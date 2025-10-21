@@ -1,0 +1,5 @@
+.. need:: REQ_001
+   :type: requirement
+   :status: implemented
+   :tags: business
+   :description: The system shall allow users to log in using secure credentials.

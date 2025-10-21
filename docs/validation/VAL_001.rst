@@ -1,0 +1,5 @@
+.. need:: VAL_001
+   :type: validation
+   :status: passed
+   :validates: REQ_BUS_001
+   :description: End-to-end test confirms login and message processing meet business goals.

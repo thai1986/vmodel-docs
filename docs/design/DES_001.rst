@@ -1,0 +1,5 @@
+.. need:: DES_001
+   :type: specification
+   :status: implemented
+   :derived_from: REQ_SW_001
+   :description: The SWC shall use a timer-triggered runnable to poll the CAN buffer every 10ms.
