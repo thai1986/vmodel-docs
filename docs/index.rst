@@ -16,5 +16,6 @@ This documentation traces the lifecycle of AUTOSAR software components using a V
    tests/integration/TC_INT_001
    tests/acceptance/TC_ACC_001
    validation/VAL_001
+   validation/test_execution_report
 
 .. needs_flow:: V-Model

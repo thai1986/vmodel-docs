@@ -1,3 +1,6 @@
+Acceptance Test: Login Functionality
+====================================
+
 .. need:: TC_001
    :type: test_case
    :status: verified

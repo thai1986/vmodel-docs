@@ -1,3 +1,6 @@
+Design Specification: OAuth2 Authentication
+=============================================
+
 .. need:: DES_001
    :type: specification
    :status: implemented
