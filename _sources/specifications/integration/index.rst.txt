@@ -1,0 +1,285 @@
+Integration Test Specifications
+================================
+
+This section contains integration test specifications for testing component interfaces.
+
+Overview
+--------
+
+Integration tests verify correct interaction between software modules and with hardware peripherals.
+
+Test Environment
+----------------
+
+* **Target**: Traveo II Starter Kit (KIT_T2G-B-H_LITE)
+* **Debugger**: J-Link or MiniProg4
+* **Test Framework**: Unity + Custom integration test harness
+* **Communication**: CAN/LIN test equipment
+
+CAN Communication Integration Tests
+------------------------------------
+
+.. spec:: CAN Bus Communication End-to-End
+   :id: SPEC_INT_001
+   :status: implemented
+   :links: REQ_FUNC_001, REQ_FUNC_002, REQ_FUNC_003
+   :verification: test
+   :component: Communication
+   :tags: integration, can
+   
+   **Objective**: Verify end-to-end CAN communication between modules
+   
+   **Test Setup**:
+   
+   * ECU 1: Traveo II device under test
+   * ECU 2: CAN test tool (Vector CANoe or similar)
+   * CAN bus: 120Ω termination at both ends
+   * Bitrate: 500 kbit/s
+   
+   **Test Steps**:
+   
+   1. Initialize CAN on both ECUs
+   2. ECU 1 sends periodic message (ID 0x100, 10ms cycle)
+   3. ECU 2 receives and echoes message (ID 0x200)
+   4. Monitor communication for 10 seconds
+   5. Verify timing and data integrity
+   
+   **Expected Results**:
+   
+   * All messages transmitted and received
+   * Cycle time: 10ms ± 1ms
+   * No bus errors
+   * Data integrity 100%
+
+.. spec:: CAN Error Recovery Test
+   :id: SPEC_INT_002
+   :status: implemented
+   :links: REQ_FUNC_001
+   :verification: test
+   :component: Communication
+   :tags: integration, can, error-handling
+   
+   **Objective**: Verify CAN bus-off recovery
+   
+   **Test Steps**:
+   
+   1. Start normal CAN communication
+   2. Force bus-off condition (disconnect termination)
+   3. Monitor error counters
+   4. Restore bus condition
+   5. Verify automatic recovery
+   
+   **Expected Results**:
+   
+   * Bus-off state detected
+   * Recovery initiated automatically
+   * Communication restored within 1 second
+   * No message loss after recovery
+
+Sensor and Actuator Integration Tests
+--------------------------------------
+
+.. spec:: Sensor to Actuator Path Test
+   :id: SPEC_INT_010
+   :status: implemented
+   :links: REQ_FUNC_010, REQ_FUNC_020
+   :verification: test
+   :component: Sensors, Actuators
+   :tags: integration, control-loop
+   
+   **Objective**: Verify complete sensor-to-actuator control loop
+   
+   **Test Setup**:
+   
+   * Analog input: Variable voltage source (0-5V)
+   * PWM output: Connected to oscilloscope
+   * Control algorithm: Linear mapping (0-5V → 0-100% duty cycle)
+   
+   **Test Steps**:
+   
+   1. Apply 0V input → Verify 0% duty cycle output
+   2. Apply 2.5V input → Verify 50% duty cycle output
+   3. Apply 5V input → Verify 100% duty cycle output
+   4. Ramp input 0-5V → Monitor output tracking
+   5. Measure end-to-end latency
+   
+   **Expected Results**:
+   
+   * Output tracks input linearly (±2%)
+   * End-to-end latency: < 10ms
+   * No oscillations or instability
+
+.. spec:: Multi-Sensor Fusion Test
+   :id: SPEC_INT_011
+   :status: approved
+   :links: REQ_FUNC_010, REQ_FUNC_011
+   :verification: test
+   :component: Sensors
+   :tags: integration, sensor-fusion
+   
+   **Objective**: Verify sensor data fusion and cross-checking
+   
+   **Test Steps**:
+   
+   1. Configure redundant temperature sensors
+   2. Apply same temperature to both sensors
+   3. Verify readings are within tolerance
+   4. Simulate one sensor failure
+   5. Verify fault detection and fallback
+   
+   **Expected Results**:
+   
+   * Normal operation: Both sensors agree within ±2°C
+   * Fault detected within 100ms
+   * System uses healthy sensor
+   * Warning DTC set
+
+Communication and Diagnostics Integration
+------------------------------------------
+
+.. spec:: UDS Diagnostic Session Test
+   :id: SPEC_INT_020
+   :status: implemented
+   :links: REQ_FUNC_031, REQ_SEC_002
+   :verification: test
+   :component: Diagnostics
+   :tags: integration, diagnostics, uds
+   
+   **Objective**: Verify UDS diagnostic session management
+   
+   **Test Setup**:
+   
+   * Diagnostic tester connected via CAN
+   * ECU in default session initially
+   
+   **Test Sequence**:
+   
+   1. Request extended diagnostic session (0x10 03)
+   2. Verify positive response
+   3. Request security access (0x27 01)
+   4. Send correct seed/key
+   5. Read DTC information (0x19 02)
+   6. Clear DTCs (0x14)
+   7. Return to default session
+   
+   **Expected Results**:
+   
+   * Session transitions work correctly
+   * Security access succeeds with valid key
+   * DTCs read and cleared successfully
+   * Timeout handling works (5 seconds)
+
+.. spec:: Bootloader Integration Test
+   :id: SPEC_INT_021
+   :status: implemented
+   :links: REQ_REL_003, REQ_SEC_001
+   :verification: test
+   :component: Bootloader
+   :tags: integration, bootloader, security
+   
+   **Objective**: Verify firmware update via bootloader
+   
+   **Test Steps**:
+   
+   1. Request programming session (0x10 02)
+   2. Perform security access
+   3. Erase flash memory (0x31)
+   4. Download new firmware (0x34/0x36)
+   5. Verify download (0x31)
+   6. Reset ECU
+   7. Verify new firmware running
+   
+   **Expected Results**:
+   
+   * Programming session entered
+   * Firmware downloaded successfully
+   * Signature verification passes
+   * ECU boots with new firmware
+   * Application checksum valid
+
+Safety Functions Integration
+-----------------------------
+
+.. spec:: Watchdog Integration Test
+   :id: SPEC_INT_030
+   :status: implemented
+   :links: REQ_SAFE_001
+   :verification: test
+   :component: Safety
+   :tags: integration, safety, watchdog
+   
+   **Objective**: Verify watchdog monitoring during normal operation
+   
+   **Test Steps**:
+   
+   1. Start all software tasks
+   2. Monitor watchdog trigger timing
+   3. Simulate task delay (increase execution time)
+   4. Verify watchdog timeout detection
+   5. Verify safe state entry
+   
+   **Expected Results**:
+   
+   * Watchdog triggered every 50ms ±5ms
+   * Timeout detected when trigger delayed
+   * Safe state entered within 50ms
+   * System reset occurs
+
+.. spec:: Emergency Shutdown Test
+   :id: SPEC_INT_031
+   :status: implemented
+   :links: REQ_SAFE_002
+   :verification: test
+   :component: Safety
+   :tags: integration, safety, fail-safe
+   
+   **Objective**: Verify emergency shutdown sequence
+   
+   **Test Steps**:
+   
+   1. Run system under normal load
+   2. Trigger emergency shutdown (critical fault)
+   3. Monitor all outputs
+   4. Verify safe state timing
+   5. Check diagnostic communication still active
+   
+   **Expected Results**:
+   
+   * All actuators disabled within 20ms
+   * Safe state achieved within 50ms
+   * CAN diagnostics remain functional
+   * Fault logged to NVM
+
+Performance Integration Tests
+------------------------------
+
+.. spec:: System Load Test
+   :id: SPEC_INT_040
+   :status: implemented
+   :links: REQ_PERF_001
+   :verification: test
+   :component: OS
+   :tags: integration, performance
+   
+   **Objective**: Verify system performance under maximum load
+   
+   **Test Configuration**:
+   
+   * All tasks enabled
+   * Maximum CAN bus load (70%)
+   * All sensors active
+   * All actuators active
+   
+   **Measurements**:
+   
+   * CPU load (via idle task)
+   * Task execution times
+   * Interrupt latency
+   * Stack usage
+   
+   **Acceptance Criteria**:
+   
+   * CPU load < 80%
+   * No deadline misses
+   * Interrupt latency < 50µs
+   * Stack usage < 90% of allocated

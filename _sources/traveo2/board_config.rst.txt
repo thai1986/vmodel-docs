@@ -1,0 +1,275 @@
+CYTVII-B-E-1M-SK Board Configuration
+====================================
+
+Board Overview
+--------------
+
+The **CYTVII-B-E-1M-SK** is an Infineon Traveo II Body Entry Starter Kit designed for automotive applications.
+
+.. list-table:: Board Specifications
+   :header-rows: 1
+   :widths: 30 70
+
+   * - Parameter
+     - Value
+   * - Board Name
+     - CYTVII-B-E-1M-SK
+   * - MCU
+     - CYT2B97CADES (Body Entry 1M)
+   * - Core
+     - Dual-Core: ARM Cortex-M0+ + ARM Cortex-M4 @ 80MHz
+   * - Flash Memory
+     - 1024 KB (1 MB)
+   * - RAM
+     - 128 KB
+   * - Debugger
+     - KitProg3 (onboard)
+   * - CAN Channels
+     - 2x CAN-FD
+   * - LIN Channels
+     - 2x LIN
+   * - ADC
+     - 12-bit SAR ADC
+   * - PWM Channels
+     - 32x TCPWM
+
+Memory Map
+----------
+
+Flash Memory
+~~~~~~~~~~~~
+
+.. code-block:: text
+
+   Base Address:  0x10000000
+   Size:          1024 KB (0x100000)
+   End Address:   0x100FFFFF
+   
+   Memory Regions:
+   ├── Interrupt Vectors  : 0x10000000 - 0x100003FF
+   ├── Code (.text)       : 0x10000400 - ...
+   ├── Constants (.rodata): ...
+   └── Initialized Data   : ...
+
+SRAM
+~~~~
+
+.. code-block:: text
+
+   Base Address:  0x28000000
+   Size:          128 KB (0x20000)
+   End Address:   0x2801FFFF
+   
+   Memory Regions:
+   ├── Data (.data)       : 0x28000000 - ...
+   ├── BSS (.bss)         : ...
+   ├── Heap               : ... (32 KB)
+   └── Stack              : ... (16 KB)
+
+Key Differences from Entry Family
+----------------------------------
+
+Compared to the smaller Traveo II Entry Family boards:
+
+.. list-table:: Comparison
+   :header-rows: 1
+   :widths: 30 35 35
+
+   * - Feature
+     - Entry (KIT_T2G-B-H_LITE)
+     - Body Entry 1M (CYTVII-B-E-1M-SK)
+   * - MCU
+     - CYT2B75CADES
+     - CYT2B97CADES
+   * - Flash
+     - 256 KB
+     - **1024 KB (4x)**
+   * - RAM
+     - 32 KB
+     - **128 KB (4x)**
+   * - CAN-FD
+     - 1 channel
+     - **2 channels**
+   * - LIN
+     - 1 channel
+     - **2 channels**
+   * - TCPWM
+     - Limited
+     - **32 channels**
+   * - Price
+     - Lower
+     - Higher
+
+Advantages
+~~~~~~~~~~
+
+1. **More Flash** - Room for larger applications, OTA updates, data logging
+2. **More RAM** - Can run more complex FreeRTOS tasks, larger buffers
+3. **More Peripherals** - 2x CAN-FD for gateway applications
+4. **Better for Production** - More representative of production ECUs
+
+Pin Configuration
+-----------------
+
+CAN Interfaces
+~~~~~~~~~~~~~~
+
+**CAN0:**
+
+- TX: P0.1
+- RX: P0.0
+- Transceiver: Onboard
+
+**CAN1:**
+
+- TX: P14.1
+- RX: P14.0
+- Transceiver: Onboard
+
+LIN Interfaces
+~~~~~~~~~~~~~~
+
+**LIN0:**
+
+- TX: P6.0
+- RX: P6.1
+
+**LIN1:**
+
+- TX: P7.0
+- RX: P7.1
+
+Debug Interface
+~~~~~~~~~~~~~~~
+
+**SWD:**
+
+- SWDIO: P6.6
+- SWCLK: P6.7
+
+**UART (Debug Console):**
+
+- TX: P5.0
+- RX: P5.1
+- Baud: 115200
+
+Programming
+-----------
+
+Using KitProg3
+~~~~~~~~~~~~~~
+
+The board includes an onboard KitProg3 debugger/programmer:
+
+.. code-block:: bash
+
+   # Using OpenOCD
+   openocd -f interface/kitprog3.cfg \\
+           -c "transport select swd" \\
+           -f target/traveo2.cfg \\
+           -c "init" \\
+           -c "reset init" \\
+           -c "flash write_image erase automotive_traveo2.elf" \\
+           -c "verify_image automotive_traveo2.elf" \\
+           -c "reset run" \\
+           -c "shutdown"
+
+Using J-Link
+~~~~~~~~~~~~
+
+For production programming, use external J-Link:
+
+.. code-block:: bash
+
+   # J-Link Flash
+   JLinkExe -device CYT2B97CADES -if SWD -speed 4000 \\
+            -CommanderScript flash.jlink
+
+Development Workflow
+--------------------
+
+Recommended Setup
+~~~~~~~~~~~~~~~~~
+
+1. **Initial Development:**
+   
+   - Use KitProg3 (onboard, free)
+   - OpenOCD + GDB for debugging
+   - UART for printf debugging
+
+2. **Production Testing:**
+   
+   - Use J-Link Pro (faster, more reliable)
+   - Automated test fixtures
+   - HIL testing
+
+Debug Output
+~~~~~~~~~~~~
+
+Serial console via KitProg3 UART:
+
+.. code-block:: bash
+
+   # Windows
+   # Use PuTTY/TeraTerm on COM port shown in Device Manager
+   
+   # Linux
+   minicom -D /dev/ttyACM0 -b 115200
+   
+   # Settings
+   Baud: 115200
+   Data: 8 bits
+   Stop: 1 bit
+   Parity: None
+   Flow Control: None
+
+Power Supply
+------------
+
+The board can be powered via:
+
+1. **USB (KitProg3)** - 5V, max 500mA
+2. **External Supply** - 12V automotive supply input
+
+For automotive testing, use external 12V supply with load dump protection.
+
+Performance Notes
+-----------------
+
+With the increased memory, you can:
+
+- Implement **bootloader** with dual-bank flash
+- Store **diagnostic data** and **DTC history**
+- Implement **data logging** for testing
+- Run **more FreeRTOS tasks** concurrently
+- Larger **CAN/LIN buffers** (128+ messages)
+- Implement **CAN TP** (ISO 15765) for multi-frame
+- Add **J1939** protocol stack
+- Implement **secure boot** with crypto
+
+Example Memory Allocation
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: c
+
+   // With 1MB Flash and 128KB RAM, you can allocate:
+   
+   // Flash Layout:
+   // 0x10000000 - 0x10007FFF: Bootloader (32 KB)
+   // 0x10008000 - 0x1007FFFF: Application Bank 1 (480 KB)
+   // 0x10080000 - 0x100F7FFF: Application Bank 2 (480 KB)
+   // 0x100F8000 - 0x100FFFFF: Configuration/Data (32 KB)
+   
+   // RAM Layout:
+   // 0x28000000 - 0x28003FFF: Stack (16 KB)
+   // 0x28004000 - 0x2800BFFF: Heap (32 KB)
+   // 0x2800C000 - 0x2800FFFF: CAN buffers (16 KB)
+   // 0x28010000 - 0x28013FFF: Application data (16 KB)
+   // 0x28014000 - 0x2801FFFF: Reserved (48 KB)
+
+References
+----------
+
+- `Infineon CYTVII-B-E-1M-SK Product Page <https://www.infineon.com/cms/en/product/evaluation-boards/cytvii-b-e-1m-sk/>`_
+- `Traveo II Body Entry Datasheet <https://www.infineon.com/dgdl/Infineon-TRAVEO_II_Body_Entry_Architecture_TRM-AdditionalTechnicalInformation-v01_00-EN.pdf>`_
+- `ModusToolbox Documentation <https://www.infineon.com/cms/en/design-support/tools/sdk/modustoolbox-software/>`_

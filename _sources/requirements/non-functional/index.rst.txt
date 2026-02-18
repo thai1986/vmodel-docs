@@ -1,0 +1,244 @@
+Non-Functional Requirements
+============================
+
+This section contains non-functional requirements defining quality attributes and constraints.
+
+.. toctree::
+   :maxdepth: 2
+   
+   performance
+   safety
+   security
+   reliability
+
+Performance Requirements
+-------------------------
+
+.. req:: Task Execution Timing
+   :id: REQ_PERF_001
+   :status: approved
+   :safety: ASIL-B
+   :priority: critical
+   :component: OS
+   :tags: non-functional, performance, timing
+   
+   The system shall execute all critical tasks within their defined time budgets.
+   
+   **Details:**
+   
+   * 1ms task: execution time < 800µs (80% CPU load)
+   * 10ms task: execution time < 8ms
+   * 100ms task: execution time < 80ms
+   * Worst-case deadline monitoring
+
+.. req:: CAN Message Latency
+   :id: REQ_PERF_002
+   :status: approved
+   :safety: ASIL-B
+   :priority: high
+   :component: Communication
+   :tags: non-functional, performance, can
+   
+   The system shall transmit CAN messages within 5ms of triggering event.
+   
+   **Details:**
+   
+   * End-to-end latency measurement
+   * Jitter < 1ms
+   * Bus load < 70%
+
+.. req:: Memory Usage
+   :id: REQ_PERF_003
+   :status: approved
+   :safety: QM
+   :priority: high
+   :component: System
+   :tags: non-functional, performance, memory
+   
+   The system shall not exceed available memory resources.
+   
+   **Details:**
+   
+   * Flash usage < 200KB (78% of 256KB)
+   * RAM usage < 28KB (87% of 32KB)
+   * Stack usage monitoring
+   * Heap fragmentation < 10%
+
+Safety Requirements
+-------------------
+
+.. req:: Watchdog Monitoring
+   :id: REQ_SAFE_001
+   :status: approved
+   :safety: ASIL-D
+   :priority: critical
+   :component: Safety
+   :tags: non-functional, safety, watchdog
+   
+   The system shall implement independent hardware and software watchdog monitoring.
+   
+   **Details:**
+   
+   * Window watchdog with configurable timing
+   * Watchdog trigger every 50ms nominal
+   * Safe state entry on watchdog reset
+   * Watchdog fault counter in NVRAM
+
+.. req:: Safe State Management
+   :id: REQ_SAFE_002
+   :status: approved
+   :safety: ASIL-D
+   :priority: critical
+   :component: Safety
+   :tags: non-functional, safety, fail-safe
+   
+   The system shall enter a defined safe state upon detection of critical faults.
+   
+   **Details:**
+   
+   * Disable all actuator outputs
+   * Enable diagnostic communication
+   * Store fault information
+   * Safe state entry time < 50ms
+
+.. req:: Memory Protection
+   :id: REQ_SAFE_003
+   :status: approved
+   :safety: ASIL-C
+   :priority: critical
+   :component: Safety
+   :tags: non-functional, safety, memory
+   
+   The system shall protect critical memory regions from unauthorized access.
+   
+   **Details:**
+   
+   * MPU configuration for code/data separation
+   * Stack overflow detection
+   * ECC on Flash and RAM
+   * Periodic memory test (startup and runtime)
+
+.. req:: Redundant Data Storage
+   :id: REQ_SAFE_004
+   :status: approved
+   :safety: ASIL-B
+   :priority: high
+   :component: Safety
+   :tags: non-functional, safety, redundancy
+   
+   The system shall store safety-critical data with redundancy and error detection.
+   
+   **Details:**
+   
+   * Dual-redundant storage
+   * CRC protection
+   * Plausibility checking on read
+   * Automatic correction of single-bit errors
+
+Security Requirements
+---------------------
+
+.. req:: Secure Boot
+   :id: REQ_SEC_001
+   :status: approved
+   :safety: QM
+   :priority: high
+   :component: Security
+   :tags: non-functional, security, boot
+   
+   The system shall verify firmware authenticity before execution.
+   
+   **Details:**
+   
+   * RSA-2048 signature verification
+   * Certificate chain validation
+   * Rollback protection
+   * Boot failure handling
+
+.. req:: Diagnostic Security Access
+   :id: REQ_SEC_002
+   :status: approved
+   :safety: QM
+   :priority: high
+   :component: Security
+   :tags: non-functional, security, diagnostics
+   
+   The system shall require authentication for privileged diagnostic services.
+   
+   **Details:**
+   
+   * Seed/key authentication mechanism
+   * Multiple security levels
+   * Failed attempt limiting (3 attempts)
+   * Lockout period: 10 minutes
+
+.. req:: Memory Readout Protection
+   :id: REQ_SEC_003
+   :status: approved
+   :safety: QM
+   :priority: medium
+   :component: Security
+   :tags: non-functional, security, memory
+   
+   The system shall prevent unauthorized memory readout via debug interfaces.
+   
+   **Details:**
+   
+   * Debug port protection
+   * Flash readout protection level 2
+   * Secure debug authentication
+   * Production fuse configuration
+
+Reliability Requirements
+------------------------
+
+.. req:: Error Detection Coverage
+   :id: REQ_REL_001
+   :status: approved
+   :safety: ASIL-C
+   :priority: critical
+   :component: Safety
+   :tags: non-functional, reliability, diagnostics
+   
+   The system shall achieve >99% diagnostic coverage for hardware faults.
+   
+   **Details:**
+   
+   * CPU self-test
+   * RAM/ROM test
+   * Peripheral built-in self-test (BIST)
+   * Error injection testing
+
+.. req:: MTBF Target
+   :id: REQ_REL_002
+   :status: approved
+   :safety: QM
+   :priority: medium
+   :component: System
+   :tags: non-functional, reliability
+   
+   The system shall achieve Mean Time Between Failures (MTBF) > 100,000 hours.
+   
+   **Details:**
+   
+   * Based on field data analysis
+   * FIT rate calculation
+   * Environmental conditions: automotive
+   * Operating temperature: -40°C to +105°C
+
+.. req:: Software Update Robustness
+   :id: REQ_REL_003
+   :status: approved
+   :safety: ASIL-A
+   :priority: high
+   :component: Bootloader
+   :tags: non-functional, reliability, update
+   
+   The system shall maintain operational capability even if software update fails.
+   
+   **Details:**
+   
+   * Dual-bank firmware storage
+   * Atomic update operations
+   * Automatic rollback on update failure
+   * Update verification before activation

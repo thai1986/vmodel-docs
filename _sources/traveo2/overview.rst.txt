@@ -1,0 +1,287 @@
+Traveo II Platform Overview
+============================
+
+Introduction
+------------
+
+The Infineon Traveo II Body Entry 1M is an automotive microcontroller series designed for body, 
+cluster, and gateway applications. This project targets the CYT2B9x series devices with 1MB Flash.
+
+Device Specifications
+---------------------
+
+Target Device: **CYT2B97CADES**
+
+Target Board: **CYTVII-B-E-1M-SK**
+
+Key Features
+^^^^^^^^^^^^
+
+* **CPU**: Dual-Core Architecture
+  
+  - ARM Cortex-M0+ @ 80 MHz (Safety/System functions)
+  - ARM Cortex-M4 @ 80 MHz (Main application core, no FPU)
+* **Flash**: 1024 KB (1 MB) with ECC
+* **RAM**: 128 KB with ECC
+* **Operating Voltage**: 3.0V - 5.5V
+* **Temperature Range**: -40°C to +125°C (Automotive Grade 0)
+* **Package**: TQFP-100
+
+Peripheral Set
+^^^^^^^^^^^^^^
+
+Communication Interfaces
+""""""""""""""""""""""""
+
+* 2x CAN-FD controllers
+  
+  * CAN 2.0B and CAN FD support
+  * Up to 5 Mbit/s data phase in CAN FD
+  * 32 message buffers per controller
+  * Hardware message filters
+  
+* 2x LIN channels
+  
+  * LIN 2.2A compliant
+  * Master and slave modes
+  * Automatic baud rate detection
+  
+* 3x SCB (Serial Communication Blocks)
+  
+  * Configurable as SPI, I2C, or UART
+  * Hardware FIFO support
+  
+* 1x SENT (Single Edge Nibble Transmission)
+  
+  * For automotive sensor interfaces
+
+Analog Interfaces
+"""""""""""""""""
+
+* 12-bit SAR ADC
+  
+  * 16 external channels
+  * 1 MSPS sampling rate
+  * Hardware averaging and filtering
+  * Programmable gain amplifier
+  
+* 2x Comparators
+  
+  * With programmable hysteresis
+
+Timers and PWM
+""""""""""""""
+
+* 24x TCPWM (Timer/Counter/PWM)
+  
+  * 16-bit resolution
+  * Multiple operating modes
+  * Quadrature decoder mode
+  * Dead-time insertion for motor control
+
+Safety and Security
+"""""""""""""""""""
+
+* MPU (Memory Protection Unit)
+* Watchdog timers (Window and Normal)
+* ECC on Flash and RAM
+* Hardware CRC accelerator
+* True Random Number Generator (TRNG)
+* Crypto accelerator (AES-128)
+
+Starter Kit
+-----------
+
+**KIT_T2G-B-H_LITE** - Traveo II Entry Lite Kit
+
+Board Features
+^^^^^^^^^^^^^^
+
+* CYT2B75CADES device
+* On-board KitProg3 debugger/programmer
+* 2x CAN transceivers (TJA1043)
+* LIN transceiver
+* Arduino-compatible headers
+* User LEDs and buttons
+* Power supply options (USB or external)
+
+Pinout
+""""""
+
+Key signals available on the kit:
+
+* **CAN0**: P5.0 (TX), P5.1 (RX)
+* **CAN1**: P14.0 (TX), P14.1 (RX)
+* **LIN0**: P6.0 (TX), P6.1 (RX)
+* **User LED**: P0.3
+* **User Button**: P0.4
+
+Memory Map
+----------
+
+.. code-block:: text
+
+   0x00000000 - 0x0003FFFF : Flash (256 KB)
+   0x08000000 - 0x08007FFF : SRAM (32 KB)
+   0x40000000 - 0x4FFFFFFF : Peripherals
+   0xE0000000 - 0xEFFFFFFF : System (ARM Cortex-M4)
+
+Clock Configuration
+-------------------
+
+System clock tree configuration:
+
+* **External Crystal**: 8 MHz
+* **PLL Output**: 80 MHz (for CPU)
+* **Peripheral Clocks**:
+  
+  * CAN: 80 MHz
+  * ADC: 10 MHz
+  * TCPWM: 80 MHz
+
+Development Tools
+-----------------
+
+Recommended Toolchain
+^^^^^^^^^^^^^^^^^^^^^
+
+* **IDE**: ModusToolbox™ 3.x or Eclipse
+* **Compiler**: ARM GCC or ARM Compiler 6
+* **Debugger**: J-Link, MiniProg4, or KitProg3
+* **Flash Tool**: OpenOCD or Infineon Programmer
+
+Required Software
+^^^^^^^^^^^^^^^^^
+
+1. **ModusToolbox™**: Development environment
+2. **Infineon PDL**: Peripheral Driver Library
+3. **MCAL Drivers**: AUTOSAR MCAL for Traveo II
+4. **HAL**: Hardware Abstraction Layer
+
+SDKs and Libraries
+^^^^^^^^^^^^^^^^^^
+
+* Device configuration tools
+* Peripheral drivers (PDL)
+* RTOS support (FreeRTOS, SafeRTOS)
+* Communication stacks (CAN, LIN)
+* Diagnostic stacks (UDS)
+
+Reference Documents
+-------------------
+
+1. **CYT2B7 Series Datasheet**: Device specifications
+2. **Technical Reference Manual**: Detailed peripheral descriptions
+3. **KIT_T2G-B-H_LITE User Guide**: Board documentation
+4. **PDL API Reference**: Software library documentation
+5. **Application Notes**: Design guidelines and examples
+
+Pin Configuration
+-----------------
+
+Default pin assignments for this project:
+
+Communication
+^^^^^^^^^^^^^
+
+.. list-table:: Communication Pins
+   :header-rows: 1
+   :widths: 20 20 30 30
+
+   * - Signal
+     - Pin
+     - Function
+     - Notes
+   * - CAN0_TX
+     - P5.0
+     - CAN0 Transmit
+     - To TJA1043 transceiver
+   * - CAN0_RX
+     - P5.1
+     - CAN0 Receive
+     - From TJA1043 transceiver
+   * - CAN1_TX
+     - P14.0
+     - CAN1 Transmit
+     - To TJA1043 transceiver
+   * - CAN1_RX
+     - P14.1
+     - CAN1 Receive
+     - From TJA1043 transceiver
+   * - LIN0_TX
+     - P6.0
+     - LIN0 Transmit
+     - To LIN transceiver
+   * - LIN0_RX
+     - P6.1
+     - LIN0 Receive
+     - From LIN transceiver
+
+Sensors (ADC)
+^^^^^^^^^^^^^
+
+.. list-table:: ADC Pins
+   :header-rows: 1
+   :widths: 30 20 50
+
+   * - Signal
+     - Pin
+     - Description
+   * - ANALOG_IN_0
+     - P10.0
+     - Temperature sensor 1
+   * - ANALOG_IN_1
+     - P10.1
+     - Pressure sensor
+   * - ANALOG_IN_2
+     - P10.2
+     - Position sensor
+   * - ANALOG_IN_3
+     - P10.3
+     - Battery voltage monitoring
+
+Actuators (PWM)
+^^^^^^^^^^^^^^^
+
+.. list-table:: PWM Outputs
+   :header-rows: 1
+   :widths: 30 20 50
+
+   * - Signal
+     - Pin
+     - Description
+   * - PWM_OUT_0
+     - P0.0
+     - Motor control channel 1
+   * - PWM_OUT_1
+     - P0.1
+     - Motor control channel 2
+   * - PWM_OUT_2
+     - P0.2
+     - Lighting control
+   * - PWM_OUT_3
+     - P12.0
+     - Heater control
+
+Safe State Configuration
+------------------------
+
+In case of critical faults, the system enters safe state with:
+
+* All PWM outputs disabled (0% duty cycle)
+* CAN in listen-only mode (diagnostics still possible)
+* Watchdog continues running
+* Error LEDs activated
+* Fault information stored to Flash
+
+Power Modes
+-----------
+
+The Traveo II supports multiple power modes:
+
+* **Active**: Full operation, all peripherals available
+* **Sleep**: CPU stopped, peripherals running
+* **Deep Sleep**: Most peripherals stopped, wake on interrupt
+* **Hibernate**: Ultra-low power, limited wake sources
+
+For automotive applications, typically Active and Sleep modes are used.

@@ -1,0 +1,125 @@
+Definitions and Terminology
+===========================
+
+This section defines key terms and concepts used throughout the documentation.
+
+General Terms
+-------------
+
+.. glossary::
+
+   ASIL
+      Automotive Safety Integrity Level - A risk classification scheme defined by ISO 26262 for automotive systems. Levels range from QM (Quality Management, least stringent) to ASIL D (most stringent).
+
+   AUTOSAR
+      AUTomotive Open System ARchitecture - A worldwide development partnership of automotive manufacturers, suppliers, and tool developers.
+
+   BSW
+      Basic Software - AUTOSAR software modules that provide standardized services to application software.
+
+   ECU
+      Electronic Control Unit - An embedded system that controls one or more electrical subsystems in a vehicle.
+
+   HIL
+      Hardware-in-the-Loop - A testing technique where real hardware is connected to a simulated environment.
+
+   MCAL
+      Microcontroller Abstraction Layer - AUTOSAR layer that provides access to microcontroller peripherals.
+
+   MCU
+      Microcontroller Unit - An integrated circuit containing a processor core, memory, and programmable I/O peripherals.
+
+   SIL
+      Software-in-the-Loop - A testing technique where software is tested in a simulated environment.
+
+   Traveo II
+      Infineon's MCU family designed for automotive cluster, body, and gateway applications.
+
+Safety Terms
+------------
+
+.. glossary::
+
+   Fail-Safe
+      A design principle where a system enters a safe state in case of failure.
+
+   Fail-Operational
+      A design principle where a system continues to operate in a degraded mode after a failure.
+
+   FMEA
+      Failure Mode and Effects Analysis - A systematic method for analyzing potential failures.
+
+   FuSa
+      Functional Safety - The part of overall safety that depends on a system operating correctly in response to its inputs.
+
+   QM
+      Quality Management - ISO 26262 classification for components that do not require safety measures beyond standard quality management.
+
+   Safety Goal
+      A top-level safety requirement for a system, derived from hazard analysis.
+
+   Safety Mechanism
+      Technical solution to detect and handle faults.
+
+Communication Terms
+-------------------
+
+.. glossary::
+
+   CAN
+      Controller Area Network - A vehicle bus standard for microcontrollers and devices to communicate.
+
+   LIN
+      Local Interconnect Network - A serial network protocol for communication between components in vehicles.
+
+   FlexRay
+      A high-speed automotive network communications protocol.
+
+   PDU
+      Protocol Data Unit - A data unit in communication protocols.
+
+   DBC
+      Database CAN - A file format for describing CAN network configurations.
+
+Development Terms
+-----------------
+
+.. glossary::
+
+   Requirement
+      A documented statement of a need and the expected capabilities or conditions that must be met.
+
+   Specification
+      Detailed description of how requirements will be verified through testing.
+
+   Traceability
+      The ability to trace relationships between requirements, specifications, and test results.
+
+   V-Model
+      A software development process that emphasizes verification and validation at each development stage.
+
+   CI/CD
+      Continuous Integration / Continuous Deployment - Automated practices for building, testing, and deploying software.
+
+   Docs-as-Code
+      An approach where documentation is treated like source code, using version control and automated builds.
+
+Traveo II Specific Terms
+-------------------------
+
+.. glossary::
+
+   CYT2B7x
+      Traveo II Entry Family microcontroller series with automotive-grade features.
+
+   KIT_T2G-B-H_LITE
+      Infineon evaluation board for Traveo II Entry devices.
+
+   MCAL Driver
+      Low-level software driver providing hardware abstraction for Traveo II peripherals.
+
+   EVTGEN
+      Event Generator peripheral in Traveo II MCU.
+
+   TCPWM
+      Timer, Counter, and PWM module in Traveo II MCU.

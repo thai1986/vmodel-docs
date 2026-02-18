@@ -1,0 +1,406 @@
+Traveo II System Architecture
+==============================
+
+This section describes the software architecture for the Traveo II platform.
+
+Software Architecture
+---------------------
+
+The software follows a layered architecture based on AUTOSAR principles:
+
+.. mermaid::
+
+   graph TB
+      APP[Application Layer]
+      RTE[Runtime Environment]
+      SWC[Software Components]
+      BSW[Basic Software]
+      MCAL[MCAL Drivers]
+      HW[Traveo II Hardware]
+      
+      APP --> RTE
+      RTE --> SWC
+      SWC --> BSW
+      BSW --> MCAL
+      MCAL --> HW
+
+Layers
+^^^^^^
+
+1. **Application Layer**
+   
+   * Vehicle functions and features
+   * Business logic
+   * State machines
+   
+2. **Runtime Environment (RTE)**
+   
+   * Interface between application and BSW
+   * Communication abstraction
+   * Event management
+   
+3. **Basic Software (BSW)**
+   
+   * Communication services (CAN, LIN)
+   * Diagnostics (UDS)
+   * Memory management
+   * OS abstraction
+   
+4. **MCAL (Microcontroller Abstraction Layer)**
+   
+   * Hardware-specific drivers
+   * Traveo II peripheral access
+   * Register-level operations
+
+Software Components
+-------------------
+
+Communication Module
+^^^^^^^^^^^^^^^^^^^^
+
+Handles all network communication:
+
+* CAN driver (CAN-FD support)
+* LIN driver
+* Network management
+* Transport protocol (ISO-TP for diagnostics)
+
+Features:
+
+* Message buffering
+* Error handling
+* Bus-off recovery
+* Wake-up signaling
+
+Files:
+
+* ``src/communication/can_driver.c``
+* ``src/communication/lin_driver.c``
+* ``src/communication/network_mgr.c``
+
+Sensor Acquisition Module
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Manages all sensor inputs:
+
+* ADC driver configuration
+* Sensor data filtering
+* Calibration/linearization
+* Fault detection
+
+Supported sensors:
+
+* Temperature sensors (NTC)
+* Pressure sensors (analog 0-5V)
+* Position sensors (potentiometer)
+* Digital sensors (switches)
+
+Files:
+
+* ``src/sensors/adc_manager.c``
+* ``src/sensors/sensor_processing.c``
+
+Actuator Control Module
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Controls all system outputs:
+
+* PWM generation (TCPWM)
+* Digital output control
+* Load diagnostics
+* Safety cutoff
+
+Outputs:
+
+* 8x PWM channels
+* 6x Digital outputs (high-side switches)
+
+Files:
+
+* ``src/actuators/pwm_driver.c``
+* ``src/actuators/digital_out.c``
+
+Diagnostics Module
+^^^^^^^^^^^^^^^^^^
+
+Implements UDS (ISO 14229) services:
+
+* Session management
+* Security access
+* DTC management
+* Data reading/writing
+* Routine control
+
+UDS Services implemented:
+
+* 0x10: Diagnostic Session Control
+* 0x11: ECU Reset
+* 0x14: Clear Diagnostic Information
+* 0x19: Read DTC Information
+* 0x22: Read Data By Identifier
+* 0x27: Security Access
+* 0x2E: Write Data By Identifier
+* 0x31: Routine Control
+* 0x34/36/37: Download (for bootloader)
+* 0x3E: Tester Present
+
+Files:
+
+* ``src/diagnostics/uds_server.c``
+* ``src/diagnostics/dtc_manager.c``
+
+Safety Module
+^^^^^^^^^^^^^
+
+Implements functional safety mechanisms:
+
+* Watchdog management
+* Memory protection (MPU)
+* Safe state management
+* Error monitoring
+* Control flow monitoring
+
+Safety measures:
+
+* Dual watchdog (main + window)
+* Stack monitoring
+* Clock monitoring
+* Power supply monitoring
+* Temperature monitoring
+
+Files:
+
+* ``src/safety/watchdog.c``
+* ``src/safety/safe_state.c``
+* ``src/safety/monitoring.c``
+
+Bootloader
+^^^^^^^^^^
+
+Secure firmware update capability:
+
+* UDS-based reprogramming
+* Dual-bank Flash management
+* Signature verification
+* Rollback protection
+
+Features:
+
+* RSA-2048 signature check
+* CRC verification
+* Atomic updates
+* Fallback to previous version
+
+Files:
+
+* ``bootloader/main.c``
+* ``bootloader/flash_driver.c``
+* ``bootloader/security.c``
+
+Task Structure
+--------------
+
+RTOS Configuration (FreeRTOS)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. list-table:: Task Configuration
+   :header-rows: 1
+   :widths: 20 15 15 20 30
+
+   * - Task Name
+     - Period
+     - Priority
+     - Stack Size
+     - Function
+   * - Task_1ms
+     - 1ms
+     - High (5)
+     - 512 bytes
+     - Critical timing, CAN TX
+   * - Task_10ms
+     - 10ms
+     - Medium (4)
+     - 1024 bytes
+     - Sensor acquisition, control
+   * - Task_100ms
+     - 100ms
+     - Low (3)
+     - 1024 bytes
+     - Diagnostics, monitoring
+   * - Task_Idle
+     - Background
+     - Idle (0)
+     - 256 bytes
+     - CPU load measurement
+
+Interrupts
+^^^^^^^^^^
+
+.. list-table:: Interrupt Configuration
+   :header-rows: 1
+   :widths: 25 15 60
+
+   * - Interrupt Source
+     - Priority
+     - Purpose
+   * - CAN0_RX
+     - 2
+     - CAN message reception
+   * - CAN1_RX
+     - 2
+     - CAN message reception
+   * - ADC_End
+     - 3
+     - ADC conversion complete
+   * - SysTick
+     - 15 (lowest)
+     - RTOS tick
+   * - Watchdog
+     - 0 (highest)
+     - Watchdog timeout (NMI)
+
+Memory Layout
+-------------
+
+Flash Organization
+^^^^^^^^^^^^^^^^^^
+
+.. code-block:: text
+
+   0x00000000 - 0x00007FFF : Bootloader (32 KB)
+   0x00008000 - 0x0000BFFF : Configuration (16 KB)
+   0x0000C000 - 0x0002FFFF : Application Bank A (144 KB)
+   0x00030000 - 0x00037FFF : Application Bank B (32 KB) [Reserved for dual-bank]
+   0x00038000 - 0x0003FFFF : Calibration Data (32 KB)
+
+RAM Organization
+^^^^^^^^^^^^^^^^
+
+.. code-block:: text
+
+   0x08000000 - 0x080001FF : Interrupt Vectors (512 bytes)
+   0x08000200 - 0x08003FFF : Application Data (15.5 KB)
+   0x08004000 - 0x08006FFF : RTOS Heap (12 KB)
+   0x08007000 - 0x08007FFF : Stack (4 KB)
+
+Build Configuration
+-------------------
+
+Compiler Settings
+^^^^^^^^^^^^^^^^^
+
+ARM GCC compiler flags:
+
+.. code-block:: bash
+
+   -mcpu=cortex-m4
+   -mthumb
+   -mfloat-abi=soft
+   -O2 -g3
+   -Wall -Wextra
+   -ffunction-sections -fdata-sections
+
+Linker Settings
+^^^^^^^^^^^^^^^
+
+.. code-block:: bash
+
+   -Wl,--gc-sections
+   -Wl,-Map=output.map
+   -Wl,--cref
+   -T linker_script.ld
+
+MISRA Compliance
+^^^^^^^^^^^^^^^^
+
+Code is checked against MISRA C:2012 guidelines:
+
+* Required rules: 100% compliance
+* Advisory rules: 95% compliance (documented deviations)
+* Static analysis: PC-Lint Plus
+
+Code Metrics
+^^^^^^^^^^^^
+
+Target metrics:
+
+* Cyclomatic complexity: < 15 per function
+* Function length: < 200 lines
+* File length: < 2000 lines
+* Comment ratio: > 20%
+
+Peripheral Configuration
+------------------------
+
+CAN Controller Setup
+^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: c
+
+   CAN_Config can0_config = {
+       .base_address = CAN0_BASE,
+       .bitrate_nominal = 500000,    // 500 kbit/s
+       .bitrate_data = 2000000,      // 2 Mbit/s (CAN FD)
+       .sample_point = 875,          // 87.5%
+       .tx_buffers = 8,
+       .rx_buffers = 24,
+       .interrupt_priority = 2
+   };
+
+ADC Configuration
+^^^^^^^^^^^^^^^^^
+
+.. code-block:: c
+
+   ADC_Config adc_config = {
+       .resolution = ADC_12BIT,
+       .reference = ADC_VREF_INTERNAL,  // 2.5V
+       .sample_time = 16,               // 1.6 µs
+       .averaging = ADC_AVG_16,
+       .trigger = ADC_TRIGGER_TIMER     // Periodic
+   };
+
+PWM Configuration
+^^^^^^^^^^^^^^^^^
+
+.. code-block:: c
+
+   TCPWM_Config pwm_config = {
+       .counter_mode = TCPWM_MODE_PWM,
+       .period = 1000,                  // 1 kHz @ 1MHz clock
+       .compare0 = 500,                 // 50% duty cycle
+       .interrupt_enable = false
+   };
+
+Debug and Development
+---------------------
+
+Debug Output
+^^^^^^^^^^^^
+
+Debug messages via UART:
+
+* Baud rate: 115200
+* Format: 8N1
+* Pin: P5.6 (TX), P5.7 (RX)
+
+Printf redirection to UART for development builds.
+
+Trace Support
+^^^^^^^^^^^^^
+
+SWO (Serial Wire Output) for real-time trace:
+
+* ITM printf
+* Event tracing
+* Data watchpoints
+
+Performance Measurement
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Built-in instrumentation:
+
+* Task execution time measurement
+* CPU load calculation
+* Stack high-water mark tracking
+* Interrupt latency measurement

@@ -1,0 +1,1080 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Traveo II Testing Guide &mdash; Automotive Software Documentation 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=912d4c92" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-data-viewer/jsonview.bundle.css?v=f6ef2277" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-needs/libs/html/datatables.min.css?v=4b4fd840" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-needs/common_css/need_links.css?v=2150a916" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-needs/common_css/need_style.css?v=92936fa5" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-needs/common_css/needstable.css?v=5e1b6797" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-needs/common_css/need_toggle.css?v=5c6620df" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-needs/common_css/need_core.css?v=f5b60a78" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-needs/modern.css?v=803738c0" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/sphinx-data-viewer/jsonview.bundle.js?v=18cd53c5"></script>
+      <script src="../_static/sphinx-data-viewer/jsonview_loader.js?v=f7ff7e7d"></script>
+      <script src="../_static/sphinx-needs/libs/html/datatables.min.js?v=8a4aee21"></script>
+      <script src="../_static/sphinx-needs/libs/html/datatables_loader.js?v=a2cae175"></script>
+      <script src="../_static/sphinx-needs/libs/html/sphinx_needs_collapse.js?v=dca66431"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Glossary" href="../reference/glossary.html" />
+    <link rel="prev" title="Traveo II System Architecture" href="architecture.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Automotive Software Documentation
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/overview.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/overview.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/overview.html#purpose">Purpose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/overview.html#scope">Scope</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/overview.html#target-audience">Target Audience</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/overview.html#document-structure">Document Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/scope.html">Scope</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/scope.html#project-scope">Project Scope</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/scope.html#in-scope">In Scope</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/scope.html#out-of-scope">Out of Scope</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/scope.html#assumptions-and-constraints">Assumptions and Constraints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/scope.html#assumptions">Assumptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/scope.html#constraints">Constraints</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/scope.html#dependencies">Dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/definitions.html">Definitions and Terminology</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/definitions.html#general-terms">General Terms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/definitions.html#safety-terms">Safety Terms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/definitions.html#communication-terms">Communication Terms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/definitions.html#development-terms">Development Terms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/definitions.html#traveo-ii-specific-terms">Traveo II Specific Terms</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Requirements</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../requirements/index.html">System Requirements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../requirements/index.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../requirements/index.html#requirement-categories">Requirement Categories</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../requirements/functional/index.html">Functional Requirements</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../requirements/functional/index.html#communication-requirements">Communication Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../requirements/functional/index.html#sensor-requirements">Sensor Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../requirements/functional/index.html#actuator-requirements">Actuator Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../requirements/functional/index.html#diagnostics-requirements">Diagnostics Requirements</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../requirements/non-functional/index.html">Non-Functional Requirements</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../requirements/non-functional/index.html#performance-requirements">Performance Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../requirements/non-functional/index.html#safety-requirements">Safety Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../requirements/non-functional/index.html#security-requirements">Security Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../requirements/non-functional/index.html#reliability-requirements">Reliability Requirements</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../requirements/index.html#requirements-summary">Requirements Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../requirements/index.html#requirements-coverage">Requirements Coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../requirements/index.html#requirements-by-status">Requirements by Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../requirements/index.html#requirements-by-safety-level">Requirements by Safety Level</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../requirements/functional/index.html">Functional Requirements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../requirements/functional/index.html#communication-requirements">Communication Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../requirements/functional/index.html#sensor-requirements">Sensor Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../requirements/functional/index.html#actuator-requirements">Actuator Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../requirements/functional/index.html#diagnostics-requirements">Diagnostics Requirements</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../requirements/non-functional/index.html">Non-Functional Requirements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../requirements/non-functional/index.html#performance-requirements">Performance Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../requirements/non-functional/index.html#safety-requirements">Safety Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../requirements/non-functional/index.html#security-requirements">Security Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../requirements/non-functional/index.html#reliability-requirements">Reliability Requirements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Test Specifications</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../specifications/index.html">Test Specifications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/index.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/index.html#test-levels">Test Levels</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../specifications/unit/index.html">Unit Test Specifications</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/unit/index.html#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/unit/index.html#test-environment">Test Environment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/unit/index.html#communication-module-tests">Communication Module Tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/unit/index.html#sensor-module-tests">Sensor Module Tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/unit/index.html#actuator-module-tests">Actuator Module Tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/unit/index.html#diagnostics-module-tests">Diagnostics Module Tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/unit/index.html#coverage-requirements">Coverage Requirements</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../specifications/integration/index.html">Integration Test Specifications</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/integration/index.html#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/integration/index.html#test-environment">Test Environment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/integration/index.html#can-communication-integration-tests">CAN Communication Integration Tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/integration/index.html#sensor-and-actuator-integration-tests">Sensor and Actuator Integration Tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/integration/index.html#communication-and-diagnostics-integration">Communication and Diagnostics Integration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/integration/index.html#safety-functions-integration">Safety Functions Integration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/integration/index.html#performance-integration-tests">Performance Integration Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../specifications/system/index.html">System Test Specifications</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/system/index.html#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/system/index.html#test-environment">Test Environment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/system/index.html#functional-system-tests">Functional System Tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/system/index.html#safety-system-tests">Safety System Tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/system/index.html#performance-and-stress-tests">Performance and Stress Tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/system/index.html#environmental-tests">Environmental Tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/system/index.html#security-system-tests">Security System Tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/system/index.html#traveo-ii-platform-specific-tests">Traveo II Platform-Specific Tests</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/index.html#test-summary">Test Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/index.html#test-coverage">Test Coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/index.html#test-status">Test Status</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../specifications/unit/index.html">Unit Test Specifications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/unit/index.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/unit/index.html#test-environment">Test Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/unit/index.html#communication-module-tests">Communication Module Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/unit/index.html#sensor-module-tests">Sensor Module Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/unit/index.html#actuator-module-tests">Actuator Module Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/unit/index.html#diagnostics-module-tests">Diagnostics Module Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/unit/index.html#coverage-requirements">Coverage Requirements</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../specifications/integration/index.html">Integration Test Specifications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/integration/index.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/integration/index.html#test-environment">Test Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/integration/index.html#can-communication-integration-tests">CAN Communication Integration Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/integration/index.html#sensor-and-actuator-integration-tests">Sensor and Actuator Integration Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/integration/index.html#communication-and-diagnostics-integration">Communication and Diagnostics Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/integration/index.html#safety-functions-integration">Safety Functions Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/integration/index.html#performance-integration-tests">Performance Integration Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../specifications/system/index.html">System Test Specifications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/system/index.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/system/index.html#test-environment">Test Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/system/index.html#functional-system-tests">Functional System Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/system/index.html#safety-system-tests">Safety System Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/system/index.html#performance-and-stress-tests">Performance and Stress Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/system/index.html#environmental-tests">Environmental Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/system/index.html#security-system-tests">Security System Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/system/index.html#traveo-ii-platform-specific-tests">Traveo II Platform-Specific Tests</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Traceability</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../traceability/requirements_coverage.html">Requirements Coverage Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/requirements_coverage.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/requirements_coverage.html#coverage-summary">Coverage Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/requirements_coverage.html#requirements-coverage-table">Requirements Coverage Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/requirements_coverage.html#orphaned-requirements">Orphaned Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/requirements_coverage.html#orphaned-test-specifications">Orphaned Test Specifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/requirements_coverage.html#coverage-by-safety-level">Coverage by Safety Level</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/requirements_coverage.html#asil-d-requirements">ASIL-D Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/requirements_coverage.html#asil-c-requirements">ASIL-C Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/requirements_coverage.html#asil-b-requirements">ASIL-B Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/requirements_coverage.html#asil-a-requirements">ASIL-A Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/requirements_coverage.html#qm-requirements">QM Requirements</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/requirements_coverage.html#coverage-metrics">Coverage Metrics</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../traceability/traceability_matrix.html">Traceability Matrix</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/traceability_matrix.html#full-traceability-matrix">Full Traceability Matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/traceability_matrix.html#traceability-flow-diagram">Traceability Flow Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/traceability_matrix.html#functional-requirements-traceability">Functional Requirements Traceability</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/traceability_matrix.html#communication-requirements">Communication Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/traceability_matrix.html#sensor-requirements">Sensor Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/traceability_matrix.html#actuator-requirements">Actuator Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/traceability_matrix.html#diagnostics-requirements">Diagnostics Requirements</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/traceability_matrix.html#non-functional-requirements-traceability">Non-Functional Requirements Traceability</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/traceability_matrix.html#safety-requirements">Safety Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/traceability_matrix.html#performance-requirements">Performance Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/traceability_matrix.html#security-requirements">Security Requirements</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/traceability_matrix.html#requirements-to-tests-mapping">Requirements to Tests Mapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/traceability_matrix.html#tests-to-requirements-mapping">Tests to Requirements Mapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/traceability_matrix.html#bi-directional-traceability">Bi-directional Traceability</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/traceability_matrix.html#forward-traceability-requirements-tests">Forward Traceability (Requirements → Tests)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/traceability_matrix.html#backward-traceability-tests-requirements">Backward Traceability (Tests → Requirements)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/traceability_matrix.html#export-options">Export Options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../traceability/verification_status.html">Verification Status</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/verification_status.html#verification-overview">Verification Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/verification_status.html#verification-status-by-level">Verification Status by Level</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/verification_status.html#unit-test-status">Unit Test Status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/verification_status.html#integration-test-status">Integration Test Status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/verification_status.html#system-test-status">System Test Status</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/verification_status.html#verification-by-safety-level">Verification by Safety Level</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/verification_status.html#asil-d-verification-status">ASIL-D Verification Status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/verification_status.html#asil-c-verification-status">ASIL-C Verification Status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/verification_status.html#asil-b-verification-status">ASIL-B Verification Status</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/verification_status.html#verification-metrics">Verification Metrics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/verification_status.html#requirements-verification-progress">Requirements Verification Progress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/verification_status.html#test-implementation-progress">Test Implementation Progress</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/verification_status.html#pending-verifications">Pending Verifications</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/verification_status.html#requirements-pending-verification">Requirements Pending Verification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/verification_status.html#tests-pending-implementation">Tests Pending Implementation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/verification_status.html#release-readiness">Release Readiness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/verification_status.html#verification-methods">Verification Methods</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/verification_status.html#verification-by-method">Verification by Method</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../traceability/verification_status.html#test-based-verification">Test-based Verification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../traceability/verification_status.html#analysis-based-verification">Analysis-based Verification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../traceability/verification_status.html#inspection-based-verification">Inspection-based Verification</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../traceability/validation.html">Test Validation Results</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/validation.html#test-reports">Test Reports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/validation.html#test-execution-summary">Test Execution Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/validation.html#traceability-integration">Traceability Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/validation.html#test-coverage-analysis">Test Coverage Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/validation.html#automated-test-execution">Automated Test Execution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/validation.html#test-environment">Test Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/validation.html#test-automation-strategy">Test Automation Strategy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/validation.html#continuous-integration">Continuous Integration</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Traveo II Platform</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Traveo II Platform Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#device-specifications">Device Specifications</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#key-features">Key Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#peripheral-set">Peripheral Set</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="overview.html#communication-interfaces">Communication Interfaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="overview.html#analog-interfaces">Analog Interfaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="overview.html#timers-and-pwm">Timers and PWM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="overview.html#safety-and-security">Safety and Security</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#starter-kit">Starter Kit</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#board-features">Board Features</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="overview.html#pinout">Pinout</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#memory-map">Memory Map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#clock-configuration">Clock Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#development-tools">Development Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#recommended-toolchain">Recommended Toolchain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#required-software">Required Software</a></li>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#sdks-and-libraries">SDKs and Libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#reference-documents">Reference Documents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#pin-configuration">Pin Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#communication">Communication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#sensors-adc">Sensors (ADC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#actuators-pwm">Actuators (PWM)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#safe-state-configuration">Safe State Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#power-modes">Power Modes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="board_config.html">CYTVII-B-E-1M-SK Board Configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="board_config.html#board-overview">Board Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="board_config.html#memory-map">Memory Map</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="board_config.html#flash-memory">Flash Memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="board_config.html#sram">SRAM</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="board_config.html#key-differences-from-entry-family">Key Differences from Entry Family</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="board_config.html#advantages">Advantages</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="board_config.html#pin-configuration">Pin Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="board_config.html#can-interfaces">CAN Interfaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="board_config.html#lin-interfaces">LIN Interfaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="board_config.html#debug-interface">Debug Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="board_config.html#programming">Programming</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="board_config.html#using-kitprog3">Using KitProg3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="board_config.html#using-j-link">Using J-Link</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="board_config.html#development-workflow">Development Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="board_config.html#recommended-setup">Recommended Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="board_config.html#debug-output">Debug Output</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="board_config.html#power-supply">Power Supply</a></li>
+<li class="toctree-l2"><a class="reference internal" href="board_config.html#performance-notes">Performance Notes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="board_config.html#example-memory-allocation">Example Memory Allocation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="board_config.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Traveo II System Architecture</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#software-architecture">Software Architecture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#layers">Layers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#software-components">Software Components</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#communication-module">Communication Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#sensor-acquisition-module">Sensor Acquisition Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#actuator-control-module">Actuator Control Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#diagnostics-module">Diagnostics Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#safety-module">Safety Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#bootloader">Bootloader</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#task-structure">Task Structure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#rtos-configuration-freertos">RTOS Configuration (FreeRTOS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#interrupts">Interrupts</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#memory-layout">Memory Layout</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#flash-organization">Flash Organization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#ram-organization">RAM Organization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#build-configuration">Build Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#compiler-settings">Compiler Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#linker-settings">Linker Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#misra-compliance">MISRA Compliance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#code-metrics">Code Metrics</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#peripheral-configuration">Peripheral Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#can-controller-setup">CAN Controller Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#adc-configuration">ADC Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#pwm-configuration">PWM Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="architecture.html#debug-and-development">Debug and Development</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#debug-output">Debug Output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#trace-support">Trace Support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html#performance-measurement">Performance Measurement</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Traveo II Testing Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#test-environment-setup">Test Environment Setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#required-hardware">Required Hardware</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hardware-connections">Hardware Connections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#required-software">Required Software</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#flashing-the-firmware">Flashing the Firmware</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#using-modustoolbox">Using ModusToolbox</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-openocd">Using OpenOCD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-j-link">Using J-Link</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#automated-testing">Automated Testing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#test-framework-structure">Test Framework Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-tests">Running Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#can-communication-testing">CAN Communication Testing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#test-can-message-transmission">Test CAN Message Transmission</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#test-can-message-reception">Test CAN Message Reception</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#adc-and-sensor-testing">ADC and Sensor Testing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#test-analog-input-reading">Test Analog Input Reading</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pwm-output-testing">PWM Output Testing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#test-pwm-frequency-and-duty-cycle">Test PWM Frequency and Duty Cycle</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#uds-diagnostic-testing">UDS Diagnostic Testing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#test-session-management">Test Session Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#test-dtc-reading">Test DTC Reading</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#safety-function-testing">Safety Function Testing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#test-watchdog-monitoring">Test Watchdog Monitoring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#test-safe-state-entry">Test Safe State Entry</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#performance-testing">Performance Testing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#test-task-timing">Test Task Timing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#test-cpu-load">Test CPU Load</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#continuous-testing">Continuous Testing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#long-term-stability-test">Long-term Stability Test</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#test-report-generation">Test Report Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#common-issues">Common Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#debug-tips">Debug Tips</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/abbreviations.html">Abbreviations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/abbreviations.html#technical-abbreviations">Technical Abbreviations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/abbreviations.html#safety-and-standards">Safety and Standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/abbreviations.html#traveo-ii-specific">Traveo II Specific</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/abbreviations.html#development-tools">Development Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/abbreviations.html#protocol-and-communication">Protocol and Communication</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/documents.html">Reference Documents</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/documents.html#standards-and-specifications">Standards and Specifications</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/documents.html#iso-standards">ISO Standards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/documents.html#automotive-spice">Automotive SPICE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/documents.html#autosar">AUTOSAR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/documents.html#misra">MISRA</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/documents.html#infineon-documentation">Infineon Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/documents.html#device-documentation">Device Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/documents.html#board-documentation">Board Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/documents.html#software-documentation">Software Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/documents.html#application-notes">Application Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/documents.html#development-tools">Development Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/documents.html#compilers-and-toolchains">Compilers and Toolchains</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/documents.html#ides-and-debuggers">IDEs and Debuggers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/documents.html#static-analysis">Static Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/documents.html#test-and-verification">Test and Verification</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/documents.html#documentation-tools">Documentation Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/documents.html#external-links">External Links</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/documents.html#official-repositories-and-resources">Official Repositories and Resources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/documents.html#training-and-support">Training and Support</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/documents.html#project-specific-documents">Project-Specific Documents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/documents.html#internal-documentation">Internal Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/documents.html#version-control">Version Control</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/documents.html#document-revision-history">Document Revision History</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/documents.html#document-review-and-approval">Document Review and Approval</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/documents.html#review-cycle">Review Cycle</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/documents.html#contact-information">Contact Information</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Automotive Software Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Traveo II Testing Guide</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/your-organization/vmodel-docs/blob/main/docs/traveo2/testing.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
+        <a href="architecture.html" class="btn btn-neutral float-left" title="Traveo II System Architecture" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../reference/glossary.html" class="btn btn-neutral float-right" title="Glossary" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+  </div>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="traveo-ii-testing-guide">
+<h1>Traveo II Testing Guide<a class="headerlink" href="#traveo-ii-testing-guide" title="Link to this heading"></a></h1>
+<p>This guide describes how to test the automotive software on Traveo II hardware.</p>
+<section id="test-environment-setup">
+<h2>Test Environment Setup<a class="headerlink" href="#test-environment-setup" title="Link to this heading"></a></h2>
+<section id="required-hardware">
+<h3>Required Hardware<a class="headerlink" href="#required-hardware" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><strong>CYTVII-B-E-1M-SK</strong> - Traveo II Body Entry 1M Starter Kit</p></li>
+<li><p><strong>J-Link</strong> or <strong>KitProg3</strong> - Debugger/Programmer (KitProg3 onboard)</p></li>
+<li><p><strong>Vector CANoe</strong> or <strong>PCAN-USB</strong> - CAN interface</p></li>
+<li><p><strong>Power Supply</strong> - 12V automotive power supply</p></li>
+<li><p><strong>Oscilloscope</strong> - For signal verification (optional)</p></li>
+<li><p><strong>USB cables</strong> - For connections</p></li>
+</ol>
+</section>
+<section id="hardware-connections">
+<h3>Hardware Connections<a class="headerlink" href="#hardware-connections" title="Link to this heading"></a></h3>
+<p>Basic Setup:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>PC --USB-- CYTVII-B-E-1M-SK
+PC --USB-- PCAN-USB --CAN-- CYTVII-B-E-1M-SK(CAN0)
+Power Supply (12V) ---&gt; CYTVII-B-E-1M-SK
+</pre></div>
+</div>
+<p>CAN Bus Wiring:</p>
+<ul class="simple">
+<li><p>CAN_H and CAN_L connections</p></li>
+<li><p>120Ω termination resistors at both ends</p></li>
+<li><p>Typical automotive CAN bus setup</p></li>
+</ul>
+</section>
+<section id="required-software">
+<h3>Required Software<a class="headerlink" href="#required-software" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><strong>ModusToolbox™ 3.x</strong> - Development IDE</p></li>
+<li><p><strong>OpenOCD</strong> - On-chip debugger</p></li>
+<li><p><strong>Python 3.8+</strong> - For test scripts</p></li>
+<li><p><strong>pytest</strong> - Test framework</p></li>
+<li><p><strong>CANalyzer/CANoe</strong> - For CAN testing (or python-can)</p></li>
+</ol>
+</section>
+<section id="installation">
+<h3>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install Python dependencies</span>
+pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+
+<span class="c1"># Install Traveo II test tools</span>
+pip<span class="w"> </span>install<span class="w"> </span>pytest<span class="w"> </span>pytest-html<span class="w"> </span>pyserial<span class="w"> </span>python-can
+
+<span class="c1"># Install OpenOCD (if not using ModusToolbox)</span>
+<span class="c1"># Follow platform-specific instructions</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="flashing-the-firmware">
+<h2>Flashing the Firmware<a class="headerlink" href="#flashing-the-firmware" title="Link to this heading"></a></h2>
+<section id="using-modustoolbox">
+<h3>Using ModusToolbox<a class="headerlink" href="#using-modustoolbox" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Open project in ModusToolbox</p></li>
+<li><p>Build the project (Ctrl+B)</p></li>
+<li><p>Connect debugger to kit</p></li>
+<li><p>Click “Program” or use “Quick Panel &gt; Program”</p></li>
+</ol>
+</section>
+<section id="using-openocd">
+<h3>Using OpenOCD<a class="headerlink" href="#using-openocd" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Flash application</span>
+openocd<span class="w"> </span>-f<span class="w"> </span>interface/kitprog3.cfg<span class="w"> </span>-f<span class="w"> </span>target/traveo2_6m.cfg<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-c<span class="w"> </span><span class="s2">&quot;program build/firmware.hex verify reset exit&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="using-j-link">
+<h3>Using J-Link<a class="headerlink" href="#using-j-link" title="Link to this heading"></a></h3>
+<p>Create a JLink script file <code class="docutils literal notranslate"><span class="pre">flash_firmware.jlink</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>device CYT2B75CADES
+si SWD
+speed 4000
+loadfile build/firmware.hex
+r
+g
+exit
+</pre></div>
+</div>
+<p>Execute:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>JLinkExe<span class="w"> </span>-CommandFile<span class="w"> </span>flash_firmware.jlink
+</pre></div>
+</div>
+</section>
+</section>
+<section id="automated-testing">
+<h2>Automated Testing<a class="headerlink" href="#automated-testing" title="Link to this heading"></a></h2>
+<section id="test-framework-structure">
+<h3>Test Framework Structure<a class="headerlink" href="#test-framework-structure" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>tests/
+├── traveo2/
+│   ├── __init__.py
+│   ├── conftest.py           # pytest configuration
+│   ├── test_can.py            # CAN communication tests
+│   ├── test_adc.py            # ADC/sensor tests
+│   ├── test_pwm.py            # PWM output tests
+│   ├── test_diagnostics.py    # UDS diagnostic tests
+│   ├── test_safety.py         # Safety function tests
+│   └── utils/
+│       ├── can_interface.py   # CAN helper functions
+│       ├── serial_interface.py # UART helper
+│       └── hardware_setup.py  # Hardware initialization
+</pre></div>
+</div>
+</section>
+<section id="running-tests">
+<h3>Running Tests<a class="headerlink" href="#running-tests" title="Link to this heading"></a></h3>
+<p>Run all tests:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest<span class="w"> </span>tests/traveo2/<span class="w"> </span>-v<span class="w"> </span>--html<span class="o">=</span>test-report.html
+</pre></div>
+</div>
+<p>Run specific test module:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest<span class="w"> </span>tests/traveo2/test_can.py<span class="w"> </span>-v
+</pre></div>
+</div>
+<p>Run with coverage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest<span class="w"> </span>tests/traveo2/<span class="w"> </span>--cov<span class="o">=</span>.<span class="w"> </span>--cov-report<span class="o">=</span>html
+</pre></div>
+</div>
+</section>
+</section>
+<section id="can-communication-testing">
+<h2>CAN Communication Testing<a class="headerlink" href="#can-communication-testing" title="Link to this heading"></a></h2>
+<section id="test-can-message-transmission">
+<h3>Test CAN Message Transmission<a class="headerlink" href="#test-can-message-transmission" title="Link to this heading"></a></h3>
+<p>Example test: <code class="docutils literal notranslate"><span class="pre">tests/traveo2/test_can.py</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">can</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">can_bus</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize CAN bus interface.&quot;&quot;&quot;</span>
+    <span class="n">bus</span> <span class="o">=</span> <span class="n">can</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">Bus</span><span class="p">(</span>
+        <span class="n">channel</span><span class="o">=</span><span class="s1">&#39;PCAN_USBBUS1&#39;</span><span class="p">,</span>
+        <span class="n">bustype</span><span class="o">=</span><span class="s1">&#39;pcan&#39;</span><span class="p">,</span>
+        <span class="n">bitrate</span><span class="o">=</span><span class="mi">500000</span>
+    <span class="p">)</span>
+    <span class="k">yield</span> <span class="n">bus</span>
+    <span class="n">bus</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_can_transmission</span><span class="p">(</span><span class="n">can_bus</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test CAN message transmission from Traveo II.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Expected periodic message from ECU</span>
+    <span class="n">message_id</span> <span class="o">=</span> <span class="mh">0x100</span>
+
+    <span class="c1"># Wait for message</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="n">can_bus</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="n">msg</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;No CAN message received&quot;</span>
+    <span class="k">assert</span> <span class="n">msg</span><span class="o">.</span><span class="n">arbitration_id</span> <span class="o">==</span> <span class="n">message_id</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">8</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Received: ID=0x</span><span class="si">{</span><span class="n">msg</span><span class="o">.</span><span class="n">arbitration_id</span><span class="si">:</span><span class="s2">03X</span><span class="si">}</span><span class="s2">, Data=</span><span class="si">{</span><span class="n">msg</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">hex</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="test-can-message-reception">
+<h3>Test CAN Message Reception<a class="headerlink" href="#test-can-message-reception" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_can_reception</span><span class="p">(</span><span class="n">can_bus</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test that Traveo II receives and processes CAN messages.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Send test message</span>
+    <span class="n">test_msg</span> <span class="o">=</span> <span class="n">can</span><span class="o">.</span><span class="n">Message</span><span class="p">(</span>
+        <span class="n">arbitration_id</span><span class="o">=</span><span class="mh">0x200</span><span class="p">,</span>
+        <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="mh">0x01</span><span class="p">,</span> <span class="mh">0x02</span><span class="p">,</span> <span class="mh">0x03</span><span class="p">,</span> <span class="mh">0x04</span><span class="p">,</span> <span class="mh">0x05</span><span class="p">,</span> <span class="mh">0x06</span><span class="p">,</span> <span class="mh">0x07</span><span class="p">,</span> <span class="mh">0x08</span><span class="p">],</span>
+        <span class="n">is_extended_id</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">)</span>
+
+    <span class="n">can_bus</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">test_msg</span><span class="p">)</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+
+    <span class="c1"># Wait for response message</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">can_bus</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">response</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;No response from ECU&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="adc-and-sensor-testing">
+<h2>ADC and Sensor Testing<a class="headerlink" href="#adc-and-sensor-testing" title="Link to this heading"></a></h2>
+<section id="test-analog-input-reading">
+<h3>Test Analog Input Reading<a class="headerlink" href="#test-analog-input-reading" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">serial</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">serial_port</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize serial connection for debug output.&quot;&quot;&quot;</span>
+    <span class="n">ser</span> <span class="o">=</span> <span class="n">serial</span><span class="o">.</span><span class="n">Serial</span><span class="p">(</span><span class="s1">&#39;COM3&#39;</span><span class="p">,</span> <span class="mi">115200</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">yield</span> <span class="n">ser</span>
+    <span class="n">ser</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_adc_reading</span><span class="p">(</span><span class="n">serial_port</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test ADC reads correct voltage.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Set test voltage: 2.5V (use external voltage source)</span>
+    <span class="n">expected_voltage</span> <span class="o">=</span> <span class="mf">2.5</span>
+    <span class="n">tolerance</span> <span class="o">=</span> <span class="mf">0.025</span>  <span class="c1"># ±1%</span>
+
+    <span class="c1"># Send command to read ADC channel 0</span>
+    <span class="n">serial_port</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;READ_ADC 0</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Read response</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">serial_port</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="n">voltage</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">voltage</span> <span class="o">-</span> <span class="n">expected_voltage</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tolerance</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="pwm-output-testing">
+<h2>PWM Output Testing<a class="headerlink" href="#pwm-output-testing" title="Link to this heading"></a></h2>
+<section id="test-pwm-frequency-and-duty-cycle">
+<h3>Test PWM Frequency and Duty Cycle<a class="headerlink" href="#test-pwm-frequency-and-duty-cycle" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_pwm_output</span><span class="p">(</span><span class="n">serial_port</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test PWM output configuration.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Configure PWM: 1kHz, 50% duty cycle</span>
+    <span class="n">serial_port</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;SET_PWM 0 1000 50</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+
+    <span class="c1"># Read back configuration</span>
+    <span class="n">serial_port</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;GET_PWM 0</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">serial_port</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+    <span class="c1"># Parse: &quot;PWM0: freq=1000Hz, duty=50%&quot;</span>
+    <span class="k">assert</span> <span class="s2">&quot;freq=1000&quot;</span> <span class="ow">in</span> <span class="n">response</span>
+    <span class="k">assert</span> <span class="s2">&quot;duty=50&quot;</span> <span class="ow">in</span> <span class="n">response</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For accurate PWM verification, use an oscilloscope or logic analyzer
+to measure the actual output signal.</p>
+</div>
+</section>
+</section>
+<section id="uds-diagnostic-testing">
+<h2>UDS Diagnostic Testing<a class="headerlink" href="#uds-diagnostic-testing" title="Link to this heading"></a></h2>
+<section id="test-session-management">
+<h3>Test Session Management<a class="headerlink" href="#test-session-management" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">isotp</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_uds_session_control</span><span class="p">(</span><span class="n">can_bus</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test UDS diagnostic session control.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Create ISO-TP socket</span>
+    <span class="n">addr</span> <span class="o">=</span> <span class="n">isotp</span><span class="o">.</span><span class="n">Address</span><span class="p">(</span>
+        <span class="n">rxid</span><span class="o">=</span><span class="mh">0x7E8</span><span class="p">,</span>  <span class="c1"># ECU response ID</span>
+        <span class="n">txid</span><span class="o">=</span><span class="mh">0x7E0</span>   <span class="c1"># Tester request ID</span>
+    <span class="p">)</span>
+
+    <span class="n">stack</span> <span class="o">=</span> <span class="n">isotp</span><span class="o">.</span><span class="n">CanStack</span><span class="p">(</span><span class="n">can_bus</span><span class="p">,</span> <span class="n">address</span><span class="o">=</span><span class="n">addr</span><span class="p">)</span>
+
+    <span class="c1"># Request extended diagnostic session (10 03)</span>
+    <span class="n">request</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">([</span><span class="mh">0x10</span><span class="p">,</span> <span class="mh">0x03</span><span class="p">])</span>
+    <span class="n">stack</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+
+    <span class="c1"># Wait for response</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+
+    <span class="c1"># Expected: 50 03 (positive response)</span>
+    <span class="k">assert</span> <span class="n">response</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+    <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mh">0x50</span>  <span class="c1"># Service + 0x40</span>
+    <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mh">0x03</span>  <span class="c1"># Session type</span>
+</pre></div>
+</div>
+</section>
+<section id="test-dtc-reading">
+<h3>Test DTC Reading<a class="headerlink" href="#test-dtc-reading" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_uds_read_dtc</span><span class="p">(</span><span class="n">can_bus</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test reading diagnostic trouble codes.&quot;&quot;&quot;</span>
+
+    <span class="n">addr</span> <span class="o">=</span> <span class="n">isotp</span><span class="o">.</span><span class="n">Address</span><span class="p">(</span><span class="n">rxid</span><span class="o">=</span><span class="mh">0x7E8</span><span class="p">,</span> <span class="n">txid</span><span class="o">=</span><span class="mh">0x7E0</span><span class="p">)</span>
+    <span class="n">stack</span> <span class="o">=</span> <span class="n">isotp</span><span class="o">.</span><span class="n">CanStack</span><span class="p">(</span><span class="n">can_bus</span><span class="p">,</span> <span class="n">address</span><span class="o">=</span><span class="n">addr</span><span class="p">)</span>
+
+    <span class="c1"># Read number of DTCs (19 01)</span>
+    <span class="n">request</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">([</span><span class="mh">0x19</span><span class="p">,</span> <span class="mh">0x01</span><span class="p">,</span> <span class="mh">0xFF</span><span class="p">])</span>
+    <span class="n">stack</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="n">response</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+    <span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mh">0x59</span>  <span class="c1"># Positive response</span>
+
+    <span class="c1"># Parse DTC count</span>
+    <span class="n">dtc_high</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+    <span class="n">dtc_low</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+    <span class="n">dtc_count</span> <span class="o">=</span> <span class="p">(</span><span class="n">dtc_high</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">|</span> <span class="n">dtc_low</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DTC Count: </span><span class="si">{</span><span class="n">dtc_count</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="safety-function-testing">
+<h2>Safety Function Testing<a class="headerlink" href="#safety-function-testing" title="Link to this heading"></a></h2>
+<section id="test-watchdog-monitoring">
+<h3>Test Watchdog Monitoring<a class="headerlink" href="#test-watchdog-monitoring" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_watchdog_recovery</span><span class="p">(</span><span class="n">serial_port</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test watchdog timeout and recovery.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Trigger watchdog timeout</span>
+    <span class="n">serial_port</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;STOP_WATCHDOG</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Wait for reset (should happen within 50ms)</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
+
+    <span class="c1"># Check that system restarted</span>
+    <span class="n">serial_port</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;GET_RESET_REASON</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">serial_port</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+
+    <span class="k">assert</span> <span class="s2">&quot;WATCHDOG&quot;</span> <span class="ow">in</span> <span class="n">response</span>
+</pre></div>
+</div>
+</section>
+<section id="test-safe-state-entry">
+<h3>Test Safe State Entry<a class="headerlink" href="#test-safe-state-entry" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_safe_state</span><span class="p">(</span><span class="n">serial_port</span><span class="p">,</span> <span class="n">can_bus</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test safe state entry on critical fault.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Inject critical fault</span>
+    <span class="n">serial_port</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;INJECT_FAULT CRITICAL</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+
+    <span class="c1"># Verify all PWM outputs are disabled</span>
+    <span class="n">serial_port</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;GET_PWM_STATUS</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">serial_port</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+
+    <span class="k">assert</span> <span class="s2">&quot;ALL_DISABLED&quot;</span> <span class="ow">in</span> <span class="n">response</span>
+
+    <span class="c1"># Verify CAN diagnostics still working</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="n">can_bus</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">msg</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="performance-testing">
+<h2>Performance Testing<a class="headerlink" href="#performance-testing" title="Link to this heading"></a></h2>
+<section id="test-task-timing">
+<h3>Test Task Timing<a class="headerlink" href="#test-task-timing" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_task_execution_times</span><span class="p">(</span><span class="n">serial_port</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Verify task execution times meet requirements.&quot;&quot;&quot;</span>
+
+    <span class="n">serial_port</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;GET_TASK_STATS</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Read task statistics</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">serial_port</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="s2">&quot;Task_1ms&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+            <span class="c1"># Parse: &quot;Task_1ms: avg=250us, max=780us&quot;</span>
+            <span class="n">max_time</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;max=&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;us&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">assert</span> <span class="n">max_time</span> <span class="o">&lt;</span> <span class="mi">800</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Task_1ms exceeded deadline: </span><span class="si">{</span><span class="n">max_time</span><span class="si">}</span><span class="s2">us&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="test-cpu-load">
+<h3>Test CPU Load<a class="headerlink" href="#test-cpu-load" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_cpu_load</span><span class="p">(</span><span class="n">serial_port</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Verify CPU load is within acceptable range.&quot;&quot;&quot;</span>
+
+    <span class="n">serial_port</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;GET_CPU_LOAD</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">serial_port</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+
+    <span class="c1"># Parse: &quot;CPU Load: 45%&quot;</span>
+    <span class="n">cpu_load</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;%&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
+
+    <span class="k">assert</span> <span class="n">cpu_load</span> <span class="o">&lt;</span> <span class="mi">80</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;CPU load too high: </span><span class="si">{</span><span class="n">cpu_load</span><span class="si">}</span><span class="s2">%&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="continuous-testing">
+<h2>Continuous Testing<a class="headerlink" href="#continuous-testing" title="Link to this heading"></a></h2>
+<section id="long-term-stability-test">
+<h3>Long-term Stability Test<a class="headerlink" href="#long-term-stability-test" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">slow</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_24hour_stability</span><span class="p">(</span><span class="n">can_bus</span><span class="p">,</span> <span class="n">serial_port</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run 24-hour stability test.&quot;&quot;&quot;</span>
+
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">duration</span> <span class="o">=</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span>  <span class="c1"># 24 hours</span>
+
+    <span class="n">msg_count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">error_count</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">while</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span> <span class="o">&lt;</span> <span class="n">duration</span><span class="p">:</span>
+        <span class="c1"># Monitor CAN messages</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="n">can_bus</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">msg</span><span class="p">:</span>
+            <span class="n">msg_count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="c1"># Check for errors periodically</span>
+        <span class="k">if</span> <span class="n">msg_count</span> <span class="o">%</span> <span class="mi">1000</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">serial_port</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;GET_ERROR_COUNT</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="n">serial_port</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+            <span class="n">errors</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">errors</span> <span class="o">&gt;</span> <span class="n">error_count</span><span class="p">:</span>
+                <span class="n">error_count</span> <span class="o">=</span> <span class="n">errors</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error count increased: </span><span class="si">{</span><span class="n">error_count</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test complete: </span><span class="si">{</span><span class="n">msg_count</span><span class="si">}</span><span class="s2"> messages, </span><span class="si">{</span><span class="n">error_count</span><span class="si">}</span><span class="s2"> errors&quot;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">error_count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Errors occurred during stability test&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="test-report-generation">
+<h2>Test Report Generation<a class="headerlink" href="#test-report-generation" title="Link to this heading"></a></h2>
+<p>Generate HTML test report:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest<span class="w"> </span>tests/traveo2/<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--html<span class="o">=</span>traveo2_test_report.html<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--self-contained-html<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--junit-xml<span class="o">=</span>test-results.xml
+</pre></div>
+</div>
+<p>The report includes:</p>
+<ul class="simple">
+<li><p>Test pass/fail status</p></li>
+<li><p>Execution time</p></li>
+<li><p>Error messages and stack traces</p></li>
+<li><p>Test coverage</p></li>
+<li><p>Screenshots (if configured)</p></li>
+</ul>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h2>
+<section id="common-issues">
+<h3>Common Issues<a class="headerlink" href="#common-issues" title="Link to this heading"></a></h3>
+<p><strong>Issue</strong>: Cannot connect to Traveo II</p>
+<ul class="simple">
+<li><p>Check USB cable connection</p></li>
+<li><p>Verify debugger drivers installed</p></li>
+<li><p>Try different USB port</p></li>
+<li><p>Check power supply</p></li>
+</ul>
+<p><strong>Issue</strong>: CAN messages not received</p>
+<ul class="simple">
+<li><p>Verify CAN termination (120Ω at each end)</p></li>
+<li><p>Check CAN_H and CAN_L wiring</p></li>
+<li><p>Verify CAN bitrate matches (500 kbit/s)</p></li>
+<li><p>Check transceiver power supply</p></li>
+</ul>
+<p><strong>Issue</strong>: ADC readings incorrect</p>
+<ul class="simple">
+<li><p>Verify reference voltage (2.5V internal)</p></li>
+<li><p>Check input voltage range (0-5V)</p></li>
+<li><p>Verify pin configuration</p></li>
+<li><p>Check for noise on analog ground</p></li>
+</ul>
+<p><strong>Issue</strong>: Firmware upload fails</p>
+<ul class="simple">
+<li><p>Erase chip completely</p></li>
+<li><p>Check Flash protection settings</p></li>
+<li><p>Verify correct device selected</p></li>
+<li><p>Try lower SWD clock speed</p></li>
+</ul>
+</section>
+<section id="debug-tips">
+<h3>Debug Tips<a class="headerlink" href="#debug-tips" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Enable debug UART output for detailed logging</p></li>
+<li><p>Use SWO trace for real-time debugging</p></li>
+<li><p>Monitor CPU load and task execution times</p></li>
+<li><p>Check stack usage for overflow</p></li>
+<li><p>Use memory protection to catch errors early</p></li>
+</ol>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="architecture.html" class="btn btn-neutral float-left" title="Traveo II System Architecture" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../reference/glossary.html" class="btn btn-neutral float-right" title="Glossary" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Your Organization.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

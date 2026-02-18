@@ -1,0 +1,77 @@
+Scope
+=====
+
+Project Scope
+-------------
+
+This project encompasses the development of automotive software for vehicle control systems running on the Infineon Traveo II Entry Family microcontroller.
+
+In Scope
+--------
+
+The following items are within the scope of this project:
+
+* **Hardware Platform**: Infineon Traveo II Entry Family (CYT2B7x series)
+* **Development Board**: KIT_T2G-B-H_LITE Starter Kit
+* **Software Components**:
+  
+  * Vehicle communication interfaces (CAN, LIN, FlexRay)
+  * Sensor data acquisition and processing
+  * Actuator control
+  * Diagnostics and error handling
+  * Safety monitoring functions
+  * Bootloader and firmware update
+  
+* **Standards Compliance**:
+  
+  * AUTOSAR Classic Platform
+  * ISO 26262 (Functional Safety)
+  * Automotive SPICE
+  * MISRA C:2012
+  
+* **Testing**:
+  
+  * Unit testing (on host and target)
+  * Integration testing
+  * System testing
+  * Hardware-in-the-loop (HIL) testing
+
+Out of Scope
+------------
+
+The following items are explicitly out of scope:
+
+* Hardware design and development
+* Mechanical integration
+* Vehicle-level integration (handled by OEM)
+* Production manufacturing
+* End-of-life and recycling
+
+Assumptions and Constraints
+----------------------------
+
+Assumptions
+^^^^^^^^^^^
+
+* Development tools and licenses are available
+* Traveo II Starter Kit hardware is available for testing
+* CAN/LIN test equipment is available
+* Development team has automotive domain expertise
+
+Constraints
+^^^^^^^^^^^
+
+* Must use Infineon MCAL (Microcontroller Abstraction Layer)
+* Must comply with customer-specific coding guidelines
+* Memory constraints: 256KB Flash, 32KB RAM
+* Real-time constraints: 1ms task cycle for critical functions
+* Development timeline: 6 months to first release
+
+Dependencies
+------------
+
+* Infineon Traveo II SDK
+* AUTOSAR BSW modules
+* Third-party libraries (approved list only)
+* Test framework (Unity/Ceedling)
+* Static analysis tools (PC-Lint Plus)

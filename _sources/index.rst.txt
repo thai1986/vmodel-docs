@@ -1,0 +1,76 @@
+Automotive Software Documentation
+=====================================
+
+Welcome to the Automotive Software Documentation repository. This documentation follows the V-Model development process and provides comprehensive requirements and test specifications for automotive software targeting the Infineon Traveo II Body Entry 1M platform (CYTVII-B-E-1M-SK).
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Introduction
+   
+   introduction/overview
+   introduction/scope
+   introduction/definitions
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Requirements
+   
+   requirements/index
+   requirements/functional/index
+   requirements/non-functional/index
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Test Specifications
+   
+   specifications/index
+   specifications/unit/index
+   specifications/integration/index
+   specifications/system/index
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Traceability
+   
+   traceability/requirements_coverage
+   traceability/traceability_matrix
+   traceability/verification_status
+   traceability/validation
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Traveo II Platform
+   
+   traveo2/overview
+   traveo2/board_config
+   traveo2/architecture
+   traveo2/testing
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Reference
+   
+   reference/glossary
+   reference/abbreviations
+   reference/documents
+
+Indices and Search
+==================
+
+* :ref:`genindex`
+* :ref:`search`
+* :ref:`needs <needs:index>`
+
+Quick Links
+===========
+
+* :need:`All Requirements <type == 'req'>`
+* :need:`All Test Specifications <type == 'spec'>`
+* :need:`All Test Cases <type == 'test'>`
+
+Document Information
+====================
+
+:Version: |version|
+:Release: |release|
+:Date: |today|

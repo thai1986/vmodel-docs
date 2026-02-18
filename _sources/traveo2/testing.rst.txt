@@ -1,0 +1,506 @@
+Traveo II Testing Guide
+========================
+
+This guide describes how to test the automotive software on Traveo II hardware.
+
+Test Environment Setup
+-----------------------
+
+Required Hardware
+^^^^^^^^^^^^^^^^^
+
+1. **CYTVII-B-E-1M-SK** - Traveo II Body Entry 1M Starter Kit
+2. **J-Link** or **KitProg3** - Debugger/Programmer (KitProg3 onboard)
+3. **Vector CANoe** or **PCAN-USB** - CAN interface
+4. **Power Supply** - 12V automotive power supply
+5. **Oscilloscope** - For signal verification (optional)
+6. **USB cables** - For connections
+
+Hardware Connections
+^^^^^^^^^^^^^^^^^^^^
+
+Basic Setup:
+
+.. code-block:: text
+
+   PC --USB-- CYTVII-B-E-1M-SK
+   PC --USB-- PCAN-USB --CAN-- CYTVII-B-E-1M-SK(CAN0)
+   Power Supply (12V) ---> CYTVII-B-E-1M-SK
+
+CAN Bus Wiring:
+
+* CAN_H and CAN_L connections
+* 120Ω termination resistors at both ends
+* Typical automotive CAN bus setup
+
+Required Software
+^^^^^^^^^^^^^^^^^
+
+1. **ModusToolbox™ 3.x** - Development IDE
+2. **OpenOCD** - On-chip debugger
+3. **Python 3.8+** - For test scripts
+4. **pytest** - Test framework
+5. **CANalyzer/CANoe** - For CAN testing (or python-can)
+
+Installation
+^^^^^^^^^^^^
+
+.. code-block:: bash
+
+   # Install Python dependencies
+   pip install -r requirements.txt
+   
+   # Install Traveo II test tools
+   pip install pytest pytest-html pyserial python-can
+   
+   # Install OpenOCD (if not using ModusToolbox)
+   # Follow platform-specific instructions
+
+Flashing the Firmware
+---------------------
+
+Using ModusToolbox
+^^^^^^^^^^^^^^^^^^
+
+1. Open project in ModusToolbox
+2. Build the project (Ctrl+B)
+3. Connect debugger to kit
+4. Click "Program" or use "Quick Panel > Program"
+
+Using OpenOCD
+^^^^^^^^^^^^^
+
+.. code-block:: bash
+
+   # Flash application
+   openocd -f interface/kitprog3.cfg -f target/traveo2_6m.cfg \
+       -c "program build/firmware.hex verify reset exit"
+
+Using J-Link
+^^^^^^^^^^^^
+
+Create a JLink script file ``flash_firmware.jlink``:
+
+.. code-block:: text
+
+   device CYT2B75CADES
+   si SWD
+   speed 4000
+   loadfile build/firmware.hex
+   r
+   g
+   exit
+
+Execute:
+
+.. code-block:: bash
+
+   JLinkExe -CommandFile flash_firmware.jlink
+
+Automated Testing
+-----------------
+
+Test Framework Structure
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: text
+
+   tests/
+   ├── traveo2/
+   │   ├── __init__.py
+   │   ├── conftest.py           # pytest configuration
+   │   ├── test_can.py            # CAN communication tests
+   │   ├── test_adc.py            # ADC/sensor tests
+   │   ├── test_pwm.py            # PWM output tests
+   │   ├── test_diagnostics.py    # UDS diagnostic tests
+   │   ├── test_safety.py         # Safety function tests
+   │   └── utils/
+   │       ├── can_interface.py   # CAN helper functions
+   │       ├── serial_interface.py # UART helper
+   │       └── hardware_setup.py  # Hardware initialization
+
+Running Tests
+^^^^^^^^^^^^^
+
+Run all tests:
+
+.. code-block:: bash
+
+   pytest tests/traveo2/ -v --html=test-report.html
+
+Run specific test module:
+
+.. code-block:: bash
+
+   pytest tests/traveo2/test_can.py -v
+
+Run with coverage:
+
+.. code-block:: bash
+
+   pytest tests/traveo2/ --cov=. --cov-report=html
+
+CAN Communication Testing
+-------------------------
+
+Test CAN Message Transmission
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Example test: ``tests/traveo2/test_can.py``
+
+.. code-block:: python
+
+   import pytest
+   import can
+   import time
+   
+   @pytest.fixture
+   def can_bus():
+       """Initialize CAN bus interface."""
+       bus = can.interface.Bus(
+           channel='PCAN_USBBUS1',
+           bustype='pcan',
+           bitrate=500000
+       )
+       yield bus
+       bus.shutdown()
+   
+   def test_can_transmission(can_bus):
+       """Test CAN message transmission from Traveo II."""
+       
+       # Expected periodic message from ECU
+       message_id = 0x100
+       
+       # Wait for message
+       msg = can_bus.recv(timeout=1.0)
+       
+       assert msg is not None, "No CAN message received"
+       assert msg.arbitration_id == message_id
+       assert len(msg.data) == 8
+       
+       print(f"Received: ID=0x{msg.arbitration_id:03X}, Data={msg.data.hex()}")
+
+Test CAN Message Reception
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+   def test_can_reception(can_bus):
+       """Test that Traveo II receives and processes CAN messages."""
+       
+       # Send test message
+       test_msg = can.Message(
+           arbitration_id=0x200,
+           data=[0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08],
+           is_extended_id=False
+       )
+       
+       can_bus.send(test_msg)
+       time.sleep(0.1)
+       
+       # Wait for response message
+       response = can_bus.recv(timeout=1.0)
+       assert response is not None, "No response from ECU"
+
+ADC and Sensor Testing
+----------------------
+
+Test Analog Input Reading
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+   import serial
+   
+   @pytest.fixture
+   def serial_port():
+       """Initialize serial connection for debug output."""
+       ser = serial.Serial('COM3', 115200, timeout=1)
+       yield ser
+       ser.close()
+   
+   def test_adc_reading(serial_port):
+       """Test ADC reads correct voltage."""
+       
+       # Set test voltage: 2.5V (use external voltage source)
+       expected_voltage = 2.5
+       tolerance = 0.025  # ±1%
+       
+       # Send command to read ADC channel 0
+       serial_port.write(b"READ_ADC 0\n")
+       
+       # Read response
+       response = serial_port.readline().decode().strip()
+       voltage = float(response.split(':')[1])
+       
+       assert abs(voltage - expected_voltage) < tolerance
+
+PWM Output Testing
+------------------
+
+Test PWM Frequency and Duty Cycle
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+   def test_pwm_output(serial_port):
+       """Test PWM output configuration."""
+       
+       # Configure PWM: 1kHz, 50% duty cycle
+       serial_port.write(b"SET_PWM 0 1000 50\n")
+       time.sleep(0.1)
+       
+       # Read back configuration
+       serial_port.write(b"GET_PWM 0\n")
+       response = serial_port.readline().decode().strip()
+       
+       # Parse: "PWM0: freq=1000Hz, duty=50%"
+       assert "freq=1000" in response
+       assert "duty=50" in response
+
+.. note::
+   For accurate PWM verification, use an oscilloscope or logic analyzer 
+   to measure the actual output signal.
+
+UDS Diagnostic Testing
+----------------------
+
+Test Session Management
+^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+   import isotp
+   
+   def test_uds_session_control(can_bus):
+       """Test UDS diagnostic session control."""
+       
+       # Create ISO-TP socket
+       addr = isotp.Address(
+           rxid=0x7E8,  # ECU response ID
+           txid=0x7E0   # Tester request ID
+       )
+       
+       stack = isotp.CanStack(can_bus, address=addr)
+       
+       # Request extended diagnostic session (10 03)
+       request = bytes([0x10, 0x03])
+       stack.send(request)
+       
+       # Wait for response
+       response = stack.recv(timeout=1.0)
+       
+       # Expected: 50 03 (positive response)
+       assert response is not None
+       assert response[0] == 0x50  # Service + 0x40
+       assert response[1] == 0x03  # Session type
+
+Test DTC Reading
+^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+   def test_uds_read_dtc(can_bus):
+       """Test reading diagnostic trouble codes."""
+       
+       addr = isotp.Address(rxid=0x7E8, txid=0x7E0)
+       stack = isotp.CanStack(can_bus, address=addr)
+       
+       # Read number of DTCs (19 01)
+       request = bytes([0x19, 0x01, 0xFF])
+       stack.send(request)
+       
+       response = stack.recv(timeout=1.0)
+       
+       assert response is not None
+       assert response[0] == 0x59  # Positive response
+       
+       # Parse DTC count
+       dtc_high = response[3]
+       dtc_low = response[4]
+       dtc_count = (dtc_high << 8) | dtc_low
+       
+       print(f"DTC Count: {dtc_count}")
+
+Safety Function Testing
+-----------------------
+
+Test Watchdog Monitoring
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+   def test_watchdog_recovery(serial_port):
+       """Test watchdog timeout and recovery."""
+       
+       # Trigger watchdog timeout
+       serial_port.write(b"STOP_WATCHDOG\n")
+       
+       # Wait for reset (should happen within 50ms)
+       time.sleep(0.2)
+       
+       # Check that system restarted
+       serial_port.write(b"GET_RESET_REASON\n")
+       response = serial_port.readline().decode()
+       
+       assert "WATCHDOG" in response
+
+Test Safe State Entry
+^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+   def test_safe_state(serial_port, can_bus):
+       """Test safe state entry on critical fault."""
+       
+       # Inject critical fault
+       serial_port.write(b"INJECT_FAULT CRITICAL\n")
+       time.sleep(0.1)
+       
+       # Verify all PWM outputs are disabled
+       serial_port.write(b"GET_PWM_STATUS\n")
+       response = serial_port.readline().decode()
+       
+       assert "ALL_DISABLED" in response
+       
+       # Verify CAN diagnostics still working
+       msg = can_bus.recv(timeout=1.0)
+       assert msg is not None
+
+Performance Testing
+-------------------
+
+Test Task Timing
+^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+   def test_task_execution_times(serial_port):
+       """Verify task execution times meet requirements."""
+       
+       serial_port.write(b"GET_TASK_STATS\n")
+       
+       # Read task statistics
+       for _ in range(5):
+           line = serial_port.readline().decode().strip()
+           if "Task_1ms" in line:
+               # Parse: "Task_1ms: avg=250us, max=780us"
+               max_time = int(line.split("max=")[1].split("us")[0])
+               assert max_time < 800, f"Task_1ms exceeded deadline: {max_time}us"
+
+Test CPU Load
+^^^^^^^^^^^^^
+
+.. code-block:: python
+
+   def test_cpu_load(serial_port):
+       """Verify CPU load is within acceptable range."""
+       
+       serial_port.write(b"GET_CPU_LOAD\n")
+       response = serial_port.readline().decode()
+       
+       # Parse: "CPU Load: 45%"
+       cpu_load = int(response.split(':')[1].strip().replace('%', ''))
+       
+       assert cpu_load < 80, f"CPU load too high: {cpu_load}%"
+
+Continuous Testing
+------------------
+
+Long-term Stability Test
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+   @pytest.mark.slow
+   def test_24hour_stability(can_bus, serial_port):
+       """Run 24-hour stability test."""
+       
+       start_time = time.time()
+       duration = 24 * 60 * 60  # 24 hours
+       
+       msg_count = 0
+       error_count = 0
+       
+       while time.time() - start_time < duration:
+           # Monitor CAN messages
+           msg = can_bus.recv(timeout=0.1)
+           if msg:
+               msg_count += 1
+           
+           # Check for errors periodically
+           if msg_count % 1000 == 0:
+               serial_port.write(b"GET_ERROR_COUNT\n")
+               response = serial_port.readline().decode()
+               errors = int(response.split(':')[1])
+               if errors > error_count:
+                   error_count = errors
+                   print(f"Error count increased: {error_count}")
+           
+           time.sleep(0.01)
+       
+       print(f"Test complete: {msg_count} messages, {error_count} errors")
+       assert error_count == 0, "Errors occurred during stability test"
+
+Test Report Generation
+----------------------
+
+Generate HTML test report:
+
+.. code-block:: bash
+
+   pytest tests/traveo2/ \
+       --html=traveo2_test_report.html \
+       --self-contained-html \
+       --junit-xml=test-results.xml
+
+The report includes:
+
+* Test pass/fail status
+* Execution time
+* Error messages and stack traces
+* Test coverage
+* Screenshots (if configured)
+
+Troubleshooting
+---------------
+
+Common Issues
+^^^^^^^^^^^^^
+
+**Issue**: Cannot connect to Traveo II
+
+* Check USB cable connection
+* Verify debugger drivers installed
+* Try different USB port
+* Check power supply
+
+**Issue**: CAN messages not received
+
+* Verify CAN termination (120Ω at each end)
+* Check CAN_H and CAN_L wiring
+* Verify CAN bitrate matches (500 kbit/s)
+* Check transceiver power supply
+
+**Issue**: ADC readings incorrect
+
+* Verify reference voltage (2.5V internal)
+* Check input voltage range (0-5V)
+* Verify pin configuration
+* Check for noise on analog ground
+
+**Issue**: Firmware upload fails
+
+* Erase chip completely
+* Check Flash protection settings
+* Verify correct device selected
+* Try lower SWD clock speed
+
+Debug Tips
+^^^^^^^^^^
+
+1. Enable debug UART output for detailed logging
+2. Use SWO trace for real-time debugging
+3. Monitor CPU load and task execution times
+4. Check stack usage for overflow
+5. Use memory protection to catch errors early

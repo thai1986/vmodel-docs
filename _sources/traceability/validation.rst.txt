@@ -1,0 +1,104 @@
+Test Validation Results
+=======================
+
+This section contains the automated test validation results from Robot Framework.
+Test results provide validation evidence for requirements and specifications,
+completing the traceability chain: **Requirement → Specification → Validation**.
+
+.. note::
+   Test results are automatically generated from Robot Framework test execution.
+   Results are updated on every CI/CD run.
+
+Test Reports
+------------
+
+The following test reports are available:
+
+* :download:`Robot Framework Report <../test-reports/report.html>` - Interactive test execution report
+* :download:`Robot Framework Log <../test-reports/log.html>` - Detailed test execution log
+* :download:`Traceability Data <../test-reports/traceability.json>` - Machine-readable traceability data
+
+Test Execution Summary
+----------------------
+
+.. include:: test_results.rst
+   :start-after: Test Suite:
+
+Traceability Integration
+-------------------------
+
+Test results are automatically linked to requirements and specifications through
+test case documentation strings. Each test case explicitly references:
+
+* **Requirements**: Functional, safety, and performance requirements (REQ_*)
+* **Specifications**: Unit, integration, and system specifications (SPEC_*)
+
+The traceability matrix is automatically updated with test execution status,
+providing real-time validation status for all requirements and specifications.
+
+Test Coverage Analysis
+----------------------
+
+Coverage is analyzed at multiple levels:
+
+1. **Requirement Coverage**: Which requirements are validated by tests
+2. **Specification Coverage**: Which specifications are validated by tests
+3. **Test Execution Status**: Pass/fail status for each requirement/specification
+4. **Safety Level Coverage**: ASIL-level test coverage (ASIL-A through ASIL-D)
+
+Automated Test Execution
+-------------------------
+
+Tests are executed automatically in the CI/CD pipeline on:
+
+* Every commit to main/develop branches
+* Every pull request
+* Manual workflow dispatch
+* Nightly scheduled runs
+
+Test execution includes:
+
+* CAN-FD communication tests
+* ADC and sensor acquisition tests
+* PWM and actuator control tests
+* LIN communication tests (when available)
+* Safety mechanism tests (watchdog, safe state)
+* Diagnostic protocol tests (UDS)
+
+Test Environment
+----------------
+
+Tests are executed in the following environments:
+
+* **Hardware-in-the-Loop (HIL)**: CYTVII-B-E-1M-SK development board
+* **Simulation**: Software-based simulation when hardware unavailable
+* **CI/CD Environment**: Ubuntu Linux with Python 3.11+
+
+Test Automation Strategy
+-------------------------
+
+The test automation follows these principles:
+
+1. **Traceability**: Every test linked to requirements/specifications
+2. **Repeatability**: Tests produce consistent results
+3. **Automation**: All tests automated with Robot Framework
+4. **Coverage**: 100% requirement and specification coverage target
+5. **Reporting**: Comprehensive HTML/XML reports with metrics
+6. **Integration**: Test results integrated into documentation
+
+Continuous Integration
+----------------------
+
+The CI/CD pipeline ensures:
+
+* Tests run automatically on code changes
+* Test reports published to documentation
+* Failed tests block merges to main branch
+* Test metrics tracked over time
+* Documentation always reflects latest test results
+
+.. seealso::
+   
+   * :doc:`../traceability/traceability_matrix` - Full traceability matrix
+   * :doc:`../traceability/coverage` - Coverage analysis
+   * :doc:`../testing/index` - Test specifications

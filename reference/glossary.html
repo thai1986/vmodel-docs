@@ -1,0 +1,717 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Glossary &mdash; Automotive Software Documentation 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=912d4c92" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-data-viewer/jsonview.bundle.css?v=f6ef2277" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-needs/libs/html/datatables.min.css?v=4b4fd840" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-needs/common_css/need_links.css?v=2150a916" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-needs/common_css/need_style.css?v=92936fa5" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-needs/common_css/needstable.css?v=5e1b6797" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-needs/common_css/need_toggle.css?v=5c6620df" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-needs/common_css/need_core.css?v=f5b60a78" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-needs/modern.css?v=803738c0" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/sphinx-data-viewer/jsonview.bundle.js?v=18cd53c5"></script>
+      <script src="../_static/sphinx-data-viewer/jsonview_loader.js?v=f7ff7e7d"></script>
+      <script src="../_static/sphinx-needs/libs/html/datatables.min.js?v=8a4aee21"></script>
+      <script src="../_static/sphinx-needs/libs/html/datatables_loader.js?v=a2cae175"></script>
+      <script src="../_static/sphinx-needs/libs/html/sphinx_needs_collapse.js?v=dca66431"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Abbreviations" href="abbreviations.html" />
+    <link rel="prev" title="Traveo II Testing Guide" href="../traveo2/testing.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Automotive Software Documentation
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/overview.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/overview.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/overview.html#purpose">Purpose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/overview.html#scope">Scope</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/overview.html#target-audience">Target Audience</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/overview.html#document-structure">Document Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/scope.html">Scope</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/scope.html#project-scope">Project Scope</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/scope.html#in-scope">In Scope</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/scope.html#out-of-scope">Out of Scope</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/scope.html#assumptions-and-constraints">Assumptions and Constraints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/scope.html#assumptions">Assumptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/scope.html#constraints">Constraints</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/scope.html#dependencies">Dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/definitions.html">Definitions and Terminology</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/definitions.html#general-terms">General Terms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/definitions.html#safety-terms">Safety Terms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/definitions.html#communication-terms">Communication Terms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/definitions.html#development-terms">Development Terms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/definitions.html#traveo-ii-specific-terms">Traveo II Specific Terms</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Requirements</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../requirements/index.html">System Requirements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../requirements/index.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../requirements/index.html#requirement-categories">Requirement Categories</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../requirements/functional/index.html">Functional Requirements</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../requirements/functional/index.html#communication-requirements">Communication Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../requirements/functional/index.html#sensor-requirements">Sensor Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../requirements/functional/index.html#actuator-requirements">Actuator Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../requirements/functional/index.html#diagnostics-requirements">Diagnostics Requirements</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../requirements/non-functional/index.html">Non-Functional Requirements</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../requirements/non-functional/index.html#performance-requirements">Performance Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../requirements/non-functional/index.html#safety-requirements">Safety Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../requirements/non-functional/index.html#security-requirements">Security Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../requirements/non-functional/index.html#reliability-requirements">Reliability Requirements</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../requirements/index.html#requirements-summary">Requirements Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../requirements/index.html#requirements-coverage">Requirements Coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../requirements/index.html#requirements-by-status">Requirements by Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../requirements/index.html#requirements-by-safety-level">Requirements by Safety Level</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../requirements/functional/index.html">Functional Requirements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../requirements/functional/index.html#communication-requirements">Communication Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../requirements/functional/index.html#sensor-requirements">Sensor Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../requirements/functional/index.html#actuator-requirements">Actuator Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../requirements/functional/index.html#diagnostics-requirements">Diagnostics Requirements</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../requirements/non-functional/index.html">Non-Functional Requirements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../requirements/non-functional/index.html#performance-requirements">Performance Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../requirements/non-functional/index.html#safety-requirements">Safety Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../requirements/non-functional/index.html#security-requirements">Security Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../requirements/non-functional/index.html#reliability-requirements">Reliability Requirements</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Test Specifications</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../specifications/index.html">Test Specifications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/index.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/index.html#test-levels">Test Levels</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../specifications/unit/index.html">Unit Test Specifications</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/unit/index.html#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/unit/index.html#test-environment">Test Environment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/unit/index.html#communication-module-tests">Communication Module Tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/unit/index.html#sensor-module-tests">Sensor Module Tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/unit/index.html#actuator-module-tests">Actuator Module Tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/unit/index.html#diagnostics-module-tests">Diagnostics Module Tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/unit/index.html#coverage-requirements">Coverage Requirements</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../specifications/integration/index.html">Integration Test Specifications</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/integration/index.html#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/integration/index.html#test-environment">Test Environment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/integration/index.html#can-communication-integration-tests">CAN Communication Integration Tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/integration/index.html#sensor-and-actuator-integration-tests">Sensor and Actuator Integration Tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/integration/index.html#communication-and-diagnostics-integration">Communication and Diagnostics Integration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/integration/index.html#safety-functions-integration">Safety Functions Integration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/integration/index.html#performance-integration-tests">Performance Integration Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../specifications/system/index.html">System Test Specifications</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/system/index.html#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/system/index.html#test-environment">Test Environment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/system/index.html#functional-system-tests">Functional System Tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/system/index.html#safety-system-tests">Safety System Tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/system/index.html#performance-and-stress-tests">Performance and Stress Tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/system/index.html#environmental-tests">Environmental Tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/system/index.html#security-system-tests">Security System Tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../specifications/system/index.html#traveo-ii-platform-specific-tests">Traveo II Platform-Specific Tests</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/index.html#test-summary">Test Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/index.html#test-coverage">Test Coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/index.html#test-status">Test Status</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../specifications/unit/index.html">Unit Test Specifications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/unit/index.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/unit/index.html#test-environment">Test Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/unit/index.html#communication-module-tests">Communication Module Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/unit/index.html#sensor-module-tests">Sensor Module Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/unit/index.html#actuator-module-tests">Actuator Module Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/unit/index.html#diagnostics-module-tests">Diagnostics Module Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/unit/index.html#coverage-requirements">Coverage Requirements</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../specifications/integration/index.html">Integration Test Specifications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/integration/index.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/integration/index.html#test-environment">Test Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/integration/index.html#can-communication-integration-tests">CAN Communication Integration Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/integration/index.html#sensor-and-actuator-integration-tests">Sensor and Actuator Integration Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/integration/index.html#communication-and-diagnostics-integration">Communication and Diagnostics Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/integration/index.html#safety-functions-integration">Safety Functions Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/integration/index.html#performance-integration-tests">Performance Integration Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../specifications/system/index.html">System Test Specifications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/system/index.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/system/index.html#test-environment">Test Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/system/index.html#functional-system-tests">Functional System Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/system/index.html#safety-system-tests">Safety System Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/system/index.html#performance-and-stress-tests">Performance and Stress Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/system/index.html#environmental-tests">Environmental Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/system/index.html#security-system-tests">Security System Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../specifications/system/index.html#traveo-ii-platform-specific-tests">Traveo II Platform-Specific Tests</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Traceability</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../traceability/requirements_coverage.html">Requirements Coverage Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/requirements_coverage.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/requirements_coverage.html#coverage-summary">Coverage Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/requirements_coverage.html#requirements-coverage-table">Requirements Coverage Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/requirements_coverage.html#orphaned-requirements">Orphaned Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/requirements_coverage.html#orphaned-test-specifications">Orphaned Test Specifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/requirements_coverage.html#coverage-by-safety-level">Coverage by Safety Level</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/requirements_coverage.html#asil-d-requirements">ASIL-D Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/requirements_coverage.html#asil-c-requirements">ASIL-C Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/requirements_coverage.html#asil-b-requirements">ASIL-B Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/requirements_coverage.html#asil-a-requirements">ASIL-A Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/requirements_coverage.html#qm-requirements">QM Requirements</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/requirements_coverage.html#coverage-metrics">Coverage Metrics</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../traceability/traceability_matrix.html">Traceability Matrix</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/traceability_matrix.html#full-traceability-matrix">Full Traceability Matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/traceability_matrix.html#traceability-flow-diagram">Traceability Flow Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/traceability_matrix.html#functional-requirements-traceability">Functional Requirements Traceability</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/traceability_matrix.html#communication-requirements">Communication Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/traceability_matrix.html#sensor-requirements">Sensor Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/traceability_matrix.html#actuator-requirements">Actuator Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/traceability_matrix.html#diagnostics-requirements">Diagnostics Requirements</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/traceability_matrix.html#non-functional-requirements-traceability">Non-Functional Requirements Traceability</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/traceability_matrix.html#safety-requirements">Safety Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/traceability_matrix.html#performance-requirements">Performance Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/traceability_matrix.html#security-requirements">Security Requirements</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/traceability_matrix.html#requirements-to-tests-mapping">Requirements to Tests Mapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/traceability_matrix.html#tests-to-requirements-mapping">Tests to Requirements Mapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/traceability_matrix.html#bi-directional-traceability">Bi-directional Traceability</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/traceability_matrix.html#forward-traceability-requirements-tests">Forward Traceability (Requirements → Tests)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/traceability_matrix.html#backward-traceability-tests-requirements">Backward Traceability (Tests → Requirements)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/traceability_matrix.html#export-options">Export Options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../traceability/verification_status.html">Verification Status</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/verification_status.html#verification-overview">Verification Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/verification_status.html#verification-status-by-level">Verification Status by Level</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/verification_status.html#unit-test-status">Unit Test Status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/verification_status.html#integration-test-status">Integration Test Status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/verification_status.html#system-test-status">System Test Status</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/verification_status.html#verification-by-safety-level">Verification by Safety Level</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/verification_status.html#asil-d-verification-status">ASIL-D Verification Status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/verification_status.html#asil-c-verification-status">ASIL-C Verification Status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/verification_status.html#asil-b-verification-status">ASIL-B Verification Status</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/verification_status.html#verification-metrics">Verification Metrics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/verification_status.html#requirements-verification-progress">Requirements Verification Progress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/verification_status.html#test-implementation-progress">Test Implementation Progress</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/verification_status.html#pending-verifications">Pending Verifications</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/verification_status.html#requirements-pending-verification">Requirements Pending Verification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/verification_status.html#tests-pending-implementation">Tests Pending Implementation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/verification_status.html#release-readiness">Release Readiness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/verification_status.html#verification-methods">Verification Methods</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traceability/verification_status.html#verification-by-method">Verification by Method</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../traceability/verification_status.html#test-based-verification">Test-based Verification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../traceability/verification_status.html#analysis-based-verification">Analysis-based Verification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../traceability/verification_status.html#inspection-based-verification">Inspection-based Verification</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../traceability/validation.html">Test Validation Results</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/validation.html#test-reports">Test Reports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/validation.html#test-execution-summary">Test Execution Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/validation.html#traceability-integration">Traceability Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/validation.html#test-coverage-analysis">Test Coverage Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/validation.html#automated-test-execution">Automated Test Execution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/validation.html#test-environment">Test Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/validation.html#test-automation-strategy">Test Automation Strategy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traceability/validation.html#continuous-integration">Continuous Integration</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Traveo II Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../traveo2/overview.html">Traveo II Platform Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../traveo2/overview.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traveo2/overview.html#device-specifications">Device Specifications</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/overview.html#key-features">Key Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/overview.html#peripheral-set">Peripheral Set</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../traveo2/overview.html#communication-interfaces">Communication Interfaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../traveo2/overview.html#analog-interfaces">Analog Interfaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../traveo2/overview.html#timers-and-pwm">Timers and PWM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../traveo2/overview.html#safety-and-security">Safety and Security</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traveo2/overview.html#starter-kit">Starter Kit</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/overview.html#board-features">Board Features</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../traveo2/overview.html#pinout">Pinout</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traveo2/overview.html#memory-map">Memory Map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traveo2/overview.html#clock-configuration">Clock Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traveo2/overview.html#development-tools">Development Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/overview.html#recommended-toolchain">Recommended Toolchain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/overview.html#required-software">Required Software</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/overview.html#sdks-and-libraries">SDKs and Libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traveo2/overview.html#reference-documents">Reference Documents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traveo2/overview.html#pin-configuration">Pin Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/overview.html#communication">Communication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/overview.html#sensors-adc">Sensors (ADC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/overview.html#actuators-pwm">Actuators (PWM)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traveo2/overview.html#safe-state-configuration">Safe State Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traveo2/overview.html#power-modes">Power Modes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../traveo2/board_config.html">CYTVII-B-E-1M-SK Board Configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../traveo2/board_config.html#board-overview">Board Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traveo2/board_config.html#memory-map">Memory Map</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/board_config.html#flash-memory">Flash Memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/board_config.html#sram">SRAM</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traveo2/board_config.html#key-differences-from-entry-family">Key Differences from Entry Family</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/board_config.html#advantages">Advantages</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traveo2/board_config.html#pin-configuration">Pin Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/board_config.html#can-interfaces">CAN Interfaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/board_config.html#lin-interfaces">LIN Interfaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/board_config.html#debug-interface">Debug Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traveo2/board_config.html#programming">Programming</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/board_config.html#using-kitprog3">Using KitProg3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/board_config.html#using-j-link">Using J-Link</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traveo2/board_config.html#development-workflow">Development Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/board_config.html#recommended-setup">Recommended Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/board_config.html#debug-output">Debug Output</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traveo2/board_config.html#power-supply">Power Supply</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traveo2/board_config.html#performance-notes">Performance Notes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/board_config.html#example-memory-allocation">Example Memory Allocation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traveo2/board_config.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../traveo2/architecture.html">Traveo II System Architecture</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../traveo2/architecture.html#software-architecture">Software Architecture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/architecture.html#layers">Layers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traveo2/architecture.html#software-components">Software Components</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/architecture.html#communication-module">Communication Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/architecture.html#sensor-acquisition-module">Sensor Acquisition Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/architecture.html#actuator-control-module">Actuator Control Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/architecture.html#diagnostics-module">Diagnostics Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/architecture.html#safety-module">Safety Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/architecture.html#bootloader">Bootloader</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traveo2/architecture.html#task-structure">Task Structure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/architecture.html#rtos-configuration-freertos">RTOS Configuration (FreeRTOS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/architecture.html#interrupts">Interrupts</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traveo2/architecture.html#memory-layout">Memory Layout</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/architecture.html#flash-organization">Flash Organization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/architecture.html#ram-organization">RAM Organization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traveo2/architecture.html#build-configuration">Build Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/architecture.html#compiler-settings">Compiler Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/architecture.html#linker-settings">Linker Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/architecture.html#misra-compliance">MISRA Compliance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/architecture.html#code-metrics">Code Metrics</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traveo2/architecture.html#peripheral-configuration">Peripheral Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/architecture.html#can-controller-setup">CAN Controller Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/architecture.html#adc-configuration">ADC Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/architecture.html#pwm-configuration">PWM Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traveo2/architecture.html#debug-and-development">Debug and Development</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/architecture.html#debug-output">Debug Output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/architecture.html#trace-support">Trace Support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/architecture.html#performance-measurement">Performance Measurement</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../traveo2/testing.html">Traveo II Testing Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../traveo2/testing.html#test-environment-setup">Test Environment Setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/testing.html#required-hardware">Required Hardware</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/testing.html#hardware-connections">Hardware Connections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/testing.html#required-software">Required Software</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/testing.html#installation">Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traveo2/testing.html#flashing-the-firmware">Flashing the Firmware</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/testing.html#using-modustoolbox">Using ModusToolbox</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/testing.html#using-openocd">Using OpenOCD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/testing.html#using-j-link">Using J-Link</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traveo2/testing.html#automated-testing">Automated Testing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/testing.html#test-framework-structure">Test Framework Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/testing.html#running-tests">Running Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traveo2/testing.html#can-communication-testing">CAN Communication Testing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/testing.html#test-can-message-transmission">Test CAN Message Transmission</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/testing.html#test-can-message-reception">Test CAN Message Reception</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traveo2/testing.html#adc-and-sensor-testing">ADC and Sensor Testing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/testing.html#test-analog-input-reading">Test Analog Input Reading</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traveo2/testing.html#pwm-output-testing">PWM Output Testing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/testing.html#test-pwm-frequency-and-duty-cycle">Test PWM Frequency and Duty Cycle</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traveo2/testing.html#uds-diagnostic-testing">UDS Diagnostic Testing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/testing.html#test-session-management">Test Session Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/testing.html#test-dtc-reading">Test DTC Reading</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traveo2/testing.html#safety-function-testing">Safety Function Testing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/testing.html#test-watchdog-monitoring">Test Watchdog Monitoring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/testing.html#test-safe-state-entry">Test Safe State Entry</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traveo2/testing.html#performance-testing">Performance Testing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/testing.html#test-task-timing">Test Task Timing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/testing.html#test-cpu-load">Test CPU Load</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traveo2/testing.html#continuous-testing">Continuous Testing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/testing.html#long-term-stability-test">Long-term Stability Test</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../traveo2/testing.html#test-report-generation">Test Report Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../traveo2/testing.html#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/testing.html#common-issues">Common Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../traveo2/testing.html#debug-tips">Debug Tips</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="abbreviations.html">Abbreviations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="abbreviations.html#technical-abbreviations">Technical Abbreviations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="abbreviations.html#safety-and-standards">Safety and Standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="abbreviations.html#traveo-ii-specific">Traveo II Specific</a></li>
+<li class="toctree-l2"><a class="reference internal" href="abbreviations.html#development-tools">Development Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="abbreviations.html#protocol-and-communication">Protocol and Communication</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="documents.html">Reference Documents</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="documents.html#standards-and-specifications">Standards and Specifications</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="documents.html#iso-standards">ISO Standards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="documents.html#automotive-spice">Automotive SPICE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="documents.html#autosar">AUTOSAR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="documents.html#misra">MISRA</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="documents.html#infineon-documentation">Infineon Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="documents.html#device-documentation">Device Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="documents.html#board-documentation">Board Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="documents.html#software-documentation">Software Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="documents.html#application-notes">Application Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="documents.html#development-tools">Development Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="documents.html#compilers-and-toolchains">Compilers and Toolchains</a></li>
+<li class="toctree-l3"><a class="reference internal" href="documents.html#ides-and-debuggers">IDEs and Debuggers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="documents.html#static-analysis">Static Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="documents.html#test-and-verification">Test and Verification</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="documents.html#documentation-tools">Documentation Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="documents.html#external-links">External Links</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="documents.html#official-repositories-and-resources">Official Repositories and Resources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="documents.html#training-and-support">Training and Support</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="documents.html#project-specific-documents">Project-Specific Documents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="documents.html#internal-documentation">Internal Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="documents.html#version-control">Version Control</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="documents.html#document-revision-history">Document Revision History</a></li>
+<li class="toctree-l2"><a class="reference internal" href="documents.html#document-review-and-approval">Document Review and Approval</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="documents.html#review-cycle">Review Cycle</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="documents.html#contact-information">Contact Information</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Automotive Software Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Glossary</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/your-organization/vmodel-docs/blob/main/docs/reference/glossary.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
+        <a href="../traveo2/testing.html" class="btn btn-neutral float-left" title="Traveo II Testing Guide" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="abbreviations.html" class="btn btn-neutral float-right" title="Abbreviations" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+  </div>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="glossary">
+<h1>Glossary<a class="headerlink" href="#glossary" title="Link to this heading"></a></h1>
+<dl class="simple glossary">
+<dt id="term-ADC">ADC<a class="headerlink" href="#term-ADC" title="Link to this term"></a></dt><dd><p>Analog-to-Digital Converter - Converts analog voltage signals to digital values.</p>
+</dd>
+<dt id="term-API">API<a class="headerlink" href="#term-API" title="Link to this term"></a></dt><dd><p>Application Programming Interface - A set of functions and procedures for building software.</p>
+</dd>
+<dt id="term-ASIL">ASIL<a class="headerlink" href="#term-ASIL" title="Link to this term"></a></dt><dd><p>Automotive Safety Integrity Level - Risk classification in ISO 26262 (A, B, C, D, or QM).</p>
+</dd>
+<dt id="term-AUTOSAR">AUTOSAR<a class="headerlink" href="#term-AUTOSAR" title="Link to this term"></a></dt><dd><p>AUTomotive Open System ARchitecture - A global development partnership of automotive manufacturers.</p>
+</dd>
+<dt id="term-Bootloader">Bootloader<a class="headerlink" href="#term-Bootloader" title="Link to this term"></a></dt><dd><p>Small program that allows firmware updates by loading new application code into memory.</p>
+</dd>
+<dt id="term-BSW">BSW<a class="headerlink" href="#term-BSW" title="Link to this term"></a></dt><dd><p>Basic Software - AUTOSAR layer providing standardized services.</p>
+</dd>
+<dt id="term-Bus-off">Bus-off<a class="headerlink" href="#term-Bus-off" title="Link to this term"></a></dt><dd><p>CAN controller state when error count exceeds threshold, requiring recovery.</p>
+</dd>
+<dt id="term-CAN">CAN<a class="headerlink" href="#term-CAN" title="Link to this term"></a></dt><dd><p>Controller Area Network - A robust vehicle bus standard for communication.</p>
+</dd>
+<dt id="term-CAN-FD">CAN FD<a class="headerlink" href="#term-CAN-FD" title="Link to this term"></a></dt><dd><p>CAN with Flexible Data-Rate - Enhanced CAN protocol with higher data rates.</p>
+</dd>
+<dt id="term-CI-CD">CI/CD<a class="headerlink" href="#term-CI-CD" title="Link to this term"></a></dt><dd><p>Continuous Integration / Continuous Deployment - Automated software development practices.</p>
+</dd>
+<dt id="term-DBC">DBC<a class="headerlink" href="#term-DBC" title="Link to this term"></a></dt><dd><p>Database CAN - File format for CAN network configuration.</p>
+</dd>
+<dt id="term-Diagnostic-Trouble-Code">Diagnostic Trouble Code<a class="headerlink" href="#term-Diagnostic-Trouble-Code" title="Link to this term"></a></dt><dt id="term-DTC">DTC<a class="headerlink" href="#term-DTC" title="Link to this term"></a></dt><dd><p>A code stored by ECU when a fault is detected, following OBD-II or manufacturer-specific format.</p>
+</dd>
+<dt id="term-Docs-as-Code">Docs-as-Code<a class="headerlink" href="#term-Docs-as-Code" title="Link to this term"></a></dt><dd><p>Treating documentation like source code with version control and automated builds.</p>
+</dd>
+<dt id="term-ECC">ECC<a class="headerlink" href="#term-ECC" title="Link to this term"></a></dt><dd><p>Error Correction Code - Detects and corrects data corruption in memory.</p>
+</dd>
+<dt id="term-ECU">ECU<a class="headerlink" href="#term-ECU" title="Link to this term"></a></dt><dd><p>Electronic Control Unit - An embedded computer in a vehicle controlling electrical systems.</p>
+</dd>
+<dt id="term-EMC">EMC<a class="headerlink" href="#term-EMC" title="Link to this term"></a></dt><dd><p>Electromagnetic Compatibility - Ability to operate in electromagnetic environment.</p>
+</dd>
+<dt id="term-Fail-Operational">Fail-Operational<a class="headerlink" href="#term-Fail-Operational" title="Link to this term"></a></dt><dd><p>Design allowing continued operation in degraded mode after failure.</p>
+</dd>
+<dt id="term-Fail-Safe">Fail-Safe<a class="headerlink" href="#term-Fail-Safe" title="Link to this term"></a></dt><dd><p>Design ensuring system enters safe state upon failure.</p>
+</dd>
+<dt id="term-Flash">Flash<a class="headerlink" href="#term-Flash" title="Link to this term"></a></dt><dd><p>Non-volatile memory storing program code and calibration data.</p>
+</dd>
+<dt id="term-FMEA">FMEA<a class="headerlink" href="#term-FMEA" title="Link to this term"></a></dt><dd><p>Failure Mode and Effects Analysis - Systematic method for analyzing potential failures.</p>
+</dd>
+<dt id="term-FreeRTOS">FreeRTOS<a class="headerlink" href="#term-FreeRTOS" title="Link to this term"></a></dt><dd><p>Free Real-Time Operating System - Popular RTOS for embedded systems.</p>
+</dd>
+<dt id="term-FuSa">FuSa<a class="headerlink" href="#term-FuSa" title="Link to this term"></a></dt><dd><p>Functional Safety - Safety depending on correct system operation.</p>
+</dd>
+<dt id="term-HAL">HAL<a class="headerlink" href="#term-HAL" title="Link to this term"></a></dt><dd><p>Hardware Abstraction Layer - Layer abstracting hardware-specific details.</p>
+</dd>
+<dt id="term-HIL">HIL<a class="headerlink" href="#term-HIL" title="Link to this term"></a></dt><dd><p>Hardware-in-the-Loop - Testing with real hardware in simulated environment.</p>
+</dd>
+<dt id="term-IDE">IDE<a class="headerlink" href="#term-IDE" title="Link to this term"></a></dt><dd><p>Integrated Development Environment - Software for coding, debugging, and building.</p>
+</dd>
+<dt id="term-ISO-26262">ISO 26262<a class="headerlink" href="#term-ISO-26262" title="Link to this term"></a></dt><dd><p>International standard for functional safety of road vehicles.</p>
+</dd>
+<dt id="term-ISO-TP">ISO-TP<a class="headerlink" href="#term-ISO-TP" title="Link to this term"></a></dt><dd><p>ISO 15765-2 Transport Protocol - Used for multi-frame diagnostic messages over CAN.</p>
+</dd>
+<dt id="term-LIN">LIN<a class="headerlink" href="#term-LIN" title="Link to this term"></a></dt><dd><p>Local Interconnect Network - Low-cost serial network for automotive applications.</p>
+</dd>
+<dt id="term-MCAL">MCAL<a class="headerlink" href="#term-MCAL" title="Link to this term"></a></dt><dd><p>Microcontroller Abstraction Layer - AUTOSAR layer for microcontroller peripheral access.</p>
+</dd>
+<dt id="term-MCU">MCU<a class="headerlink" href="#term-MCU" title="Link to this term"></a></dt><dd><p>Microcontroller Unit - Integrated circuit with processor, memory, and peripherals.</p>
+</dd>
+<dt id="term-MISRA">MISRA<a class="headerlink" href="#term-MISRA" title="Link to this term"></a></dt><dd><p>Motor Industry Software Reliability Association - Coding guidelines for automotive software.</p>
+</dd>
+<dt id="term-MPU">MPU<a class="headerlink" href="#term-MPU" title="Link to this term"></a></dt><dd><p>Memory Protection Unit - Hardware providing memory access protection.</p>
+</dd>
+<dt id="term-MTBF">MTBF<a class="headerlink" href="#term-MTBF" title="Link to this term"></a></dt><dd><p>Mean Time Between Failures - Average time between system failures.</p>
+</dd>
+<dt id="term-NVM">NVM<a class="headerlink" href="#term-NVM" title="Link to this term"></a></dt><dd><p>Non-Volatile Memory - Memory retaining data when power is removed.</p>
+</dd>
+<dt id="term-OBD">OBD<a class="headerlink" href="#term-OBD" title="Link to this term"></a></dt><dd><p>On-Board Diagnostics - Vehicle self-diagnostic and reporting capability.</p>
+</dd>
+<dt id="term-PDU">PDU<a class="headerlink" href="#term-PDU" title="Link to this term"></a></dt><dd><p>Protocol Data Unit - Data unit in communication protocols.</p>
+</dd>
+<dt id="term-PWM">PWM<a class="headerlink" href="#term-PWM" title="Link to this term"></a></dt><dd><p>Pulse Width Modulation - Technique for controlling power to loads by varying pulse width.</p>
+</dd>
+<dt id="term-QM">QM<a class="headerlink" href="#term-QM" title="Link to this term"></a></dt><dd><p>Quality Management - ISO 26262 classification for non-safety components.</p>
+</dd>
+<dt id="term-RTE">RTE<a class="headerlink" href="#term-RTE" title="Link to this term"></a></dt><dd><p>Runtime Environment - AUTOSAR layer between application and BSW.</p>
+</dd>
+<dt id="term-RTOS">RTOS<a class="headerlink" href="#term-RTOS" title="Link to this term"></a></dt><dd><p>Real-Time Operating System - OS designed for real-time applications with timing guarantees.</p>
+</dd>
+<dt id="term-Safety-Goal">Safety Goal<a class="headerlink" href="#term-Safety-Goal" title="Link to this term"></a></dt><dd><p>Top-level safety requirement derived from hazard analysis.</p>
+</dd>
+<dt id="term-Safety-Mechanism">Safety Mechanism<a class="headerlink" href="#term-Safety-Mechanism" title="Link to this term"></a></dt><dd><p>Technical solution to detect and mitigate faults.</p>
+</dd>
+<dt id="term-SAR-ADC">SAR ADC<a class="headerlink" href="#term-SAR-ADC" title="Link to this term"></a></dt><dd><p>Successive Approximation Register ADC - Common ADC architecture.</p>
+</dd>
+<dt id="term-SIL">SIL<a class="headerlink" href="#term-SIL" title="Link to this term"></a></dt><dd><p>Software-in-the-Loop - Testing software in simulated environment.</p>
+</dd>
+<dt id="term-Sphinx">Sphinx<a class="headerlink" href="#term-Sphinx" title="Link to this term"></a></dt><dd><p>Documentation generation tool using reStructuredText.</p>
+</dd>
+<dt id="term-Sphinx-Needs">Sphinx-Needs<a class="headerlink" href="#term-Sphinx-Needs" title="Link to this term"></a></dt><dd><p>Sphinx extension for requirements management and traceability.</p>
+</dd>
+<dt id="term-SPICE">SPICE<a class="headerlink" href="#term-SPICE" title="Link to this term"></a></dt><dd><p>Software Process Improvement and Capability dEtermination - Process assessment model.</p>
+</dd>
+<dt id="term-SWC">SWC<a class="headerlink" href="#term-SWC" title="Link to this term"></a></dt><dd><p>Software Component - AUTOSAR application-level component.</p>
+</dd>
+<dt id="term-SWD">SWD<a class="headerlink" href="#term-SWD" title="Link to this term"></a></dt><dd><p>Serial Wire Debug - Two-wire debug interface for ARM processors.</p>
+</dd>
+<dt id="term-SWO">SWO<a class="headerlink" href="#term-SWO" title="Link to this term"></a></dt><dd><p>Serial Wire Output - Single-wire trace output for ARM debugging.</p>
+</dd>
+<dt id="term-TCPWM">TCPWM<a class="headerlink" href="#term-TCPWM" title="Link to this term"></a></dt><dd><p>Timer, Counter, and PWM - Versatile timer peripheral in Traveo II.</p>
+</dd>
+<dt id="term-Traceability">Traceability<a class="headerlink" href="#term-Traceability" title="Link to this term"></a></dt><dd><p>Ability to trace relationships between requirements, design, implementation, and tests.</p>
+</dd>
+<dt id="term-Traveo-II">Traveo II<a class="headerlink" href="#term-Traveo-II" title="Link to this term"></a></dt><dd><p>Infineon’s automotive MCU family for cluster, body, and gateway applications.</p>
+</dd>
+<dt id="term-UDS">UDS<a class="headerlink" href="#term-UDS" title="Link to this term"></a></dt><dd><p>Unified Diagnostic Services (ISO 14229) - Standardized diagnostic protocol.</p>
+</dd>
+<dt id="term-V-Model">V-Model<a class="headerlink" href="#term-V-Model" title="Link to this term"></a></dt><dd><p>Software development model emphasizing verification at each development stage.</p>
+</dd>
+<dt id="term-Watchdog">Watchdog<a class="headerlink" href="#term-Watchdog" title="Link to this term"></a></dt><dd><p>Timer that resets system if not periodically refreshed, detecting software hangs.</p>
+</dd>
+<dt id="term-WCET">WCET<a class="headerlink" href="#term-WCET" title="Link to this term"></a></dt><dd><p>Worst-Case Execution Time - Maximum time a task can take to execute.</p>
+</dd>
+</dl>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../traveo2/testing.html" class="btn btn-neutral float-left" title="Traveo II Testing Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="abbreviations.html" class="btn btn-neutral float-right" title="Abbreviations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Your Organization.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

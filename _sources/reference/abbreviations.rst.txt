@@ -1,0 +1,266 @@
+Abbreviations
+=============
+
+This page lists common abbreviations used throughout the documentation.
+
+Technical Abbreviations
+-----------------------
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 80
+
+   * - Abbreviation
+     - Meaning
+   * - ADC
+     - Analog-to-Digital Converter
+   * - API
+     - Application Programming Interface
+   * - ARM
+     - Advanced RISC Machine (processor architecture)
+   * - ASIL
+     - Automotive Safety Integrity Level
+   * - AUTOSAR
+     - AUTomotive Open System ARchitecture
+   * - BSW
+     - Basic Software
+   * - CAN
+     - Controller Area Network
+   * - CI/CD
+     - Continuous Integration / Continuous Deployment
+   * - CPU
+     - Central Processing Unit
+   * - CRC
+     - Cyclic Redundancy Check
+   * - DBC
+     - Database CAN
+   * - DMA
+     - Direct Memory Access
+   * - DoIP
+     - Diagnostics over Internet Protocol
+   * - DTC
+     - Diagnostic Trouble Code
+   * - ECU
+     - Electronic Control Unit
+   * - ECC
+     - Error Correction Code
+   * - EMC
+     - Electromagnetic Compatibility
+   * - EEPROM
+     - Electrically Erasable Programmable Read-Only Memory
+   * - FD
+     - Flexible Data-rate (CAN FD)
+   * - FIFO
+     - First In, First Out
+   * - FMEA
+     - Failure Mode and Effects Analysis
+   * - FPU
+     - Floating Point Unit
+   * - FuSa
+     - Functional Safety
+   * - GPIO
+     - General Purpose Input/Output
+   * - HAL
+     - Hardware Abstraction Layer
+   * - HIL
+     - Hardware-in-the-Loop
+   * - I2C
+     - Inter-Integrated Circuit
+   * - ID
+     - Identifier
+   * - IDE
+     - Integrated Development Environment
+   * - IRQ
+     - Interrupt Request
+   * - ISO
+     - International Organization for Standardization
+   * - ISO-TP
+     - ISO Transport Protocol
+   * - LIN
+     - Local Interconnect Network
+   * - LSB
+     - Least Significant Bit
+   * - MCAL
+     - Microcontroller Abstraction Layer
+   * - MCU
+     - Microcontroller Unit
+   * - MISRA
+     - Motor Industry Software Reliability Association
+   * - MPU
+     - Memory Protection Unit
+   * - MSB
+     - Most Significant Bit
+   * - MTBF
+     - Mean Time Between Failures
+   * - NMI
+     - Non-Maskable Interrupt
+   * - NTC
+     - Negative Temperature Coefficient (thermistor)
+   * - NVIC
+     - Nested Vectored Interrupt Controller
+   * - NVM
+     - Non-Volatile Memory
+   * - OBD
+     - On-Board Diagnostics
+   * - OEM
+     - Original Equipment Manufacturer
+   * - OS
+     - Operating System
+   * - PDL
+     - Peripheral Driver Library
+   * - PDU
+     - Protocol Data Unit
+   * - PWM
+     - Pulse Width Modulation
+   * - QM
+     - Quality Management
+   * - RAM
+     - Random Access Memory
+   * - ROM
+     - Read-Only Memory
+   * - RST
+     - reStructuredText
+   * - RTE
+     - Runtime Environment
+   * - RTOS
+     - Real-Time Operating System
+   * - Rx
+     - Receive / Receiver
+   * - SAE
+     - Society of Automotive Engineers
+   * - SIL
+     - Software-in-the-Loop
+   * - SPI
+     - Serial Peripheral Interface
+   * - SPICE
+     - Software Process Improvement and Capability dEtermination
+   * - SRAM
+     - Static Random-Access Memory
+   * - SWC
+     - Software Component
+   * - SWD
+     - Serial Wire Debug
+   * - SWO
+     - Serial Wire Output
+   * - TCPWM
+     - Timer, Counter, and PWM
+   * - Tx
+     - Transmit / Transmitter
+   * - UART
+     - Universal Asynchronous Receiver-Transmitter
+   * - UDS
+     - Unified Diagnostic Services
+   * - USB
+     - Universal Serial Bus
+   * - WCET
+     - Worst-Case Execution Time
+   * - WDT
+     - Watchdog Timer
+
+Safety and Standards
+--------------------
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 80
+
+   * - Abbreviation
+     - Meaning
+   * - ASIL-A
+     - Automotive Safety Integrity Level A (lowest functional safety)
+   * - ASIL-B
+     - Automotive Safety Integrity Level B
+   * - ASIL-C
+     - Automotive Safety Integrity Level C
+   * - ASIL-D
+     - Automotive Safety Integrity Level D (highest functional safety)
+   * - CISPR
+     - Comité International Spécial des Perturbations Radioélectriques
+   * - FIT
+     - Failures In Time (failures per billion hours)
+   * - ISO 11898
+     - CAN specification standard
+   * - ISO 14229
+     - Unified Diagnostic Services (UDS) standard
+   * - ISO 15765
+     - Diagnostic communication over CAN (ISO-TP)
+   * - ISO 17356
+     - FlexRay communications system standard
+   * - ISO 26262
+     - Functional safety for road vehicles
+   * - ISO 7637
+     - Electrical disturbances by conduction and coupling
+   * - ISO/SAE 21434
+     - Road vehicles - Cybersecurity engineering
+   * - QM
+     - Quality Management (no ASIL classification)
+
+Traveo II Specific
+------------------
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 80
+
+   * - Abbreviation
+     - Meaning
+   * - CYT2B7x
+     - Traveo II Entry Family device series
+   * - EVTGEN
+     - Event Generator (Traveo II peripheral)
+   * - MCWDT
+     - Multi-Counter Watchdog Timer
+   * - SAR
+     - Successive Approximation Register (ADC type)
+   * - SCB
+     - Serial Communication Block
+   * - TCPWM
+     - Timer, Counter, and PWM
+   * - T2G
+     - Traveo II Generation
+
+Development Tools
+-----------------
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 80
+
+   * - Abbreviation
+     - Meaning
+   * - GCC
+     - GNU Compiler Collection
+   * - GDB
+     - GNU Debugger
+   * - JTAG
+     - Joint Test Action Group (debug interface)
+   * - OpenOCD
+     - Open On-Chip Debugger
+   * - RTT
+     - Real-Time Transfer (SEGGER debugging technique)
+
+Protocol and Communication
+--------------------------
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 80
+
+   * - Abbreviation
+     - Meaning
+   * - ACK
+     - Acknowledgment
+   * - CPOL
+     - Clock Polarity
+   * - CPHA
+     - Clock Phase
+   * - EOF
+     - End Of Frame
+   * - LSB
+     - Least Significant Byte/Bit
+   * - MSB
+     - Most Significant Byte/Bit
+   * - NACK
+     - Negative Acknowledgment
+   * - SOF
+     - Start Of Frame

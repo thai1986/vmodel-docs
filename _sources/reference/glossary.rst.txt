@@ -1,0 +1,177 @@
+Glossary
+========
+
+.. glossary::
+   :sorted:
+
+   ADC
+      Analog-to-Digital Converter - Converts analog voltage signals to digital values.
+
+   API
+      Application Programming Interface - A set of functions and procedures for building software.
+
+   ASIL
+      Automotive Safety Integrity Level - Risk classification in ISO 26262 (A, B, C, D, or QM).
+
+   AUTOSAR
+      AUTomotive Open System ARchitecture - A global development partnership of automotive manufacturers.
+
+   Bootloader
+      Small program that allows firmware updates by loading new application code into memory.
+
+   BSW
+      Basic Software - AUTOSAR layer providing standardized services.
+
+   Bus-off
+      CAN controller state when error count exceeds threshold, requiring recovery.
+
+   CAN
+      Controller Area Network - A robust vehicle bus standard for communication.
+
+   CAN FD
+      CAN with Flexible Data-Rate - Enhanced CAN protocol with higher data rates.
+
+   CI/CD
+      Continuous Integration / Continuous Deployment - Automated software development practices.
+
+   DBC
+      Database CAN - File format for CAN network configuration.
+
+   Diagnostic Trouble Code
+   DTC
+      A code stored by ECU when a fault is detected, following OBD-II or manufacturer-specific format.
+
+   Docs-as-Code
+      Treating documentation like source code with version control and automated builds.
+
+   ECU
+      Electronic Control Unit - An embedded computer in a vehicle controlling electrical systems.
+
+   ECC
+      Error Correction Code - Detects and corrects data corruption in memory.
+
+   EMC
+      Electromagnetic Compatibility - Ability to operate in electromagnetic environment.
+
+   Fail-Safe
+      Design ensuring system enters safe state upon failure.
+
+   Fail-Operational
+      Design allowing continued operation in degraded mode after failure.
+
+   Flash
+      Non-volatile memory storing program code and calibration data.
+
+   FMEA
+      Failure Mode and Effects Analysis - Systematic method for analyzing potential failures.
+
+   FreeRTOS
+      Free Real-Time Operating System - Popular RTOS for embedded systems.
+
+   FuSa
+      Functional Safety - Safety depending on correct system operation.
+
+   HAL
+      Hardware Abstraction Layer - Layer abstracting hardware-specific details.
+
+   HIL
+      Hardware-in-the-Loop - Testing with real hardware in simulated environment.
+
+   IDE
+      Integrated Development Environment - Software for coding, debugging, and building.
+
+   ISO 26262
+      International standard for functional safety of road vehicles.
+
+   ISO-TP
+      ISO 15765-2 Transport Protocol - Used for multi-frame diagnostic messages over CAN.
+
+   LIN
+      Local Interconnect Network - Low-cost serial network for automotive applications.
+
+   MCAL
+      Microcontroller Abstraction Layer - AUTOSAR layer for microcontroller peripheral access.
+
+   MCU
+      Microcontroller Unit - Integrated circuit with processor, memory, and peripherals.
+
+   MISRA
+      Motor Industry Software Reliability Association - Coding guidelines for automotive software.
+
+   MPU
+      Memory Protection Unit - Hardware providing memory access protection.
+
+   MTBF
+      Mean Time Between Failures - Average time between system failures.
+
+   NVM
+      Non-Volatile Memory - Memory retaining data when power is removed.
+
+   OBD
+      On-Board Diagnostics - Vehicle self-diagnostic and reporting capability.
+
+   PDU
+      Protocol Data Unit - Data unit in communication protocols.
+
+   PWM
+      Pulse Width Modulation - Technique for controlling power to loads by varying pulse width.
+
+   QM
+      Quality Management - ISO 26262 classification for non-safety components.
+
+   RTOS
+      Real-Time Operating System - OS designed for real-time applications with timing guarantees.
+
+   RTE
+      Runtime Environment - AUTOSAR layer between application and BSW.
+
+   SAR ADC
+      Successive Approximation Register ADC - Common ADC architecture.
+
+   Safety Goal
+      Top-level safety requirement derived from hazard analysis.
+
+   Safety Mechanism
+      Technical solution to detect and mitigate faults.
+
+   SIL
+      Software-in-the-Loop - Testing software in simulated environment.
+
+   SPICE
+      Software Process Improvement and Capability dEtermination - Process assessment model.
+
+   Sphinx
+      Documentation generation tool using reStructuredText.
+
+   Sphinx-Needs
+      Sphinx extension for requirements management and traceability.
+
+   SWC
+      Software Component - AUTOSAR application-level component.
+
+   SWD
+      Serial Wire Debug - Two-wire debug interface for ARM processors.
+
+   SWO
+      Serial Wire Output - Single-wire trace output for ARM debugging.
+
+   TCPWM
+      Timer, Counter, and PWM - Versatile timer peripheral in Traveo II.
+
+   Traceability
+      Ability to trace relationships between requirements, design, implementation, and tests.
+
+   Traveo II
+      Infineon's automotive MCU family for cluster, body, and gateway applications.
+
+   UDS
+      Unified Diagnostic Services (ISO 14229) - Standardized diagnostic protocol.
+
+   V-Model
+      Software development model emphasizing verification at each development stage.
+
+   Watchdog
+      Timer that resets system if not periodically refreshed, detecting software hangs.
+
+   WCET
+      Worst-Case Execution Time - Maximum time a task can take to execute.

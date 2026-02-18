@@ -1,0 +1,56 @@
+Test Specifications
+====================
+
+This section contains test specifications that verify system requirements.
+
+Overview
+--------
+
+Test specifications are organized by test level:
+
+* **Unit Tests** - Individual component testing
+* **Integration Tests** - Interface and interaction testing
+* **System Tests** - End-to-end system validation
+
+All test specifications follow this structure:
+
+* **Unique ID** - Traceable identifier (e.g., SPEC_UNIT_001)
+* **Title** - Short descriptive name
+* **Description** - Test procedure and expected results
+* **Status** - Current state (draft, proposed, approved, implemented, verified)
+* **Links** - Traced requirements (REQ_xxx)
+* **Verification** - Test method (inspection, analysis, test, demonstration)
+
+Test Levels
+-----------
+
+.. toctree::
+   :maxdepth: 2
+   
+   unit/index
+   integration/index
+   system/index
+
+Test Summary
+------------
+
+.. needtable::
+   :columns: id, title, status, links
+   :style: table
+   :filter: type == 'spec'
+   
+Test Coverage
+-------------
+
+.. needflow::
+   :tags: testing
+   :show_link_names:
+   :types: req, spec, test
+   
+Test Status
+-----------
+
+.. needpie::
+   :labels: Status
+   :filter: type == 'spec' or type == 'test'
+   :legend:

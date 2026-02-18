@@ -1,0 +1,63 @@
+System Requirements
+===================
+
+This section contains all system-level requirements for the automotive software.
+
+Overview
+--------
+
+Requirements are organized into:
+
+* **Functional Requirements** - What the system shall do
+* **Non-Functional Requirements** - Quality attributes and constraints
+
+All requirements follow this structure:
+
+* **Unique ID** - Traceable identifier (e.g., REQ_FUNC_001)
+* **Title** - Short descriptive name
+* **Description** - Detailed requirement text
+* **Status** - Current state (draft, proposed, approved, implemented, verified)
+* **Safety Level** - ASIL classification or QM
+* **Priority** - Critical, High, Medium, Low
+* **Component** - System component affected
+* **Tags** - Category labels for filtering
+
+Requirement Categories
+----------------------
+
+.. toctree::
+   :maxdepth: 2
+   
+   functional/index
+   non-functional/index
+
+Requirements Summary
+--------------------
+
+.. needtable::
+   :columns: id, title, status, safety, tags
+   :style: table
+   :filter: type == 'req'
+   
+Requirements Coverage
+---------------------
+
+.. needflow::
+   :tags: requirements
+   :show_link_names:
+   
+Requirements by Status
+----------------------
+
+.. needpie::
+   :labels: Status
+   :filter: type == 'req'
+   :legend:
+
+Requirements by Safety Level
+-----------------------------
+
+.. needpie::
+   :labels: Safety
+   :filter: type == 'req'
+   :legend:

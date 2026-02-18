@@ -1,0 +1,258 @@
+Unit Test Specifications
+=========================
+
+This section contains unit test specifications for individual software components.
+
+Overview
+--------
+
+Unit tests verify the correct behavior of individual functions and modules in isolation.
+
+Test Environment
+----------------
+
+* **Framework**: Unity Test Framework
+* **Coverage Tool**: gcov/lcov
+* **Target**: Host PC (x86) and Traveo II MCU
+* **Mock Framework**: CMock for hardware abstraction
+
+Communication Module Tests
+---------------------------
+
+.. spec:: CAN Initialization Test
+   :id: SPEC_UNIT_001
+   :status: implemented
+   :links: REQ_FUNC_001
+   :verification: test
+   :component: Communication
+   :tags: unit, can
+   
+   **Objective**: Verify CAN controller initialization
+   
+   **Preconditions**:
+   
+   * CAN hardware is available or mocked
+   * System clock is configured
+   
+   **Test Steps**:
+   
+   1. Call CAN_Init() with valid configuration
+   2. Verify return value is E_OK
+   3. Read back CAN controller registers
+   4. Verify bitrate is set to 500 kbit/s
+   5. Verify CAN controller is in normal mode
+   
+   **Expected Results**:
+   
+   * Initialization succeeds
+   * Bitrate configured correctly
+   * Controller enters normal operational mode
+   
+   **Test Code**:
+   
+   .. code-block:: c
+   
+      void test_CAN_Init_Success(void)
+      {
+          Can_ConfigType config = {
+              .baudrate = 500000,
+              .mode = CAN_MODE_NORMAL
+          };
+          
+          Std_ReturnType result = CAN_Init(&config);
+          
+          TEST_ASSERT_EQUAL(E_OK, result);
+          TEST_ASSERT_EQUAL(500000, CAN_GetBaudrate());
+          TEST_ASSERT_EQUAL(CAN_MODE_NORMAL, CAN_GetMode());
+      }
+
+.. spec:: CAN Message Transmission Test
+   :id: SPEC_UNIT_002
+   :status: implemented
+   :links: REQ_FUNC_002
+   :verification: test
+   :component: Communication
+   :tags: unit, can
+   
+   **Objective**: Verify CAN message transmission
+   
+   **Test Steps**:
+   
+   1. Initialize CAN module
+   2. Prepare test message with ID 0x123
+   3. Call CAN_Transmit() with message
+   4. Verify transmission confirmation
+   5. Check message was sent on bus
+   
+   **Expected Results**:
+   
+   * Message accepted for transmission
+   * Transmission confirmation received
+   * Correct message ID and data on bus
+
+.. spec:: CAN Message Reception Test
+   :id: SPEC_UNIT_003
+   :status: implemented
+   :links: REQ_FUNC_003
+   :verification: test
+   :component: Communication
+   :tags: unit, can
+   
+   **Objective**: Verify CAN message reception and filtering
+   
+   **Test Steps**:
+   
+   1. Initialize CAN with hardware filters
+   2. Configure filter for ID 0x456
+   3. Simulate reception of message with ID 0x456
+   4. Simulate reception of message with ID 0x789 (not filtered)
+   5. Check received messages
+   
+   **Expected Results**:
+   
+   * Message 0x456 is received
+   * Message 0x789 is rejected by filter
+   * Receive callback invoked correctly
+
+Sensor Module Tests
+--------------------
+
+.. spec:: ADC Reading Test
+   :id: SPEC_UNIT_010
+   :status: implemented
+   :links: REQ_FUNC_010
+   :verification: test
+   :component: Sensors
+   :tags: unit, adc
+   
+   **Objective**: Verify analog sensor reading accuracy
+   
+   **Test Steps**:
+   
+   1. Configure ADC channel
+   2. Set simulation input voltage to 2.5V
+   3. Trigger ADC conversion
+   4. Read converted value
+   5. Calculate voltage from digital value
+   6. Verify accuracy within ±1%
+   
+   **Expected Results**:
+   
+   * Conversion completes successfully
+   * Calculated voltage: 2.5V ± 0.025V
+   * Conversion time < 100µs
+
+.. spec:: Temperature Sensor Plausibility Test
+   :id: SPEC_UNIT_011
+   :status: implemented
+   :links: REQ_FUNC_011
+   :verification: test
+   :component: Sensors
+   :tags: unit, sensors
+   
+   **Objective**: Verify temperature sensor plausibility checking
+   
+   **Test Cases**:
+   
+   1. **Valid temperature**: Input 25°C → Output 25°C, no error
+   2. **Low out-of-range**: Input -50°C → Error flag set
+   3. **High out-of-range**: Input 150°C → Error flag set
+   4. **Sensor short circuit**: Input 0V → Fault detected
+   5. **Sensor open circuit**: Input 5V → Fault detected
+
+Actuator Module Tests
+----------------------
+
+.. spec:: PWM Output Test
+   :id: SPEC_UNIT_020
+   :status: implemented
+   :links: REQ_FUNC_020
+   :verification: test
+   :component: Actuators
+   :tags: unit, pwm
+   
+   **Objective**: Verify PWM output generation
+   
+   **Test Steps**:
+   
+   1. Initialize PWM module
+   2. Set frequency to 1kHz
+   3. Set duty cycle to 50%
+   4. Enable PWM output
+   5. Measure output signal (simulated)
+   
+   **Expected Results**:
+   
+   * Frequency: 1000Hz ± 1Hz
+   * Duty cycle: 50% ± 0.1%
+   * Signal quality meets requirements
+
+.. spec:: Digital Output Short Circuit Test
+   :id: SPEC_UNIT_021
+   :status: implemented
+   :links: REQ_FUNC_021
+   :verification: test
+   :component: Actuators
+   :tags: unit, diagnostics
+   
+   **Objective**: Verify short circuit detection on digital outputs
+   
+   **Test Steps**:
+   
+   1. Enable digital output
+   2. Simulate short circuit to ground
+   3. Check diagnostic status
+   4. Verify output is disabled
+   5. Verify DTC is set
+   
+   **Expected Results**:
+   
+   * Short circuit detected within 1ms
+   * Output disabled automatically
+   * DTC 0x1234 stored
+
+Diagnostics Module Tests
+-------------------------
+
+.. spec:: DTC Storage Test
+   :id: SPEC_UNIT_030
+   :status: implemented
+   :links: REQ_FUNC_030
+   :verification: test
+   :component: Diagnostics
+   :tags: unit, diagnostics
+   
+   **Objective**: Verify DTC storage in NVM
+   
+   **Test Steps**:
+   
+   1. Clear all DTCs
+   2. Set DTC 0x1234 with freeze frame
+   3. Power cycle (simulate)
+   4. Read stored DTCs
+   5. Verify DTC persisted across power cycle
+   
+   **Expected Results**:
+   
+   * DTC stored successfully
+   * Freeze frame data intact
+   * Timestamp recorded
+   * Data survives power cycle
+
+Coverage Requirements
+---------------------
+
+.. req:: Unit Test Coverage
+   :id: REQ_TEST_UNIT_COV
+   :status: approved
+   :safety: ASIL-B
+   :priority: critical
+   :component: Testing
+   :tags: testing, quality
+   
+   Unit tests shall achieve minimum coverage:
+   
+   * **Statement coverage**: 100% for ASIL-B code
+   * **Branch coverage**: 100% for ASIL-B code
+   * **MC/DC coverage**: 100% for safety-critical functions
+   * **Function coverage**: 100%

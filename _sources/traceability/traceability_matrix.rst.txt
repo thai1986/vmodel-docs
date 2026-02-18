@@ -1,0 +1,131 @@
+Traceability Matrix
+===================
+
+This page provides comprehensive traceability between requirements and tests.
+
+Full Traceability Matrix
+-------------------------
+
+.. needtable::
+   :columns: id, title, type, outgoing, incoming, status
+   :style: table
+   :sort: id
+
+Traceability Flow Diagram
+--------------------------
+
+The following diagram shows traceability relationships:
+
+.. needflow::
+   :types: req, spec, test
+   :show_link_names:
+   :show_filters:
+
+Functional Requirements Traceability
+-------------------------------------
+
+Communication Requirements
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. needflow::
+   :tags: communication
+   :types: req, spec, test
+   :show_link_names:
+
+Sensor Requirements
+^^^^^^^^^^^^^^^^^^^
+
+.. needflow::
+   :tags: sensors
+   :types: req, spec, test
+   :show_link_names:
+
+Actuator Requirements
+^^^^^^^^^^^^^^^^^^^^^
+
+.. needflow::
+   :tags: actuators
+   :types: req, spec, test
+   :show_link_names:
+
+Diagnostics Requirements
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. needflow::
+   :tags: diagnostics
+   :types: req, spec, test
+   :show_link_names:
+
+Non-Functional Requirements Traceability
+-----------------------------------------
+
+Safety Requirements
+^^^^^^^^^^^^^^^^^^^
+
+.. needflow::
+   :tags: safety
+   :types: req, spec, test
+   :show_link_names:
+
+Performance Requirements
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. needflow::
+   :tags: performance
+   :types: req, spec, test
+   :show_link_names:
+
+Security Requirements
+^^^^^^^^^^^^^^^^^^^^^
+
+.. needflow::
+   :tags: security
+   :types: req, spec, test
+   :show_link_names:
+
+Requirements to Tests Mapping
+------------------------------
+
+.. needtable::
+   :columns: id, title, outgoing
+   :style: table
+   :filter: type == 'req'
+   :sort: id
+
+Tests to Requirements Mapping
+------------------------------
+
+.. needtable::
+   :columns: id, title, links
+   :style: table
+   :filter: type == 'spec' or type == 'test'
+   :sort: id
+
+Bi-directional Traceability
+----------------------------
+
+Forward Traceability (Requirements → Tests)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. needflow::
+   :types: req, spec
+   :show_link_names:
+   :filter: type == 'req' and outgoing
+
+Backward Traceability (Tests → Requirements)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. needflow::
+   :types: spec, req
+   :show_link_names:
+   :filter: type == 'spec' and links
+
+Export Options
+--------------
+
+The traceability matrix can be exported in various formats:
+
+* **PDF**: Full documentation with traceability
+* **Excel**: Use the script ``scripts/export_traceability.py``
+* **JSON**: Structured data for tool integration
+* **HTML**: This web-based view

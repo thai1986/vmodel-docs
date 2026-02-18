@@ -1,0 +1,111 @@
+Requirements Coverage Analysis
+================================
+
+This page shows the coverage of requirements by test specifications.
+
+Overview
+--------
+
+Requirements traceability ensures that:
+
+* Every requirement is verified by at least one test
+* Every test is linked to at least one requirement
+* Bidirectional traceability is maintained
+* Coverage gaps are identified
+
+Coverage Summary
+----------------
+
+.. needpie::
+   :labels: Status
+   :legend:
+   :filter: type == 'req'
+
+Requirements Coverage Table
+----------------------------
+
+.. needtable::
+   :columns: id, title, status, incoming
+   :style: table
+   :filter: type == 'req'
+   :sort: id
+
+Orphaned Requirements
+---------------------
+
+Requirements with no test coverage (must be zero for release):
+
+.. needlist::
+   :filter: type == 'req' and not incoming
+   :show_status:
+   :show_tags:
+
+Orphaned Test Specifications
+-----------------------------
+
+Tests with no requirement links (should be investigated):
+
+.. needlist::
+   :filter: (type == 'spec' or type == 'test') and not links
+   :show_status:
+   :show_tags:
+
+Coverage by Safety Level
+-------------------------
+
+ASIL-D Requirements
+^^^^^^^^^^^^^^^^^^^
+
+.. needtable::
+   :columns: id, title, incoming, status
+   :filter: type == 'req' and 'ASIL-D' in safety
+   :style: table
+
+ASIL-C Requirements
+^^^^^^^^^^^^^^^^^^^
+
+.. needtable::
+   :columns: id, title, incoming, status
+   :filter: type == 'req' and 'ASIL-C' in safety
+   :style: table
+
+ASIL-B Requirements
+^^^^^^^^^^^^^^^^^^^
+
+.. needtable::
+   :columns: id, title, incoming, status
+   :filter: type == 'req' and 'ASIL-B' in safety
+   :style: table
+
+ASIL-A Requirements
+^^^^^^^^^^^^^^^^^^^
+
+.. needtable::
+   :columns: id, title, incoming, status
+   :filter: type == 'req' and 'ASIL-A' in safety
+   :style: table
+
+QM Requirements
+^^^^^^^^^^^^^^^
+
+.. needtable::
+   :columns: id, title, incoming, status
+   :filter: type == 'req' and 'QM' in safety
+   :style: table
+
+Coverage Metrics
+----------------
+
+The following metrics are automatically calculated:
+
+**Requirements Coverage**:
+
+.. needextend::
+   :filter: type == 'req'
+   :show_coverage:
+
+**Test Implementation Status**:
+
+.. needextend::
+   :filter: type == 'spec'
+   :show_status:

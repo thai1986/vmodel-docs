@@ -1,0 +1,190 @@
+Verification Status
+===================
+
+This page tracks the verification status of all requirements and test specifications.
+
+Verification Overview
+---------------------
+
+.. needpie::
+   :labels: Status
+   :filter: type == 'spec'
+   :legend:
+   :title: Test Specification Status
+
+Verification Status by Level
+-----------------------------
+
+Unit Test Status
+^^^^^^^^^^^^^^^^
+
+.. needtable::
+   :columns: id, title, status, links
+   :style: table
+   :filter: type == 'spec' and 'unit' in tags
+   :sort: status
+
+Integration Test Status
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. needtable::
+   :columns: id, title, status, links
+   :style: table
+   :filter: type == 'spec' and 'integration' in tags
+   :sort: status
+
+System Test Status
+^^^^^^^^^^^^^^^^^^
+
+.. needtable::
+   :columns: id, title, status, links
+   :style: table
+   :filter: type == 'spec' and 'system' in tags
+   :sort: status
+
+Verification by Safety Level
+-----------------------------
+
+ASIL-D Verification Status
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Requirements:
+
+.. needtable::
+   :columns: id, title, status, incoming
+   :filter: type == 'req' and 'ASIL-D' in safety
+   :style: table
+
+ASIL-C Verification Status
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Requirements:
+
+.. needtable::
+   :columns: id, title, status, incoming
+   :filter: type == 'req' and 'ASIL-C' in safety
+   :style: table
+
+ASIL-B Verification Status
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Requirements:
+
+.. needtable::
+   :columns: id, title, status, incoming
+   :filter: type == 'req' and 'ASIL-B' in safety
+   :style: table
+
+Verification Metrics
+--------------------
+
+Requirements Verification Progress
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. needextend::
+   :filter: type == 'req'
+   :show_status:
+   :group_by: status
+
+Test Implementation Progress
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. needextend::
+   :filter: type == 'spec'
+   :show_status:
+   :group_by: status
+
+Pending Verifications
+---------------------
+
+Requirements Pending Verification
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. needlist::
+   :filter: type == 'req' and status in ['draft', 'proposed', 'approved']
+   :show_status:
+   :show_tags:
+
+Tests Pending Implementation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. needlist::
+   :filter: type == 'spec' and status in ['draft', 'proposed', 'approved']
+   :show_status:
+   :show_tags:
+
+Release Readiness
+-----------------
+
+For release, the following criteria must be met:
+
+.. list-table:: Release Criteria
+   :header-rows: 1
+   :widths: 40 30 30
+
+   * - Criterion
+     - Target
+     - Status
+   * - Requirements approved
+     - 100%
+     - Check table above
+   * - Requirements with tests
+     - 100%
+     - See Coverage page
+   * - Tests implemented
+     - 100%
+     - Check table above
+   * - Tests passed
+     - 100%
+     - CI/CD report
+   * - Safety requirements verified
+     - 100%
+     - See ASIL tables above
+   * - Orphaned requirements
+     - 0
+     - See Coverage page
+
+Verification Methods
+--------------------
+
+.. list-table:: Verification Method Summary
+   :header-rows: 1
+   :widths: 30 70
+
+   * - Method
+     - Description
+   * - Test
+     - Verification through testing (unit, integration, system)
+   * - Analysis
+     - Verification through analysis (timing, memory, performance)
+   * - Inspection
+     - Verification through code review or documentation review
+   * - Demonstration
+     - Verification through demonstration to stakeholder
+
+Verification by Method
+^^^^^^^^^^^^^^^^^^^^^^
+
+Test-based Verification
+"""""""""""""""""""""""
+
+.. needtable::
+   :columns: id, title, status
+   :filter: verification == 'test'
+   :style: table
+
+Analysis-based Verification
+""""""""""""""""""""""""""""
+
+.. needtable::
+   :columns: id, title, status
+   :filter: verification == 'analysis'
+   :style: table
+
+Inspection-based Verification
+""""""""""""""""""""""""""""""
+
+.. needtable::
+   :columns: id, title, status
+   :filter: verification == 'inspection'
+   :style: table

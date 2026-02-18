@@ -1,0 +1,360 @@
+Reference Documents
+===================
+
+This page lists all reference documents and standards used in this project.
+
+Standards and Specifications
+-----------------------------
+
+ISO Standards
+^^^^^^^^^^^^^
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 50 30
+
+   * - Standard
+     - Title
+     - Version
+   * - ISO 26262
+     - Road vehicles - Functional safety
+     - 2018 (2nd Edition)
+   * - ISO 14229-1
+     - Unified diagnostic services (UDS) - Part 1: Application layer
+     - 2020
+   * - ISO 15765-2
+     - Diagnostic communication over CAN (DoCAN) - Part 2: Transport protocol
+     - 2016
+   * - ISO 11898-1
+     - Controller area network (CAN) - Part 1: Data link layer and physical signaling
+     - 2015
+   * - ISO 17356
+     - FlexRay communications system
+     - 2005
+   * - ISO 7637-2
+     - Electrical disturbances by conduction and coupling - Part 2
+     - 2011
+   * - ISO/SAE 21434
+     - Road vehicles - Cybersecurity engineering
+     - 2021
+
+Automotive SPICE
+^^^^^^^^^^^^^^^^
+
+* **Automotive SPICE PAM 3.1** - Process Assessment Model
+* **ASPICE Guidelines** - v3.1, 2017
+
+AUTOSAR
+^^^^^^^
+
+* **AUTOSAR Classic Platform** - Release R20-11
+* **AUTOSAR MCAL Specification** - v4.4.0
+* **AUTOSAR CAN Driver Specification**
+* **AUTOSAR LIN Driver Specification**
+* **AUTOSAR Diagnostic Event Manager Specification**
+
+MISRA
+^^^^^
+
+* **MISRA C:2012** - Guidelines for the use of the C language in critical systems
+* **MISRA C:2012 Amendment 1** - Additional rules for C
+* **MISRA Compliance Guidelines**
+
+Infineon Documentation
+----------------------
+
+Device Documentation
+^^^^^^^^^^^^^^^^^^^^
+
+.. list-table::
+   :header-rows: 1
+   :widths: 40 40 20
+
+   * - Document
+     - Description
+     - Version
+   * - CYT2B7 Series Datasheet
+     - Device specifications and electrical characteristics
+     - Rev. *B, 2023
+   * - TRAVEO™ II Automotive Body Controller Entry Architecture TRM
+     - Technical Reference Manual
+     - Rev. B, 2023
+   * - CYT2B7 Register TRM
+     - Register-level documentation
+     - Rev. B, 2023
+   * - TRAVEO II Flash Programming Specifications
+     - Flash memory programming guide
+     - Rev. A, 2022
+
+Board Documentation
+^^^^^^^^^^^^^^^^^^^
+
+.. list-table::
+   :header-rows: 1
+   :widths: 40 40 20
+
+   * - Document
+     - Description
+     - Version
+   * - KIT_T2G-B-H_LITE User Guide
+     - Starter kit documentation
+     - Rev. 1.1, 2023
+   * - Schematic KIT_T2G-B-H_LITE
+     - Board schematics
+     - Rev. 1.0
+   * - Bill of Materials
+     - Component list
+     - Rev. 1.0
+
+Software Documentation
+^^^^^^^^^^^^^^^^^^^^^^
+
+.. list-table::
+   :header-rows: 1
+   :widths: 40 40 20
+
+   * - Document
+     - Description
+     - Version
+   * - Traveo II PDL API Reference
+     - Peripheral Driver Library documentation
+     - v2.10.0
+   * - ModusToolbox User Guide
+     - IDE and development environment
+     - v3.1
+   * - FreeRTOS for Traveo II
+     - RTOS integration guide
+     - v10.4.6
+
+Application Notes
+^^^^^^^^^^^^^^^^^
+
+* **AN235644** - Secure Boot and Firmware Update for Traveo II
+* **AN234237** - Using CAN FD with Traveo II
+* **AN234336** - Functional Safety with Traveo II
+* **AN234429** - Power Modes and Low Power Design
+* **AN234523** - ADC Measurements and Best Practices
+
+Development Tools
+-----------------
+
+Compilers and Toolchains
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 50 20
+
+   * - Tool
+     - Description
+     - Version
+   * - ARM GCC
+     - GNU Arm Embedded Toolchain
+     - 12.2.1
+   * - ARM Compiler 6
+     - ARM professional compiler
+     - 6.19
+   * - IAR EWARM
+     - IAR Embedded Workbench for ARM
+     - 9.30
+
+IDEs and Debuggers
+^^^^^^^^^^^^^^^^^^
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 50 20
+
+   * - Tool
+     - Description
+     - Version
+   * - ModusToolbox
+     - Infineon development environment
+     - 3.1
+   * - Eclipse
+     - Open-source IDE
+     - 2023-06
+   * - J-Link
+     - SEGGER debug probe
+     - V7.92
+   * - OpenOCD
+     - Open on-chip debugger
+     - 0.12.0
+
+Static Analysis
+^^^^^^^^^^^^^^^
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 50 20
+
+   * - Tool
+     - Description
+     - Version
+   * - PC-Lint Plus
+     - Static code analysis for C/C++
+     - 1.4.1
+   * - Cppcheck
+     - Open-source static analysis
+     - 2.12
+   * - LDRA
+     - Static and dynamic analysis (optional)
+     - 10.3
+
+Test and Verification
+^^^^^^^^^^^^^^^^^^^^^
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 50 20
+
+   * - Tool
+     - Description
+     - Version
+   * - Vector CANoe
+     - CAN network analysis and testing
+     - 16.0
+   * - PCAN-View
+     - CAN message monitor
+     - 4.3
+   * - Unity
+     - Unit test framework for C
+     - 2.5.2
+   * - pytest
+     - Python testing framework
+     - 8.0.0
+   * - gcov/lcov
+     - Code coverage tools
+     - Latest
+
+Documentation Tools
+-------------------
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 50 20
+
+   * - Tool
+     - Description
+     - Version
+   * - Sphinx
+     - Documentation generator
+     - 7.2.0
+   * - Sphinx-Needs
+     - Requirements management extension
+     - 2.0.0
+   * - PlantUML
+     - Diagram generation
+     - 1.2023.12
+   * - Mermaid
+     - Diagram and flowchart tool
+     - 10.6.1
+   * - LaTeX
+     - Document typesetting for PDF
+     - TeX Live 2023
+
+External Links
+--------------
+
+Official Repositories and Resources
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* **Infineon Traveo II**: https://www.infineon.com/cms/en/product/microcontroller/32-bit-traveo-t2g-arm-cortex-microcontroller/
+* **ModusToolbox**: https://www.infineon.com/modustoolbox
+* **AUTOSAR**: https://www.autosar.org/
+* **Sphinx Documentation**: https://www.sphinx-doc.org/
+* **Sphinx-Needs**: https://sphinxcontrib-needs.readthedocs.io/
+
+Training and Support
+^^^^^^^^^^^^^^^^^^^^
+
+* **Infineon Training**: https://www.infineon.com/cms/en/training/
+* **AUTOSAR Training**: https://www.autosar.org/working-groups/training/
+* **ISO 26262 Training**: Various commercial providers
+* **Automotive SPICE**: https://www.automotivespice.com/
+
+Project-Specific Documents
+--------------------------
+
+Internal Documentation
+^^^^^^^^^^^^^^^^^^^^^^
+
+.. list-table::
+   :header-rows: 1
+   :widths: 40 60
+
+   * - Document
+     - Description
+   * - Software Safety Plan
+     - ISO 26262 safety planning
+   * - Software Development Plan
+     - Development process and schedule
+   * - Configuration Management Plan
+     - Version control and release management
+   * - Verification and Validation Plan
+     - Test strategy and acceptance criteria
+   * - Software Architecture Document
+     - High-level system design
+   * - Coding Guidelines
+     - Project-specific coding standards
+
+Version Control
+^^^^^^^^^^^^^^^
+
+All documents are version-controlled in Git:
+
+* **Repository**: https://github.com/your-organization/vmodel-docs
+* **Documentation Branch**: `main`
+* **Development Branch**: `develop`
+* **Tag Format**: `vX.Y.Z` (e.g., v1.0.0)
+
+Document Revision History
+-------------------------
+
+.. list-table::
+   :header-rows: 1
+   :widths: 15 15 50 20
+
+   * - Version
+     - Date
+     - Changes
+     - Author
+   * - 1.0.0
+     - 2024-01-15
+     - Initial release
+     - Development Team
+   * - 1.0.1
+     - 2024-02-01
+     - Added Traveo II specific requirements
+     - Development Team
+   * - 1.1.0
+     - 2024-03-01
+     - Added cybersecurity requirements (ISO 21434)
+     - Development Team
+
+Document Review and Approval
+-----------------------------
+
+This documentation undergoes regular review:
+
+* **Technical Review**: Software architects and lead engineers
+* **Safety Review**: Functional safety manager
+* **Quality Review**: Quality assurance team
+* **Management Approval**: Project manager
+
+Review Cycle
+^^^^^^^^^^^^
+
+* **Minor Updates**: As needed, reviewed within 1 week
+* **Major Updates**: Quarterly, comprehensive review
+* **Release Reviews**: Before each release, full validation
+
+Contact Information
+-------------------
+
+For questions or clarifications regarding this documentation:
+
+* **Project Lead**: [Name] <email@example.com>
+* **Safety Manager**: [Name] <email@example.com>
+* **Quality Assurance**: [Name] <email@example.com>
+* **Technical Support**: support@example.com
