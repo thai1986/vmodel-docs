@@ -1,0 +1,53 @@
+name: Hardware Flash TRAVEO II
+
+on:
+  workflow_dispatch:
+    inputs:
+      build_type:
+        description: Build type
+        required: true
+        default: Debug
+        type: choice
+        options:
+          - Debug
+          - Release
+      target_cfg:
+        description: OpenOCD target cfg path (relative to scripts dir)
+        required: true
+        default: target/traveo2_1m_a0.cfg
+        type: string
+      interface_cfg:
+        description: OpenOCD interface cfg path
+        required: true
+        default: interface/kitprog.cfg
+        type: string
+
+concurrency:
+  group: traveo2-board-flash
+  cancel-in-progress: false
+
+jobs:
+  flash:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build firmware
+        shell: pwsh
+        run: |
+          Set-ExecutionPolicy -Scope Process Bypass
+          ./scripts/build_traveo2.ps1 -BuildType "${{ github.event.inputs.build_type }}"
+
+      - name: Check KitProg
+        shell: pwsh
+        run: |
+          Set-ExecutionPolicy -Scope Process Bypass
+          ./scripts/check_kitprog.ps1 -InterfaceCfg "${{ github.event.inputs.interface_cfg }}"
+
+      - name: Flash firmware
+        shell: pwsh
+        run: |
+          Set-ExecutionPolicy -Scope Process Bypass
+          ./scripts/flash_traveo2.ps1 -ElfPath "build\traveo2_starter.elf" -InterfaceCfg "${{ github.event.inputs.interface_cfg }}" -TargetCfg "${{ github.event.inputs.target_cfg }}"
