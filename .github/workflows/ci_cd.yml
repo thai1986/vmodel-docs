@@ -83,7 +83,7 @@ jobs:
     name: CD Flash To Hardware
     needs: ci_build
     if: (github.event_name == 'push' && github.ref == 'refs/heads/main') || github.event_name == 'workflow_dispatch'
-    runs-on: [self-hosted, windows, userpc]
+    runs-on: self-hosted
     concurrency:
       group: traveo2-board-flash
       cancel-in-progress: false
