@@ -34,7 +34,7 @@ env:
 jobs:
   ci_build:
     name: CI Build
-    runs-on: [self-hosted, windows, userpc]
+    runs-on: self-hosted
 
     steps:
       - name: Checkout
