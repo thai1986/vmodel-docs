@@ -40,14 +40,37 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install build dependencies
+      - name: Install build dependencies (Windows self-hosted)
+        shell: pwsh
         run: |
-          sudo apt-get update
-          sudo apt-get install -y cmake ninja-build gcc-arm-none-eabi binutils-arm-none-eabi
+          $ErrorActionPreference = "Stop"
+
+          if (-not (Get-Command winget -ErrorAction SilentlyContinue)) {
+            throw "winget is required on self-hosted Windows runner"
+          }
+
+          function Ensure-Tool {
+            param(
+              [string]$CommandName,
+              [string]$WingetId
+            )
+
+            if (-not (Get-Command $CommandName -ErrorAction SilentlyContinue)) {
+              winget install --id $WingetId -e --silent --accept-source-agreements --accept-package-agreements
+            }
+          }
+
+          Ensure-Tool -CommandName "cmake" -WingetId "Kitware.CMake"
+          Ensure-Tool -CommandName "ninja" -WingetId "Ninja-build.Ninja"
+          Ensure-Tool -CommandName "arm-none-eabi-gcc" -WingetId "Arm.GnuArmEmbeddedToolchain"
+          Ensure-Tool -CommandName "openocd" -WingetId "xpack-dev-tools.openocd-xpack"
+
+          Add-Content -Path $env:GITHUB_PATH -Value "$env:LOCALAPPDATA\Microsoft\WinGet\Links"
 
       - name: Build firmware
         shell: pwsh
         run: |
+          $env:Path = [System.Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [System.Environment]::GetEnvironmentVariable('Path','User')
           ./scripts/build_traveo2.ps1 -BuildType "${{ env.BUILD_TYPE }}"
 
       - name: Upload ELF artifact
@@ -60,7 +83,7 @@ jobs:
     name: CD Flash To Hardware
     needs: ci_build
     if: (github.event_name == 'push' && github.ref == 'refs/heads/main') || github.event_name == 'workflow_dispatch'
-    runs-on: self-hosted
+    runs-on: [self-hosted, windows, userpc]
     concurrency:
       group: traveo2-board-flash
       cancel-in-progress: false
@@ -75,14 +98,39 @@ jobs:
           name: traveo2-starter-elf
           path: build
 
+      - name: Ensure flash dependencies (Windows self-hosted)
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+
+          if (-not (Get-Command winget -ErrorAction SilentlyContinue)) {
+            throw "winget is required on self-hosted Windows runner"
+          }
+
+          function Ensure-Tool {
+            param(
+              [string]$CommandName,
+              [string]$WingetId
+            )
+
+            if (-not (Get-Command $CommandName -ErrorAction SilentlyContinue)) {
+              winget install --id $WingetId -e --silent --accept-source-agreements --accept-package-agreements
+            }
+          }
+
+          Ensure-Tool -CommandName "openocd" -WingetId "xpack-dev-tools.openocd-xpack"
+          Add-Content -Path $env:GITHUB_PATH -Value "$env:LOCALAPPDATA\Microsoft\WinGet\Links"
+
       - name: Check debug probe
         shell: pwsh
         run: |
           Set-ExecutionPolicy -Scope Process Bypass
+          $env:Path = [System.Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [System.Environment]::GetEnvironmentVariable('Path','User')
           ./scripts/check_kitprog.ps1 -InterfaceCfg "${{ env.INTERFACE_CFG }}"
 
       - name: Flash firmware
         shell: pwsh
         run: |
           Set-ExecutionPolicy -Scope Process Bypass
+          $env:Path = [System.Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [System.Environment]::GetEnvironmentVariable('Path','User')
           ./scripts/flash_traveo2.ps1 -ElfPath "build/traveo2_starter.elf" -InterfaceCfg "${{ env.INTERFACE_CFG }}" -TargetCfg "${{ env.TARGET_CFG }}"
