@@ -1,6 +1,6 @@
 param(
     [string]$ElfPath = "build\traveo2_starter.elf",
-    [string]$InterfaceCfg = "interface/kitprog.cfg",
+    [string]$InterfaceCfg = "interface/cmsis-dap.cfg",
     [string]$TargetCfg = "target/traveo2_1m_a0.cfg",
     [string]$OpenOcdScriptsDir = "",
     [string]$OpenOcdExe = ""
@@ -11,6 +11,8 @@ $ErrorActionPreference = "Stop"
 if (-not (Test-Path $ElfPath)) {
     throw "ELF file not found: $ElfPath"
 }
+
+$elfPathResolved = (Resolve-Path $ElfPath).Path -replace '\\','/'
 
 $candidateOpenOcdExe = @()
 if ($OpenOcdExe -ne "") {
@@ -72,9 +74,10 @@ if (-not (Test-Path $targetPath)) {
     throw "OpenOCD target config not found: $targetPath. Set -OpenOcdScriptsDir and -TargetCfg to your installed TRAVEO II script path."
 }
 
-& $openocdExe -s $openocdScripts -f $InterfaceCfg -f $TargetCfg -c "program $ElfPath verify reset exit"
+$openOcdCommand = 'transport select swd; program "' + $elfPathResolved + '" verify reset exit'
+& $openocdExe -s $openocdScripts -f $InterfaceCfg -f $TargetCfg -c $openOcdCommand
 if ($LASTEXITCODE -ne 0) {
     throw "OpenOCD flash failed with exit code $LASTEXITCODE"
 }
 
-Write-Host "Flash complete: $ElfPath"
+Write-Host "Flash complete: $elfPathResolved"

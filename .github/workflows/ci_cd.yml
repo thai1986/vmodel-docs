@@ -1,0 +1,88 @@
+name: CI/CD TRAVEO II Starter
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      build_type:
+        description: Build type
+        required: true
+        default: Debug
+        type: choice
+        options:
+          - Debug
+          - Release
+      interface_cfg:
+        description: OpenOCD interface cfg path
+        required: true
+        default: interface/cmsis-dap.cfg
+        type: string
+      target_cfg:
+        description: OpenOCD target cfg path
+        required: true
+        default: target/traveo2_1m_a0.cfg
+        type: string
+
+env:
+  BUILD_TYPE: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.build_type || 'Debug' }}
+  INTERFACE_CFG: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.interface_cfg || 'interface/cmsis-dap.cfg' }}
+  TARGET_CFG: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.target_cfg || 'target/traveo2_1m_a0.cfg' }}
+
+jobs:
+  ci_build:
+    name: CI Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake ninja-build gcc-arm-none-eabi binutils-arm-none-eabi
+
+      - name: Build firmware
+        shell: pwsh
+        run: |
+          ./scripts/build_traveo2.ps1 -BuildType "${{ env.BUILD_TYPE }}"
+
+      - name: Upload ELF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: traveo2-starter-elf
+          path: build/traveo2_starter.elf
+
+  cd_flash:
+    name: CD Flash To Hardware
+    needs: ci_build
+    if: (github.event_name == 'push' && github.ref == 'refs/heads/main') || github.event_name == 'workflow_dispatch'
+    runs-on: self-hosted
+    concurrency:
+      group: traveo2-board-flash
+      cancel-in-progress: false
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download ELF artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: traveo2-starter-elf
+          path: build
+
+      - name: Check debug probe
+        shell: pwsh
+        run: |
+          Set-ExecutionPolicy -Scope Process Bypass
+          ./scripts/check_kitprog.ps1 -InterfaceCfg "${{ env.INTERFACE_CFG }}"
+
+      - name: Flash firmware
+        shell: pwsh
+        run: |
+          Set-ExecutionPolicy -Scope Process Bypass
+          ./scripts/flash_traveo2.ps1 -ElfPath "build/traveo2_starter.elf" -InterfaceCfg "${{ env.INTERFACE_CFG }}" -TargetCfg "${{ env.TARGET_CFG }}"

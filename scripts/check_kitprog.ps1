@@ -1,5 +1,5 @@
 param(
-    [string]$InterfaceCfg = "interface/kitprog.cfg",
+    [string]$InterfaceCfg = "interface/cmsis-dap.cfg",
     [string]$OpenOcdScriptsDir = "",
     [string]$OpenOcdExe = ""
 )
@@ -61,11 +61,11 @@ if (-not (Test-Path $interfacePath)) {
 
 Write-Host "Using OpenOCD: $openocdExeResolved"
 Write-Host "Using scripts : $openocdScripts"
-Write-Host "Checking KitProg with $InterfaceCfg ..."
+Write-Host "Checking debug probe with $InterfaceCfg ..."
 
 $previousErrorPreference = $ErrorActionPreference
 $ErrorActionPreference = "Continue"
-$output = & $openocdExeResolved -s $openocdScripts -f $InterfaceCfg -c "adapter speed 2000; init; shutdown" 2>&1
+$output = & $openocdExeResolved -s $openocdScripts -f $InterfaceCfg -c "transport select swd; adapter speed 2000; init; shutdown" 2>&1
 $ErrorActionPreference = $previousErrorPreference
 $exitCode = $LASTEXITCODE
 
@@ -74,12 +74,12 @@ if ($output) {
 }
 
 if ($exitCode -eq 0) {
-    Write-Host "KitProg check PASSED."
+    Write-Host "Probe check PASSED."
     exit 0
 }
 
 if (($output -join "`n") -match "Can't find a KitProg device") {
-    throw "KitProg check FAILED: device not found. Reconnect board, use a data USB cable, and close any app using KitProg."
+    throw "Probe check FAILED: KitProg device not found. Reconnect board, use a data USB cable, and close any app using KitProg."
 }
 
-throw "KitProg check FAILED with OpenOCD exit code $exitCode"
+throw "Probe check FAILED with OpenOCD exit code $exitCode"

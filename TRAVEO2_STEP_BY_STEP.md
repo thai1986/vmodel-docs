@@ -2,24 +2,6 @@
 
 ## 1) Prerequisites (Windows)
 
-Install these tools and ensure they are in `PATH`:
-
-1. CMake
-2. Ninja
-3. GNU Arm Embedded Toolchain (`arm-none-eabi-gcc`)
-4. OpenOCD (with KitProg3 support)
-
-Quick check:
-
-```powershell
-Get-Command cmake,ninja,arm-none-eabi-gcc,openocd
-```
-
-## 2) Project structure
-# Step-by-Step: CYTVII-B-E-1M-SK (Compile + Flash)
-
-## 1) Prerequisites (Windows)
-
 Install these tools and ensure they are in PATH:
 
 1. CMake
@@ -37,7 +19,8 @@ Current status on this machine:
 
 - Installed: CMake, Ninja, GNU Arm Embedded Toolchain, OpenOCD xPack
 - Build: verified working
-- Flash tooling: script auto-prefers Infineon OpenOCD at C:\Infineon\Tools\ModusToolboxProgtools-1.7\openocd\bin\openocd.exe
+- Probe access: verified with `interface/cmsis-dap.cfg`
+- Flash tooling: script auto-prefers Infineon OpenOCD at `C:\Infineon\Tools\ModusToolboxProgtools-1.7\openocd\bin\openocd.exe`
 
 ## 2) Project structure
 
@@ -69,20 +52,20 @@ Expected output file:
 Connect board via USB, then run:
 
 ```powershell
-./scripts/check_kitprog.ps1
+./scripts/check_kitprog.ps1 -InterfaceCfg "interface/cmsis-dap.cfg"
 ```
 
-If this fails with "Can't find a KitProg device", reconnect cable/board and close apps that may be using KitProg.
+If this fails with `Can't find a KitProg device`, reconnect cable/board and close apps that may be using KitProg.
 
 ## 5) Flash to CYTVII-B-E-1M-SK
 
 Run:
 
 ```powershell
-./scripts/flash_traveo2.ps1 -ElfPath "build\traveo2_starter.elf" -InterfaceCfg "interface/kitprog.cfg" -TargetCfg "target/traveo2_1m_a0.cfg"
+./scripts/flash_traveo2.ps1 -ElfPath "build\traveo2_starter.elf" -InterfaceCfg "interface/cmsis-dap.cfg" -TargetCfg "target/traveo2_1m_a0.cfg"
 ```
 
-If your board revision uses a different TRAVEO II target cfg, change TargetCfg accordingly.
+If your board revision uses a different TRAVEO II target cfg, change `TargetCfg` accordingly.
 
 ## 6) Troubleshooting
 
@@ -102,4 +85,3 @@ $openocd = (Get-Command openocd).Source
 $scripts = Join-Path (Split-Path -Parent (Split-Path -Parent $openocd)) "openocd\scripts"
 Get-ChildItem (Join-Path $scripts "target") -Filter *.cfg | Select-Object -ExpandProperty Name
 ```
-
