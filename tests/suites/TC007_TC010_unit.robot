@@ -199,9 +199,9 @@ TC-010 - IoHwAb Polarity Inversion For LED1
 
 Unit Test Suite Setup
     Connect To Board Via OpenOCD
-    Reset And Halt Target
-    Resume Target
-    Sleep    0.2s
+    # reset run lets CM0+ boot ROM complete and start CM4.
+    Reset And Run Target
+    Sleep    0.5s    # Let Port_Init run so drive modes and PRT_PS pull-up are active
     Halt Target
 
 Unit Test Suite Teardown

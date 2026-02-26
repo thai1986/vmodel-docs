@@ -42,10 +42,9 @@ TC-003 - LED1 Is OFF At Power-On Reset
     [Tags]    TC-003    power-on    functional    REQ-FUNC-003
 
     # Perform a full reset so the MCU enters its startup sequence
-    Reset And Halt Target
-    # Let the startup + Port_Init run (brief resume then re-halt)
-    Resume Target
-    Sleep    0.1s    # 100 ms – enough for startup + first scheduler tick
+    # Use reset run so CM0+ boot ROM can start CM4 before we halt.
+    Reset And Run Target
+    Sleep    0.5s    # 500 ms – enough for CM0+ boot + Port_Init + first scheduler tick
     Halt Target
 
     # Read PRT_DR bit 0 for P19 (LED1)
@@ -184,11 +183,12 @@ TC-006 - No Repeated Toggle While SW1 Is Held For 3 Seconds
 *** Keywords ***
 
 Functional Suite Setup
-    [Documentation]    Connect to board, flash firmware, and reset to a clean state.
+    [Documentation]    Connect to board and reset to a clean state, waiting
+    ...    for CM0+ boot ROM to start CM4 and the scheduler loop to be running.
     Connect To Board Via OpenOCD
-    Reset And Halt Target
-    Resume Target
-    Sleep    0.2s    # Let the firmware reach the main scheduler loop
+    # reset run lets CM0+ boot ROM complete and start CM4.
+    Reset And Run Target
+    Sleep    0.5s    # Let the firmware reach the main scheduler loop
     Halt Target
 
 Functional Suite Teardown

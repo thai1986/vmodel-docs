@@ -78,17 +78,13 @@ TC-002 - LED1 Pin P19.0 Drive Mode Is Strong After Port Init
 *** Keywords ***
 
 Port Init Suite Setup
-    [Documentation]    Connect to the board via OpenOCD and reset + halt the
-    ...    target so Port_Init() runs and the registers are in their
-    ...    post-initialisation state.
+    [Documentation]    Connect to the board via OpenOCD and reset the target,
+    ...    waiting for the CM0+ boot ROM to start CM4 and Port_Init() to complete.
     Connect To Board Via OpenOCD
-    # Reset and halt immediately after Port_Init: the firmware is small enough
-    # that a full reset-halt leaves the CPU inside or past Port_Init.
-    Reset And Halt Target
-    # Let Port_Init complete by single-stepping past it, or simply resume
-    # briefly and re-halt.  Here we resume for 50 ms then halt.
-    Resume Target
-    Sleep    0.05s    # ~50 ms – enough for Port_Init to finish at 48 MHz
+    # Use reset run so CM0+ boot ROM can initialise and start CM4.
+    # reset halt would stop CM0+ before it can start CM4, leaving Port_Init() uncalled.
+    Reset And Run Target
+    Sleep    0.5s    # 500 ms – enough for CM0+ boot + CM4 startup + Port_Init
     Halt Target
     Log    Board halted. PRT_PC registers should reflect post-Port_Init state.
 
