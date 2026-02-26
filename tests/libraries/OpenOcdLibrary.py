@@ -163,21 +163,47 @@ class OpenOcdLibrary:
         host: str = "localhost",
         port: int = 4444,
         timeout: float = 5.0,
+        retries: int = 15,
+        retry_delay: float = 1.0,
     ) -> None:
         """Open a Telnet connection to a running OpenOCD instance.
 
+        Retries the connection up to *retries* times with *retry_delay* seconds
+        between attempts before raising an error.
+
         Arguments:
-        - ``host``    – OpenOCD Telnet host (default: ``localhost``)
-        - ``port``    – OpenOCD Telnet port (default: ``4444``)
-        - ``timeout`` – connection / read timeout in seconds (default: 5.0)
+        - ``host``        – OpenOCD Telnet host (default: ``localhost``)
+        - ``port``        – OpenOCD Telnet port (default: ``4444``)
+        - ``timeout``     – connection / read timeout in seconds (default: 5.0)
+        - ``retries``     – number of connection attempts (default: 15)
+        - ``retry_delay`` – seconds to wait between attempts (default: 1.0)
 
         Example::
 
             Open OpenOCD Connection    host=localhost    port=4444
         """
-        self._tn = _TelnetSocket(host, int(port), float(timeout))
-        # Consume the OpenOCD banner / prompt
-        self._tn.read_until(b"> ", timeout=float(timeout))
+        last_exc: Exception = RuntimeError("No connection attempted.")
+        for attempt in range(int(retries)):
+            try:
+                self._tn = _TelnetSocket(host, int(port), float(timeout))
+                # Consume the OpenOCD banner / prompt
+                self._tn.read_until(b"> ", timeout=float(timeout))
+                logger.info("Connected to OpenOCD on attempt %d.", attempt + 1)
+                return
+            except OSError as exc:
+                last_exc = exc
+                logger.warning(
+                    "OpenOCD connection attempt %d/%d failed: %s – retrying in %.1fs",
+                    attempt + 1, int(retries), exc, float(retry_delay),
+                )
+                if self._tn is not None:
+                    self._tn.close()
+                    self._tn = None
+                time.sleep(float(retry_delay))
+        raise RuntimeError(
+            f"Could not connect to OpenOCD at {host}:{port} after {retries} attempts. "
+            f"Last error: {last_exc}"
+        )
 
     def close_openocd_connection(self) -> None:
         """Close the Telnet connection to OpenOCD."""
