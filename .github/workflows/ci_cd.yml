@@ -165,10 +165,13 @@ jobs:
           $openocdExe = (Get-Command openocd -ErrorAction Stop).Source
           if (-not $openocdExe) { throw "openocd not found on PATH" }
 
-          # Resolve scripts directory (same logic as flash_traveo2.ps1)
+          # Resolve scripts directory – check all known layouts, prefer the one
+          # bundled with the resolved executable (xPack: <install>\openocd\scripts)
           $openocdBinDir = Split-Path -Parent $openocdExe
+          $openocdRoot   = Split-Path -Parent $openocdBinDir
           $candidateScriptDirs = @(
-            (Join-Path $openocdBinDir "..\scripts"),
+            (Join-Path $openocdBinDir "..\scripts"),          # generic layout
+            (Join-Path $openocdRoot   "openocd\scripts"),     # xPack layout
             "C:\Infineon\Tools\ModusToolboxProgtools-1.7\openocd\scripts"
           )
           $openocdScripts = $null
