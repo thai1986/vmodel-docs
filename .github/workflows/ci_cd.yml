@@ -161,16 +161,20 @@ jobs:
         run: |
           $env:Path = [System.Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [System.Environment]::GetEnvironmentVariable('Path','User')
 
-          # Resolve openocd executable
-          $openocdExe = (Get-Command openocd -ErrorAction Stop).Source
-          if (-not $openocdExe) { throw "openocd not found on PATH" }
+          # Resolve openocd executable – prefer Infineon ModusToolbox (same as
+          # flash_traveo2.ps1), fall back to PATH only if not found.
+          $candidateExes = @(
+            "C:\Infineon\Tools\ModusToolboxProgtools-1.7\openocd\bin\openocd.exe",
+            (Get-Command openocd -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Source -ErrorAction SilentlyContinue)
+          ) | Where-Object { $_ -and (Test-Path $_) }
+          $openocdExe = $candidateExes | Select-Object -First 1
+          if (-not $openocdExe) { throw "openocd not found. Install Infineon ModusToolbox or add openocd to PATH." }
 
-          # Resolve scripts directory – check all known layouts, prefer the one
-          # bundled with the resolved executable (xPack: <install>\openocd\scripts)
+          # Resolve scripts directory relative to the chosen exe
           $openocdBinDir = Split-Path -Parent $openocdExe
           $openocdRoot   = Split-Path -Parent $openocdBinDir
           $candidateScriptDirs = @(
-            (Join-Path $openocdBinDir "..\scripts"),          # generic layout
+            (Join-Path $openocdBinDir "..\scripts"),          # ModusToolbox / generic layout
             (Join-Path $openocdRoot   "openocd\scripts"),     # xPack layout
             "C:\Infineon\Tools\ModusToolboxProgtools-1.7\openocd\scripts"
           )
