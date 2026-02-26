@@ -187,6 +187,10 @@ jobs:
           Write-Host "Using OpenOCD : $openocdExe"
           Write-Host "Using scripts : $openocdScripts"
 
+          # Kill any leftover openocd process that might be holding port 4444
+          Get-Process -Name openocd -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue
+          Start-Sleep -Seconds 1
+
           $logFile    = "$PWD\openocd.log"
           $logErrFile = "$PWD\openocd_err.log"
           $proc = Start-Process -FilePath $openocdExe `
@@ -209,9 +213,15 @@ jobs:
             try {
               $tcp = [System.Net.Sockets.TcpClient]::new("localhost", 4444)
               $tcp.Close()
+              # Confirm the process we started is still alive (not a stale process)
+              if ($proc.HasExited) {
+                Write-Host "=== OpenOCD stdout ===" ; Get-Content $logFile    -ErrorAction SilentlyContinue
+                Write-Host "=== OpenOCD stderr ===" ; Get-Content $logErrFile -ErrorAction SilentlyContinue
+                throw "OpenOCD process exited after port became available."
+              }
               Write-Host "OpenOCD is ready after ${elapsed}s."
               break
-            } catch {
+            } catch [System.Net.Sockets.SocketException] {
               Start-Sleep -Seconds 1
               $elapsed++
             }
