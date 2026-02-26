@@ -7,14 +7,16 @@ Library          ../libraries/OpenOcdLibrary.py
 
 *** Keywords ***
 Connect To Board Via OpenOCD
-    [Documentation]    Start OpenOCD (if not already running) and open the Telnet connection.
+    [Documentation]    Start OpenOCD server process, then open the Telnet connection.
     ...    Requires the KitProg3 USB-DAP adapter connected to the host.
+    Start OpenOCD    interface_cfg=${OPENOCD_INTERFACE}    target_cfg=${OPENOCD_TARGET}
     Open OpenOCD Connection    host=${OPENOCD_HOST}    port=${OPENOCD_PORT}
     ...    timeout=${OPENOCD_TIMEOUT}
 
 Disconnect From Board
-    [Documentation]    Close the Telnet connection and optionally stop the OpenOCD process.
+    [Documentation]    Close the Telnet connection and stop the OpenOCD process.
     Close OpenOCD Connection
+    Stop OpenOCD
 
 Flash And Halt At Port Init Return
     [Documentation]    Reset the target, halt it, and leave the CPU stopped

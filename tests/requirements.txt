@@ -7,7 +7,7 @@
 robotframework>=7.0
 
 # No additional pip packages are needed:
-# - OpenOcdLibrary.py uses only stdlib (subprocess, telnetlib, re, time)
+# - OpenOcdLibrary.py uses only stdlib (subprocess, socket, re, time, os, shutil)
 # - SourceInspectionLibrary.py uses only stdlib (re, os, pathlib)
 #
 # External tool required (NOT a pip package):

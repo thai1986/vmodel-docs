@@ -32,6 +32,8 @@ In a .robot file::
     Close OpenOCD Connection
 """
 
+import os
+import shutil
 import socket
 import subprocess
 import time
@@ -102,36 +104,76 @@ class OpenOcdLibrary:
 
     def start_openocd(
         self,
-        openocd_exe: str = "openocd",
         interface_cfg: str = "interface/cmsis-dap.cfg",
         target_cfg: str = "target/traveo2_1m_a0.cfg",
         scripts_dir: str = "",
-        extra_args: str = "",
-        startup_delay: float = 2.0,
+        openocd_exe: str = "",
+        port: int = 4444,
+        startup_timeout: float = 30.0,
     ) -> None:
-        """Start an OpenOCD server process.
+        """Start an OpenOCD server process and wait until port *port* is ready.
+
+        Automatically resolves the OpenOCD executable and scripts directory
+        (prefers Infineon ModusToolbox installation, falls back to PATH).
+        Any previously running ``openocd`` process is killed first.
 
         Arguments:
-        - ``openocd_exe``    – path to the openocd executable (default: ``openocd`` on PATH)
-        - ``interface_cfg``  – interface config file (relative to scripts dir)
-        - ``target_cfg``     – target config file (relative to scripts dir)
-        - ``scripts_dir``    – OpenOCD scripts directory (optional)
-        - ``extra_args``     – any additional OpenOCD arguments as a single string
-        - ``startup_delay``  – seconds to wait for OpenOCD to start (default: 2.0)
+        - ``interface_cfg``    – interface config file relative to scripts dir
+        - ``target_cfg``       – target config file relative to scripts dir
+        - ``scripts_dir``      – explicit OpenOCD scripts dir (auto-detected if empty)
+        - ``openocd_exe``      – explicit OpenOCD executable path (auto-detected if empty)
+        - ``port``             – Telnet port to poll (default: 4444)
+        - ``startup_timeout``  – seconds to wait for port (default: 30)
 
         Example::
 
-            Start OpenOCD    openocd_exe=C:/Infineon/Tools/openocd/bin/openocd.exe
-            ...    interface_cfg=interface/cmsis-dap.cfg
+            Start OpenOCD    interface_cfg=interface/cmsis-dap.cfg
             ...    target_cfg=target/traveo2_1m_a0.cfg
         """
-        cmd = [openocd_exe]
-        if scripts_dir:
-            cmd += ["-s", scripts_dir]
-        cmd += ["-f", interface_cfg, "-f", target_cfg]
-        if extra_args:
-            cmd += extra_args.split()
 
+        # ── Resolve executable ───────────────────────────────────────────
+        if openocd_exe and os.path.isfile(openocd_exe):
+            resolved_exe = openocd_exe
+        else:
+            candidates_exe = [
+                r"C:\Infineon\Tools\ModusToolboxProgtools-1.7\openocd\bin\openocd.exe",
+                shutil.which("openocd"),
+            ]
+            resolved_exe = next((e for e in candidates_exe if e and os.path.isfile(e)), None)
+            if not resolved_exe:
+                raise RuntimeError(
+                    "openocd executable not found. Install Infineon ModusToolbox "
+                    "or add openocd to PATH."
+                )
+
+        # ── Resolve scripts directory ────────────────────────────────────
+        if scripts_dir and os.path.isdir(scripts_dir):
+            resolved_scripts = scripts_dir
+        else:
+            bin_dir  = os.path.dirname(resolved_exe)
+            root_dir = os.path.dirname(bin_dir)
+            candidates_scripts = [
+                os.path.normpath(os.path.join(bin_dir,  "..", "scripts")),   # ModusToolbox/generic
+                os.path.normpath(os.path.join(root_dir, "openocd", "scripts")),  # xPack
+                r"C:\Infineon\Tools\ModusToolboxProgtools-1.7\openocd\scripts",
+            ]
+            resolved_scripts = next((s for s in candidates_scripts if os.path.isdir(s)), None)
+            if not resolved_scripts:
+                raise RuntimeError(
+                    f"OpenOCD scripts directory not found. Checked: {candidates_scripts}"
+                )
+
+        logger.info("Using OpenOCD : %s", resolved_exe)
+        logger.info("Using scripts : %s", resolved_scripts)
+
+        # ── Kill any stale openocd holding the port ──────────────────────
+        subprocess.run(["taskkill", "/F", "/IM", "openocd.exe"],
+                       capture_output=True)  # ignore errors if not running
+        time.sleep(1.0)
+
+        # ── Start process ────────────────────────────────────────────────
+        cmd = [resolved_exe, "-s", resolved_scripts,
+               "-f", interface_cfg, "-f", target_cfg]
         logger.info("Starting OpenOCD: %s", " ".join(cmd))
         self._process = subprocess.Popen(
             cmd,
@@ -139,10 +181,28 @@ class OpenOcdLibrary:
             stderr=subprocess.STDOUT,
             text=True,
         )
-        time.sleep(float(startup_delay))
-        if self._process.poll() is not None:
-            out = self._process.stdout.read()
-            raise RuntimeError(f"OpenOCD failed to start.\nOutput:\n{out}")
+
+        # ── Poll until Telnet port is ready ──────────────────────────────
+        deadline = time.monotonic() + float(startup_timeout)
+        while True:
+            if self._process.poll() is not None:
+                out = self._process.stdout.read()
+                raise RuntimeError(
+                    f"OpenOCD failed to start (exit {self._process.returncode}).\n{out}"
+                )
+            try:
+                s = socket.create_connection(("localhost", int(port)), timeout=1)
+                s.close()
+                logger.info("OpenOCD is ready on port %s.", port)
+                return
+            except OSError:
+                if time.monotonic() >= deadline:
+                    self._process.kill()
+                    out = self._process.stdout.read()
+                    raise RuntimeError(
+                        f"OpenOCD did not open port {port} within {startup_timeout}s.\n{out}"
+                    )
+                time.sleep(1.0)
 
     def stop_openocd(self) -> None:
         """Terminate the OpenOCD process started by `Start OpenOCD`."""
