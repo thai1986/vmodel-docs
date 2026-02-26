@@ -1,0 +1,607 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Test Specification &mdash; TRAVEO II Entry Family Starter Kit 002-25314 Rev. *B documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=133f8659"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Test Results" href="test_results.html" />
+    <link rel="prev" title="Software Requirements" href="requirements.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            TRAVEO II Entry Family Starter Kit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="requirements.html">Software Requirements</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Test Specification</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">Test Cases</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tc-001-sw1-pin-drive-mode-after-port-init">TC-001 – SW1 Pin Drive Mode After Port_Init</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tc-002-led1-pin-drive-mode-after-port-init">TC-002 – LED1 Pin Drive Mode After Port_Init</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tc-003-led1-off-at-power-on-reset">TC-003 – LED1 OFF at Power-On Reset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tc-004-led1-on-after-first-sw1-press">TC-004 – LED1 ON After First SW1 Press</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tc-005-led1-off-after-second-sw1-press">TC-005 – LED1 OFF After Second SW1 Press</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tc-006-no-repeated-toggle-while-holding-sw1">TC-006 – No Repeated Toggle While Holding SW1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tc-007-dio-readchannel-returns-std-low-when-sw1-pressed">TC-007 – Dio_ReadChannel Returns STD_LOW When SW1 Pressed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tc-008-dio-writechannel-drives-led1-active-low">TC-008 – Dio_WriteChannel Drives LED1 Active-LOW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tc-009-iohwab-polarity-inversion-for-sw1">TC-009 – IoHwAb Polarity Inversion for SW1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tc-010-iohwab-polarity-inversion-for-led1">TC-010 – IoHwAb Polarity Inversion for LED1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tc-011-swc-runnable-called-at-10-ms-period">TC-011 – SWC Runnable Called at 10 ms Period</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tc-012-no-direct-register-access-in-swcledtoggle">TC-012 – No Direct Register Access in SwcLedToggle</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="test_results.html">Test Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="board_overview.html">Board Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pinout.html">Pinout – Board Headers</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">TRAVEO II Entry Family Starter Kit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Test Specification</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/test_spec.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="test-specification">
+<h1>Test Specification<a class="headerlink" href="#test-specification" title="Link to this heading"></a></h1>
+<p>This page defines the test cases for the <strong>TRAVEO II Entry Family Starter Kit</strong>
+LED toggle feature. Each test case is linked to one or more requirements
+in the <a class="reference internal" href="requirements.html"><span class="doc">Software Requirements</span></a> page.</p>
+<nav class="contents local" id="test-cases">
+<p class="topic-title">Test Cases</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#overview" id="id2">Overview</a></p></li>
+<li><p><a class="reference internal" href="#id1" id="id3">Test Cases</a></p></li>
+</ul>
+</nav>
+<hr class="docutils" />
+<section id="overview">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Overview</a><a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 15.0%" />
+<col style="width: 40.0%" />
+<col style="width: 20.0%" />
+<col style="width: 15.0%" />
+<col style="width: 10.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Test ID</p></th>
+<th class="head"><p>Summary</p></th>
+<th class="head"><p>Covers</p></th>
+<th class="head"><p>Method</p></th>
+<th class="head"><p>Status</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="#tc-001"><span class="std std-ref">TC-001 – SW1 Pin Drive Mode After Port_Init</span></a></p></td>
+<td><p>Port initialisation – SW1 pin drive mode</p></td>
+<td><p><a class="reference internal" href="requirements.html#req-sw-001"><span class="std std-ref">REQ-SW-001 – Port Initialisation</span></a>, <a class="reference internal" href="requirements.html#req-hw-001"><span class="std std-ref">REQ-HW-001 – USER Switch Input</span></a></p></td>
+<td><p>Inspection / Debug</p></td>
+<td><p>Draft</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tc-002"><span class="std std-ref">TC-002 – LED1 Pin Drive Mode After Port_Init</span></a></p></td>
+<td><p>Port initialisation – LED1 pin drive mode</p></td>
+<td><p><a class="reference internal" href="requirements.html#req-sw-001"><span class="std std-ref">REQ-SW-001 – Port Initialisation</span></a>, <a class="reference internal" href="requirements.html#req-hw-002"><span class="std std-ref">REQ-HW-002 – USER LED Output</span></a></p></td>
+<td><p>Inspection / Debug</p></td>
+<td><p>Draft</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tc-003"><span class="std std-ref">TC-003 – LED1 OFF at Power-On Reset</span></a></p></td>
+<td><p>LED1 OFF at power-on reset</p></td>
+<td><p><a class="reference internal" href="requirements.html#req-func-003"><span class="std std-ref">REQ-FUNC-003 – Initial State</span></a></p></td>
+<td><p>Board Test</p></td>
+<td><p>Draft</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tc-004"><span class="std std-ref">TC-004 – LED1 ON After First SW1 Press</span></a></p></td>
+<td><p>LED1 turns ON on first SW1 press</p></td>
+<td><p><a class="reference internal" href="requirements.html#req-func-001"><span class="std std-ref">REQ-FUNC-001 – LED Toggle on Button Press</span></a>, <a class="reference internal" href="requirements.html#req-func-002"><span class="std std-ref">REQ-FUNC-002 – Falling-Edge Detection</span></a></p></td>
+<td><p>Board Test</p></td>
+<td><p>Draft</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tc-005"><span class="std std-ref">TC-005 – LED1 OFF After Second SW1 Press</span></a></p></td>
+<td><p>LED1 turns OFF on second SW1 press</p></td>
+<td><p><a class="reference internal" href="requirements.html#req-func-001"><span class="std std-ref">REQ-FUNC-001 – LED Toggle on Button Press</span></a>, <a class="reference internal" href="requirements.html#req-func-002"><span class="std std-ref">REQ-FUNC-002 – Falling-Edge Detection</span></a></p></td>
+<td><p>Board Test</p></td>
+<td><p>Draft</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tc-006"><span class="std std-ref">TC-006 – No Repeated Toggle While Holding SW1</span></a></p></td>
+<td><p>No repeated toggle while holding SW1</p></td>
+<td><p><a class="reference internal" href="requirements.html#req-func-002"><span class="std std-ref">REQ-FUNC-002 – Falling-Edge Detection</span></a></p></td>
+<td><p>Board Test</p></td>
+<td><p>Draft</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tc-007"><span class="std std-ref">TC-007 – Dio_ReadChannel Returns STD_LOW When SW1 Pressed</span></a></p></td>
+<td><p>Dio_ReadChannel returns STD_LOW when SW1 pressed</p></td>
+<td><p><a class="reference internal" href="requirements.html#req-sw-002"><span class="std std-ref">REQ-SW-002 – DIO Read Channel</span></a>, <a class="reference internal" href="requirements.html#req-hw-001"><span class="std std-ref">REQ-HW-001 – USER Switch Input</span></a></p></td>
+<td><p>Unit Test</p></td>
+<td><p>Draft</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tc-008"><span class="std std-ref">TC-008 – Dio_WriteChannel Drives LED1 Active-LOW</span></a></p></td>
+<td><p>Dio_WriteChannel drives LED1 active-LOW correctly</p></td>
+<td><p><a class="reference internal" href="requirements.html#req-sw-003"><span class="std std-ref">REQ-SW-003 – DIO Write Channel</span></a>, <a class="reference internal" href="requirements.html#req-hw-002"><span class="std std-ref">REQ-HW-002 – USER LED Output</span></a></p></td>
+<td><p>Unit Test</p></td>
+<td><p>Draft</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tc-009"><span class="std std-ref">TC-009 – IoHwAb Polarity Inversion for SW1</span></a></p></td>
+<td><p>IoHwAb polarity inversion – SW1</p></td>
+<td><p><a class="reference internal" href="requirements.html#req-sw-004"><span class="std std-ref">REQ-SW-004 – IoHwAb Polarity Abstraction</span></a></p></td>
+<td><p>Unit Test</p></td>
+<td><p>Draft</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tc-010"><span class="std std-ref">TC-010 – IoHwAb Polarity Inversion for LED1</span></a></p></td>
+<td><p>IoHwAb polarity inversion – LED1</p></td>
+<td><p><a class="reference internal" href="requirements.html#req-sw-004"><span class="std std-ref">REQ-SW-004 – IoHwAb Polarity Abstraction</span></a></p></td>
+<td><p>Unit Test</p></td>
+<td><p>Draft</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tc-011"><span class="std std-ref">TC-011 – SWC Runnable Called at 10 ms Period</span></a></p></td>
+<td><p>SWC runnable called at 10 ms period</p></td>
+<td><p><a class="reference internal" href="requirements.html#req-sw-005"><span class="std std-ref">REQ-SW-005 – SWC Runnable Period</span></a></p></td>
+<td><p>Inspection</p></td>
+<td><p>Draft</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tc-012"><span class="std std-ref">TC-012 – No Direct Register Access in SwcLedToggle</span></a></p></td>
+<td><p>No direct register access in SwcLedToggle</p></td>
+<td><p><a class="reference internal" href="requirements.html#req-sw-006"><span class="std std-ref">REQ-SW-006 – No Direct Register Access in Application Layer</span></a></p></td>
+<td><p>Code Review</p></td>
+<td><p>Draft</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<hr class="docutils" />
+<section id="id1">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Test Cases</a><a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<section id="tc-001-sw1-pin-drive-mode-after-port-init">
+<span id="tc-001"></span><h3>TC-001 – SW1 Pin Drive Mode After Port_Init<a class="headerlink" href="#tc-001-sw1-pin-drive-mode-after-port-init" title="Link to this heading"></a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">ID<span class="colon">:</span></dt>
+<dd class="field-odd"><p>TC-001</p>
+</dd>
+<dt class="field-even">Covers<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="requirements.html#req-sw-001"><span class="std std-ref">REQ-SW-001 – Port Initialisation</span></a>, <a class="reference internal" href="requirements.html#req-hw-001"><span class="std std-ref">REQ-HW-001 – USER Switch Input</span></a></p>
+</dd>
+<dt class="field-odd">Test Method<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Inspection / Debugger register read</p>
+</dd>
+<dt class="field-even">Robot File<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference download internal" download="" href="_downloads/712074f9510aebe988815317c536c3fb/TC001_TC002_port_init.robot"><code class="xref download docutils literal notranslate"><span class="pre">TC001_TC002_port_init.robot</span></code></a></p>
+</dd>
+<dt class="field-odd">Precondition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Board powered, firmware loaded, debugger connected.</p>
+</dd>
+<dt class="field-even">Expected Result<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">PRT_PC</span></code> for port 7, pin 0 = <code class="docutils literal notranslate"><span class="pre">0x02</span></code> (pull-up drive mode).</p>
+</dd>
+</dl>
+<p><strong>Steps</strong></p>
+<ol class="arabic simple">
+<li><p>Flash firmware to board.</p></li>
+<li><p>Halt CPU immediately after <code class="docutils literal notranslate"><span class="pre">Port_Init()</span></code> returns (breakpoint).</p></li>
+<li><p>Read register <code class="docutils literal notranslate"><span class="pre">0x40310000</span> <span class="pre">+</span> <span class="pre">(7</span> <span class="pre">*</span> <span class="pre">0x80)</span> <span class="pre">+</span> <span class="pre">0x08</span></code> (GPIO port 7, PRT_PC).</p></li>
+<li><p>Verify bits [2:0] equal <code class="docutils literal notranslate"><span class="pre">0x2</span></code> (<code class="docutils literal notranslate"><span class="pre">PORT_DM_PULLUP</span></code>).</p></li>
+</ol>
+<p><strong>Pass Criteria</strong></p>
+<p>Bits [2:0] of PRT_PC for P7 == <code class="docutils literal notranslate"><span class="pre">0x2</span></code>.</p>
+<hr class="docutils" />
+</section>
+<section id="tc-002-led1-pin-drive-mode-after-port-init">
+<span id="tc-002"></span><h3>TC-002 – LED1 Pin Drive Mode After Port_Init<a class="headerlink" href="#tc-002-led1-pin-drive-mode-after-port-init" title="Link to this heading"></a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">ID<span class="colon">:</span></dt>
+<dd class="field-odd"><p>TC-002</p>
+</dd>
+<dt class="field-even">Covers<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="requirements.html#req-sw-001"><span class="std std-ref">REQ-SW-001 – Port Initialisation</span></a>, <a class="reference internal" href="requirements.html#req-hw-002"><span class="std std-ref">REQ-HW-002 – USER LED Output</span></a></p>
+</dd>
+<dt class="field-odd">Test Method<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Inspection / Debugger register read</p>
+</dd>
+<dt class="field-even">Robot File<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference download internal" download="" href="_downloads/712074f9510aebe988815317c536c3fb/TC001_TC002_port_init.robot"><code class="xref download docutils literal notranslate"><span class="pre">TC001_TC002_port_init.robot</span></code></a></p>
+</dd>
+<dt class="field-odd">Precondition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Board powered, firmware loaded, debugger connected.</p>
+</dd>
+<dt class="field-even">Expected Result<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">PRT_PC</span></code> for port 19, pin 0 = <code class="docutils literal notranslate"><span class="pre">0x06</span></code> (strong drive mode).</p>
+</dd>
+</dl>
+<p><strong>Steps</strong></p>
+<ol class="arabic simple">
+<li><p>Flash firmware to board.</p></li>
+<li><p>Halt CPU immediately after <code class="docutils literal notranslate"><span class="pre">Port_Init()</span></code> returns (breakpoint).</p></li>
+<li><p>Read register <code class="docutils literal notranslate"><span class="pre">0x40310000</span> <span class="pre">+</span> <span class="pre">(19</span> <span class="pre">*</span> <span class="pre">0x80)</span> <span class="pre">+</span> <span class="pre">0x08</span></code> (GPIO port 19, PRT_PC).</p></li>
+<li><p>Verify bits [2:0] equal <code class="docutils literal notranslate"><span class="pre">0x6</span></code> (<code class="docutils literal notranslate"><span class="pre">PORT_DM_STRONG</span></code>).</p></li>
+</ol>
+<p><strong>Pass Criteria</strong></p>
+<p>Bits [2:0] of PRT_PC for P19 == <code class="docutils literal notranslate"><span class="pre">0x6</span></code>.</p>
+<hr class="docutils" />
+</section>
+<section id="tc-003-led1-off-at-power-on-reset">
+<span id="tc-003"></span><h3>TC-003 – LED1 OFF at Power-On Reset<a class="headerlink" href="#tc-003-led1-off-at-power-on-reset" title="Link to this heading"></a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">ID<span class="colon">:</span></dt>
+<dd class="field-odd"><p>TC-003</p>
+</dd>
+<dt class="field-even">Covers<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="requirements.html#req-func-003"><span class="std std-ref">REQ-FUNC-003 – Initial State</span></a></p>
+</dd>
+<dt class="field-odd">Test Method<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Board Test (visual observation)</p>
+</dd>
+<dt class="field-even">Robot File<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference download internal" download="" href="_downloads/8a340b253fd9c9c52b2847fee7f13250/TC003_TC006_functional.robot"><code class="xref download docutils literal notranslate"><span class="pre">TC003_TC006_functional.robot</span></code></a></p>
+</dd>
+<dt class="field-odd">Precondition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Board powered via USB. No button pressed.</p>
+</dd>
+</dl>
+<p><strong>Steps</strong></p>
+<ol class="arabic simple">
+<li><p>Power-cycle the board (unplug and reconnect USB).</p></li>
+<li><p>Observe LED1 immediately after power-on.</p></li>
+</ol>
+<p><strong>Pass Criteria</strong></p>
+<p>LED1 is <strong>not illuminated</strong> after power-on reset.</p>
+<hr class="docutils" />
+</section>
+<section id="tc-004-led1-on-after-first-sw1-press">
+<span id="tc-004"></span><h3>TC-004 – LED1 ON After First SW1 Press<a class="headerlink" href="#tc-004-led1-on-after-first-sw1-press" title="Link to this heading"></a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">ID<span class="colon">:</span></dt>
+<dd class="field-odd"><p>TC-004</p>
+</dd>
+<dt class="field-even">Covers<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="requirements.html#req-func-001"><span class="std std-ref">REQ-FUNC-001 – LED Toggle on Button Press</span></a>, <a class="reference internal" href="requirements.html#req-func-002"><span class="std std-ref">REQ-FUNC-002 – Falling-Edge Detection</span></a></p>
+</dd>
+<dt class="field-odd">Test Method<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Board Test (visual observation)</p>
+</dd>
+<dt class="field-even">Robot File<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference download internal" download="" href="_downloads/8a340b253fd9c9c52b2847fee7f13250/TC003_TC006_functional.robot"><code class="xref download docutils literal notranslate"><span class="pre">TC003_TC006_functional.robot</span></code></a></p>
+</dd>
+<dt class="field-odd">Precondition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>TC-003 passed (LED1 is OFF).</p>
+</dd>
+</dl>
+<p><strong>Steps</strong></p>
+<ol class="arabic simple">
+<li><p>Press SW1 once and release.</p></li>
+<li><p>Observe LED1.</p></li>
+</ol>
+<p><strong>Pass Criteria</strong></p>
+<p>LED1 is <strong>illuminated</strong> (blue) after releasing SW1.</p>
+<hr class="docutils" />
+</section>
+<section id="tc-005-led1-off-after-second-sw1-press">
+<span id="tc-005"></span><h3>TC-005 – LED1 OFF After Second SW1 Press<a class="headerlink" href="#tc-005-led1-off-after-second-sw1-press" title="Link to this heading"></a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">ID<span class="colon">:</span></dt>
+<dd class="field-odd"><p>TC-005</p>
+</dd>
+<dt class="field-even">Covers<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="requirements.html#req-func-001"><span class="std std-ref">REQ-FUNC-001 – LED Toggle on Button Press</span></a>, <a class="reference internal" href="requirements.html#req-func-002"><span class="std std-ref">REQ-FUNC-002 – Falling-Edge Detection</span></a></p>
+</dd>
+<dt class="field-odd">Test Method<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Board Test (visual observation)</p>
+</dd>
+<dt class="field-even">Robot File<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference download internal" download="" href="_downloads/8a340b253fd9c9c52b2847fee7f13250/TC003_TC006_functional.robot"><code class="xref download docutils literal notranslate"><span class="pre">TC003_TC006_functional.robot</span></code></a></p>
+</dd>
+<dt class="field-odd">Precondition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>TC-004 passed (LED1 is ON).</p>
+</dd>
+</dl>
+<p><strong>Steps</strong></p>
+<ol class="arabic simple">
+<li><p>Press SW1 once and release.</p></li>
+<li><p>Observe LED1.</p></li>
+</ol>
+<p><strong>Pass Criteria</strong></p>
+<p>LED1 is <strong>not illuminated</strong> after releasing SW1.</p>
+<hr class="docutils" />
+</section>
+<section id="tc-006-no-repeated-toggle-while-holding-sw1">
+<span id="tc-006"></span><h3>TC-006 – No Repeated Toggle While Holding SW1<a class="headerlink" href="#tc-006-no-repeated-toggle-while-holding-sw1" title="Link to this heading"></a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">ID<span class="colon">:</span></dt>
+<dd class="field-odd"><p>TC-006</p>
+</dd>
+<dt class="field-even">Covers<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="requirements.html#req-func-002"><span class="std std-ref">REQ-FUNC-002 – Falling-Edge Detection</span></a></p>
+</dd>
+<dt class="field-odd">Test Method<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Board Test (visual observation)</p>
+</dd>
+<dt class="field-even">Robot File<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference download internal" download="" href="_downloads/8a340b253fd9c9c52b2847fee7f13250/TC003_TC006_functional.robot"><code class="xref download docutils literal notranslate"><span class="pre">TC003_TC006_functional.robot</span></code></a></p>
+</dd>
+<dt class="field-odd">Precondition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>LED1 is in any stable state.</p>
+</dd>
+</dl>
+<p><strong>Steps</strong></p>
+<ol class="arabic simple">
+<li><p>Press and <strong>hold</strong> SW1 for 3 seconds without releasing.</p></li>
+<li><p>Observe LED1 during the hold period.</p></li>
+<li><p>Release SW1.</p></li>
+</ol>
+<p><strong>Pass Criteria</strong></p>
+<p>LED1 changes state <strong>exactly once</strong> at the moment of press.
+It does not toggle repeatedly while the button is held.</p>
+<hr class="docutils" />
+</section>
+<section id="tc-007-dio-readchannel-returns-std-low-when-sw1-pressed">
+<span id="tc-007"></span><h3>TC-007 – Dio_ReadChannel Returns STD_LOW When SW1 Pressed<a class="headerlink" href="#tc-007-dio-readchannel-returns-std-low-when-sw1-pressed" title="Link to this heading"></a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">ID<span class="colon">:</span></dt>
+<dd class="field-odd"><p>TC-007</p>
+</dd>
+<dt class="field-even">Covers<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="requirements.html#req-sw-002"><span class="std std-ref">REQ-SW-002 – DIO Read Channel</span></a>, <a class="reference internal" href="requirements.html#req-hw-001"><span class="std std-ref">REQ-HW-001 – USER Switch Input</span></a></p>
+</dd>
+<dt class="field-odd">Test Method<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Unit Test (debugger watch / printf trace)</p>
+</dd>
+<dt class="field-even">Robot File<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference download internal" download="" href="_downloads/b8d98199aded4717e081a32b5bb9b93a/TC007_TC010_unit.robot"><code class="xref download docutils literal notranslate"><span class="pre">TC007_TC010_unit.robot</span></code></a></p>
+</dd>
+<dt class="field-odd">Precondition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Debugger connected. Breakpoint inside <code class="docutils literal notranslate"><span class="pre">SwcLedToggle_Run10ms</span></code>.</p>
+</dd>
+</dl>
+<p><strong>Steps</strong></p>
+<ol class="arabic simple">
+<li><p>Set a breakpoint at the <code class="docutils literal notranslate"><span class="pre">IoHwAb_Read_Sw1()</span></code> call in <code class="docutils literal notranslate"><span class="pre">SwcLedToggle_Run10ms</span></code>.</p></li>
+<li><p>Press and hold SW1.</p></li>
+<li><p>Step into <code class="docutils literal notranslate"><span class="pre">IoHwAb_Read_Sw1</span></code> → <code class="docutils literal notranslate"><span class="pre">Dio_ReadChannel(DIO_CHANNEL_SW1)</span></code>.</p></li>
+<li><p>Inspect return value.</p></li>
+</ol>
+<p><strong>Pass Criteria</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">Dio_ReadChannel(DIO_CHANNEL_SW1)</span></code> returns <code class="docutils literal notranslate"><span class="pre">STD_LOW</span></code> (0x00) while SW1 is held pressed.</p>
+<hr class="docutils" />
+</section>
+<section id="tc-008-dio-writechannel-drives-led1-active-low">
+<span id="tc-008"></span><h3>TC-008 – Dio_WriteChannel Drives LED1 Active-LOW<a class="headerlink" href="#tc-008-dio-writechannel-drives-led1-active-low" title="Link to this heading"></a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">ID<span class="colon">:</span></dt>
+<dd class="field-odd"><p>TC-008</p>
+</dd>
+<dt class="field-even">Covers<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="requirements.html#req-sw-003"><span class="std std-ref">REQ-SW-003 – DIO Write Channel</span></a>, <a class="reference internal" href="requirements.html#req-hw-002"><span class="std std-ref">REQ-HW-002 – USER LED Output</span></a></p>
+</dd>
+<dt class="field-odd">Test Method<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Unit Test (debugger register read)</p>
+</dd>
+<dt class="field-even">Robot File<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference download internal" download="" href="_downloads/b8d98199aded4717e081a32b5bb9b93a/TC007_TC010_unit.robot"><code class="xref download docutils literal notranslate"><span class="pre">TC007_TC010_unit.robot</span></code></a></p>
+</dd>
+<dt class="field-odd">Precondition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Debugger connected.</p>
+</dd>
+</dl>
+<p><strong>Steps</strong></p>
+<ol class="arabic simple">
+<li><p>Set a breakpoint after <code class="docutils literal notranslate"><span class="pre">IoHwAb_Write_Led1(IOHWAB_SIG_ACTIVE)</span></code> call.</p></li>
+<li><p>Read GPIO port 19 <code class="docutils literal notranslate"><span class="pre">PRT_DR</span></code> register (<code class="docutils literal notranslate"><span class="pre">0x40310000</span> <span class="pre">+</span> <span class="pre">19*0x80</span> <span class="pre">+</span> <span class="pre">0x00</span></code>).</p></li>
+<li><p>Check bit 0.</p></li>
+</ol>
+<p><strong>Pass Criteria</strong></p>
+<p>Bit 0 of PRT_DR for port 19 == <code class="docutils literal notranslate"><span class="pre">0</span></code> (STD_LOW → LED active-LOW = ON).</p>
+<hr class="docutils" />
+</section>
+<section id="tc-009-iohwab-polarity-inversion-for-sw1">
+<span id="tc-009"></span><h3>TC-009 – IoHwAb Polarity Inversion for SW1<a class="headerlink" href="#tc-009-iohwab-polarity-inversion-for-sw1" title="Link to this heading"></a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">ID<span class="colon">:</span></dt>
+<dd class="field-odd"><p>TC-009</p>
+</dd>
+<dt class="field-even">Covers<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="requirements.html#req-sw-004"><span class="std std-ref">REQ-SW-004 – IoHwAb Polarity Abstraction</span></a></p>
+</dd>
+<dt class="field-odd">Test Method<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Unit Test (code inspection + debugger)</p>
+</dd>
+<dt class="field-even">Robot File<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference download internal" download="" href="_downloads/b8d98199aded4717e081a32b5bb9b93a/TC007_TC010_unit.robot"><code class="xref download docutils literal notranslate"><span class="pre">TC007_TC010_unit.robot</span></code></a></p>
+</dd>
+<dt class="field-odd">Precondition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Debugger connected.</p>
+</dd>
+</dl>
+<p><strong>Steps</strong></p>
+<ol class="arabic simple">
+<li><p>With SW1 <strong>pressed</strong> (pin LOW), call <code class="docutils literal notranslate"><span class="pre">IoHwAb_Read_Sw1()</span></code>.</p></li>
+<li><p>Verify return value is <code class="docutils literal notranslate"><span class="pre">IOHWAB_SIG_ACTIVE</span></code> (1).</p></li>
+<li><p>With SW1 <strong>released</strong> (pin HIGH), call <code class="docutils literal notranslate"><span class="pre">IoHwAb_Read_Sw1()</span></code>.</p></li>
+<li><p>Verify return value is <code class="docutils literal notranslate"><span class="pre">IOHWAB_SIG_INACTIVE</span></code> (0).</p></li>
+</ol>
+<p><strong>Pass Criteria</strong></p>
+<ul class="simple">
+<li><p>Pin LOW  → <code class="docutils literal notranslate"><span class="pre">IoHwAb_Read_Sw1()</span></code> == <code class="docutils literal notranslate"><span class="pre">IOHWAB_SIG_ACTIVE</span></code></p></li>
+<li><p>Pin HIGH → <code class="docutils literal notranslate"><span class="pre">IoHwAb_Read_Sw1()</span></code> == <code class="docutils literal notranslate"><span class="pre">IOHWAB_SIG_INACTIVE</span></code></p></li>
+</ul>
+<hr class="docutils" />
+</section>
+<section id="tc-010-iohwab-polarity-inversion-for-led1">
+<span id="tc-010"></span><h3>TC-010 – IoHwAb Polarity Inversion for LED1<a class="headerlink" href="#tc-010-iohwab-polarity-inversion-for-led1" title="Link to this heading"></a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">ID<span class="colon">:</span></dt>
+<dd class="field-odd"><p>TC-010</p>
+</dd>
+<dt class="field-even">Covers<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="requirements.html#req-sw-004"><span class="std std-ref">REQ-SW-004 – IoHwAb Polarity Abstraction</span></a></p>
+</dd>
+<dt class="field-odd">Test Method<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Unit Test (code inspection + debugger)</p>
+</dd>
+<dt class="field-even">Robot File<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference download internal" download="" href="_downloads/b8d98199aded4717e081a32b5bb9b93a/TC007_TC010_unit.robot"><code class="xref download docutils literal notranslate"><span class="pre">TC007_TC010_unit.robot</span></code></a></p>
+</dd>
+<dt class="field-odd">Precondition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Debugger connected.</p>
+</dd>
+</dl>
+<p><strong>Steps</strong></p>
+<ol class="arabic simple">
+<li><p>Call <code class="docutils literal notranslate"><span class="pre">IoHwAb_Write_Led1(IOHWAB_SIG_ACTIVE)</span></code> (LED on request).</p></li>
+<li><p>Read PRT_DR bit 0 for port 19 → expect <code class="docutils literal notranslate"><span class="pre">0</span></code> (STD_LOW).</p></li>
+<li><p>Call <code class="docutils literal notranslate"><span class="pre">IoHwAb_Write_Led1(IOHWAB_SIG_INACTIVE)</span></code> (LED off request).</p></li>
+<li><p>Read PRT_DR bit 0 for port 19 → expect <code class="docutils literal notranslate"><span class="pre">1</span></code> (STD_HIGH).</p></li>
+</ol>
+<p><strong>Pass Criteria</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">IOHWAB_SIG_ACTIVE</span></code>   writes STD_LOW  (0) to PRT_DR bit 0.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IOHWAB_SIG_INACTIVE</span></code> writes STD_HIGH (1) to PRT_DR bit 0.</p></li>
+</ul>
+<hr class="docutils" />
+</section>
+<section id="tc-011-swc-runnable-called-at-10-ms-period">
+<span id="tc-011"></span><h3>TC-011 – SWC Runnable Called at 10 ms Period<a class="headerlink" href="#tc-011-swc-runnable-called-at-10-ms-period" title="Link to this heading"></a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">ID<span class="colon">:</span></dt>
+<dd class="field-odd"><p>TC-011</p>
+</dd>
+<dt class="field-even">Covers<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="requirements.html#req-sw-005"><span class="std std-ref">REQ-SW-005 – SWC Runnable Period</span></a></p>
+</dd>
+<dt class="field-odd">Test Method<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Code Inspection</p>
+</dd>
+<dt class="field-even">Robot File<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference download internal" download="" href="_downloads/84f405aae31c7c5ca23faad8e19a00b1/TC011_TC012_inspection.robot"><code class="xref download docutils literal notranslate"><span class="pre">TC011_TC012_inspection.robot</span></code></a></p>
+</dd>
+<dt class="field-odd">Precondition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Source code available.</p>
+</dd>
+</dl>
+<p><strong>Steps</strong></p>
+<ol class="arabic simple">
+<li><p>Review <code class="docutils literal notranslate"><span class="pre">main.c</span></code> scheduler loop.</p></li>
+<li><p>Confirm <code class="docutils literal notranslate"><span class="pre">Os_WaitTick10ms()</span></code> is called before <code class="docutils literal notranslate"><span class="pre">SwcLedToggle_Run10ms()</span></code>.</p></li>
+<li><p>Review <code class="docutils literal notranslate"><span class="pre">Os_WaitTick10ms()</span></code> busy-wait count (480 000 iterations at ~48 MHz).</p></li>
+</ol>
+<p><strong>Pass Criteria</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">SwcLedToggle_Run10ms()</span></code> is called once per loop iteration.</p></li>
+<li><p>The loop delay is configured for approximately 10 ms.</p></li>
+</ul>
+<hr class="docutils" />
+</section>
+<section id="tc-012-no-direct-register-access-in-swcledtoggle">
+<span id="tc-012"></span><h3>TC-012 – No Direct Register Access in SwcLedToggle<a class="headerlink" href="#tc-012-no-direct-register-access-in-swcledtoggle" title="Link to this heading"></a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">ID<span class="colon">:</span></dt>
+<dd class="field-odd"><p>TC-012</p>
+</dd>
+<dt class="field-even">Covers<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="requirements.html#req-sw-006"><span class="std std-ref">REQ-SW-006 – No Direct Register Access in Application Layer</span></a></p>
+</dd>
+<dt class="field-odd">Test Method<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Code Review / Static Analysis</p>
+</dd>
+<dt class="field-even">Robot File<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference download internal" download="" href="_downloads/84f405aae31c7c5ca23faad8e19a00b1/TC011_TC012_inspection.robot"><code class="xref download docutils literal notranslate"><span class="pre">TC011_TC012_inspection.robot</span></code></a></p>
+</dd>
+<dt class="field-odd">Precondition<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Source code available.</p>
+</dd>
+</dl>
+<p><strong>Steps</strong></p>
+<ol class="arabic simple">
+<li><p>Open <code class="docutils literal notranslate"><span class="pre">src/App/SwcLedToggle/SwcLedToggle.c</span></code>.</p></li>
+<li><p>Search for any direct memory-mapped register addresses (e.g. <code class="docutils literal notranslate"><span class="pre">0x4031</span></code>).</p></li>
+<li><p>Verify <code class="docutils literal notranslate"><span class="pre">SwcLedToggle.c</span></code> contains <strong>no</strong> <code class="docutils literal notranslate"><span class="pre">REG32</span></code> macro calls or raw address literals.</p></li>
+<li><p>Verify all hardware access is via <code class="docutils literal notranslate"><span class="pre">IoHwAb_Read_Sw1()</span></code> and <code class="docutils literal notranslate"><span class="pre">IoHwAb_Write_Led1()</span></code>.</p></li>
+</ol>
+<p><strong>Pass Criteria</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">SwcLedToggle.c</span></code> contains zero direct register accesses.
+All I/O calls use the IoHwAb API exclusively.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="requirements.html" class="btn btn-neutral float-left" title="Software Requirements" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="test_results.html" class="btn btn-neutral float-right" title="Test Results" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

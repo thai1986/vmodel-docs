@@ -1,0 +1,603 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Software Requirements &mdash; TRAVEO II Entry Family Starter Kit 002-25314 Rev. *B documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=133f8659"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Test Specification" href="test_spec.html" />
+    <link rel="prev" title="TRAVEO II Entry Family Starter Kit" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            TRAVEO II Entry Family Starter Kit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Software Requirements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#system-requirements">System Requirements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#req-sys-001-target-hardware"><strong>REQ-SYS-001</strong> – Target Hardware</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#req-sys-002-software-architecture"><strong>REQ-SYS-002</strong> – Software Architecture</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#hardware-requirements">Hardware Requirements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#req-hw-001-user-switch-input"><strong>REQ-HW-001</strong> – USER Switch Input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#req-hw-002-user-led-output"><strong>REQ-HW-002</strong> – USER LED Output</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#functional-requirements">Functional Requirements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#req-func-001-led-toggle-on-button-press"><strong>REQ-FUNC-001</strong> – LED Toggle on Button Press</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#req-func-002-falling-edge-detection"><strong>REQ-FUNC-002</strong> – Falling-Edge Detection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#req-func-003-initial-state"><strong>REQ-FUNC-003</strong> – Initial State</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">Software Requirements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#req-sw-001-port-initialisation"><strong>REQ-SW-001</strong> – Port Initialisation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#req-sw-002-dio-read-channel"><strong>REQ-SW-002</strong> – DIO Read Channel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#req-sw-003-dio-write-channel"><strong>REQ-SW-003</strong> – DIO Write Channel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#req-sw-004-iohwab-polarity-abstraction"><strong>REQ-SW-004</strong> – IoHwAb Polarity Abstraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#req-sw-005-swc-runnable-period"><strong>REQ-SW-005</strong> – SWC Runnable Period</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#req-sw-006-no-direct-register-access-in-application-layer"><strong>REQ-SW-006</strong> – No Direct Register Access in Application Layer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#requirements-traceability-matrix">Requirements Traceability Matrix</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="test_spec.html">Test Specification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test_results.html">Test Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="board_overview.html">Board Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pinout.html">Pinout – Board Headers</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">TRAVEO II Entry Family Starter Kit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Software Requirements</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/requirements.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="software-requirements">
+<h1>Software Requirements<a class="headerlink" href="#software-requirements" title="Link to this heading"></a></h1>
+<p>This page defines the software requirements for the <strong>TRAVEO II Entry Family Starter Kit</strong>
+LED toggle feature. Each requirement is assigned a unique ID used for traceability
+between specification and implementation.</p>
+<nav class="contents local" id="requirements">
+<p class="topic-title">Requirements</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#system-requirements" id="id2">System Requirements</a></p></li>
+<li><p><a class="reference internal" href="#hardware-requirements" id="id3">Hardware Requirements</a></p></li>
+<li><p><a class="reference internal" href="#functional-requirements" id="id4">Functional Requirements</a></p></li>
+<li><p><a class="reference internal" href="#id1" id="id5">Software Requirements</a></p></li>
+<li><p><a class="reference internal" href="#requirements-traceability-matrix" id="id6">Requirements Traceability Matrix</a></p></li>
+</ul>
+</nav>
+<hr class="docutils" />
+<section id="system-requirements">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">System Requirements</a><a class="headerlink" href="#system-requirements" title="Link to this heading"></a></h2>
+<section id="req-sys-001-target-hardware">
+<span id="req-sys-001"></span><h3><strong>REQ-SYS-001</strong> – Target Hardware<a class="headerlink" href="#req-sys-001-target-hardware" title="Link to this heading"></a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">ID<span class="colon">:</span></dt>
+<dd class="field-odd"><p>REQ-SYS-001</p>
+</dd>
+<dt class="field-even">Type<span class="colon">:</span></dt>
+<dd class="field-even"><p>System</p>
+</dd>
+<dt class="field-odd">Priority<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Mandatory</p>
+</dd>
+<dt class="field-even">Status<span class="colon">:</span></dt>
+<dd class="field-even"><p>Approved</p>
+</dd>
+<dt class="field-odd">Test Cases<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="test_spec.html#tc-001"><span class="std std-ref">TC-001 – SW1 Pin Drive Mode After Port_Init</span></a>, <a class="reference internal" href="test_spec.html#tc-002"><span class="std std-ref">TC-002 – LED1 Pin Drive Mode After Port_Init</span></a></p>
+</dd>
+</dl>
+<p>The software shall execute on the <strong>CYTVII-B-E-1M-SK</strong> evaluation board
+equipped with the <strong>CYT2B75XX</strong> microcontroller (32-bit Arm Cortex-M4F,
+QFP 100-pin, 0.5 mm pitch).</p>
+<hr class="docutils" />
+</section>
+<section id="req-sys-002-software-architecture">
+<span id="req-sys-002"></span><h3><strong>REQ-SYS-002</strong> – Software Architecture<a class="headerlink" href="#req-sys-002-software-architecture" title="Link to this heading"></a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">ID<span class="colon">:</span></dt>
+<dd class="field-odd"><p>REQ-SYS-002</p>
+</dd>
+<dt class="field-even">Type<span class="colon">:</span></dt>
+<dd class="field-even"><p>System</p>
+</dd>
+<dt class="field-odd">Priority<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Mandatory</p>
+</dd>
+<dt class="field-even">Status<span class="colon">:</span></dt>
+<dd class="field-even"><p>Approved</p>
+</dd>
+<dt class="field-odd">Test Cases<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="test_spec.html#tc-012"><span class="std std-ref">TC-012 – No Direct Register Access in SwcLedToggle</span></a></p>
+</dd>
+</dl>
+<p>The software shall follow the <strong>AUTOSAR Classic layered architecture</strong>:</p>
+<ul class="simple">
+<li><p><strong>MCAL</strong> – Port Driver, DIO Driver</p></li>
+<li><p><strong>ECU Abstraction</strong> – I/O Hardware Abstraction (IoHwAb)</p></li>
+<li><p><strong>Application</strong> – Software Component (SWC)</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="hardware-requirements">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Hardware Requirements</a><a class="headerlink" href="#hardware-requirements" title="Link to this heading"></a></h2>
+<section id="req-hw-001-user-switch-input">
+<span id="req-hw-001"></span><h3><strong>REQ-HW-001</strong> – USER Switch Input<a class="headerlink" href="#req-hw-001-user-switch-input" title="Link to this heading"></a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">ID<span class="colon">:</span></dt>
+<dd class="field-odd"><p>REQ-HW-001</p>
+</dd>
+<dt class="field-even">Type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Hardware</p>
+</dd>
+<dt class="field-odd">Priority<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Mandatory</p>
+</dd>
+<dt class="field-even">Status<span class="colon">:</span></dt>
+<dd class="field-even"><p>Approved</p>
+</dd>
+<dt class="field-odd">Test Cases<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="test_spec.html#tc-001"><span class="std std-ref">TC-001 – SW1 Pin Drive Mode After Port_Init</span></a>, <a class="reference internal" href="test_spec.html#tc-007"><span class="std std-ref">TC-007 – Dio_ReadChannel Returns STD_LOW When SW1 Pressed</span></a>, <a class="reference internal" href="test_spec.html#tc-009"><span class="std std-ref">TC-009 – IoHwAb Polarity Inversion for SW1</span></a></p>
+</dd>
+</dl>
+<p>The USER Switch <strong>SW1</strong> shall be connected to MCU port pin <strong>P7.0</strong> (QFP pin 29),
+configured as a resistive pull-up digital input. The switch is <strong>active-LOW</strong>:
+logic LOW on the pin indicates a pressed state.</p>
+<hr class="docutils" />
+</section>
+<section id="req-hw-002-user-led-output">
+<span id="req-hw-002"></span><h3><strong>REQ-HW-002</strong> – USER LED Output<a class="headerlink" href="#req-hw-002-user-led-output" title="Link to this heading"></a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">ID<span class="colon">:</span></dt>
+<dd class="field-odd"><p>REQ-HW-002</p>
+</dd>
+<dt class="field-even">Type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Hardware</p>
+</dd>
+<dt class="field-odd">Priority<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Mandatory</p>
+</dd>
+<dt class="field-even">Status<span class="colon">:</span></dt>
+<dd class="field-even"><p>Approved</p>
+</dd>
+<dt class="field-odd">Test Cases<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="test_spec.html#tc-002"><span class="std std-ref">TC-002 – LED1 Pin Drive Mode After Port_Init</span></a>, <a class="reference internal" href="test_spec.html#tc-008"><span class="std std-ref">TC-008 – Dio_WriteChannel Drives LED1 Active-LOW</span></a>, <a class="reference internal" href="test_spec.html#tc-010"><span class="std std-ref">TC-010 – IoHwAb Polarity Inversion for LED1</span></a></p>
+</dd>
+</dl>
+<p>The USER LED <strong>LED1</strong> (blue) shall be connected to MCU port pin <strong>P19.0</strong> (QFP pin 77),
+configured as a strong-drive digital output. The LED is <strong>active-LOW</strong>:
+driving the pin LOW illuminates the LED.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="functional-requirements">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Functional Requirements</a><a class="headerlink" href="#functional-requirements" title="Link to this heading"></a></h2>
+<section id="req-func-001-led-toggle-on-button-press">
+<span id="req-func-001"></span><h3><strong>REQ-FUNC-001</strong> – LED Toggle on Button Press<a class="headerlink" href="#req-func-001-led-toggle-on-button-press" title="Link to this heading"></a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">ID<span class="colon">:</span></dt>
+<dd class="field-odd"><p>REQ-FUNC-001</p>
+</dd>
+<dt class="field-even">Type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Functional</p>
+</dd>
+<dt class="field-odd">Priority<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Mandatory</p>
+</dd>
+<dt class="field-even">Status<span class="colon">:</span></dt>
+<dd class="field-even"><p>Approved</p>
+</dd>
+<dt class="field-odd">Implements<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#req-hw-001"><span class="std std-ref">REQ-HW-001 – USER Switch Input</span></a>, <a class="reference internal" href="#req-hw-002"><span class="std std-ref">REQ-HW-002 – USER LED Output</span></a></p>
+</dd>
+<dt class="field-even">Test Cases<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="test_spec.html#tc-004"><span class="std std-ref">TC-004 – LED1 ON After First SW1 Press</span></a>, <a class="reference internal" href="test_spec.html#tc-005"><span class="std std-ref">TC-005 – LED1 OFF After Second SW1 Press</span></a></p>
+</dd>
+</dl>
+<p>Pressing SW1 once shall turn LED1 <strong>ON</strong>.
+Pressing SW1 again shall turn LED1 <strong>OFF</strong>.
+Each confirmed press event shall toggle the LED state exactly once.</p>
+<hr class="docutils" />
+</section>
+<section id="req-func-002-falling-edge-detection">
+<span id="req-func-002"></span><h3><strong>REQ-FUNC-002</strong> – Falling-Edge Detection<a class="headerlink" href="#req-func-002-falling-edge-detection" title="Link to this heading"></a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">ID<span class="colon">:</span></dt>
+<dd class="field-odd"><p>REQ-FUNC-002</p>
+</dd>
+<dt class="field-even">Type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Functional</p>
+</dd>
+<dt class="field-odd">Priority<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Mandatory</p>
+</dd>
+<dt class="field-even">Status<span class="colon">:</span></dt>
+<dd class="field-even"><p>Approved</p>
+</dd>
+<dt class="field-odd">Implements<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#req-func-001"><span class="std std-ref">REQ-FUNC-001 – LED Toggle on Button Press</span></a></p>
+</dd>
+<dt class="field-even">Test Cases<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="test_spec.html#tc-004"><span class="std std-ref">TC-004 – LED1 ON After First SW1 Press</span></a>, <a class="reference internal" href="test_spec.html#tc-005"><span class="std std-ref">TC-005 – LED1 OFF After Second SW1 Press</span></a>, <a class="reference internal" href="test_spec.html#tc-006"><span class="std std-ref">TC-006 – No Repeated Toggle While Holding SW1</span></a></p>
+</dd>
+</dl>
+<p>The software shall act on a <strong>single rising edge</strong> of the logical SW1 signal
+(INACTIVE to ACTIVE transition) per button press. Holding the button pressed
+shall not repeatedly toggle the LED.</p>
+<hr class="docutils" />
+</section>
+<section id="req-func-003-initial-state">
+<span id="req-func-003"></span><h3><strong>REQ-FUNC-003</strong> – Initial State<a class="headerlink" href="#req-func-003-initial-state" title="Link to this heading"></a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">ID<span class="colon">:</span></dt>
+<dd class="field-odd"><p>REQ-FUNC-003</p>
+</dd>
+<dt class="field-even">Type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Functional</p>
+</dd>
+<dt class="field-odd">Priority<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Mandatory</p>
+</dd>
+<dt class="field-even">Status<span class="colon">:</span></dt>
+<dd class="field-even"><p>Approved</p>
+</dd>
+<dt class="field-odd">Test Cases<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="test_spec.html#tc-003"><span class="std std-ref">TC-003 – LED1 OFF at Power-On Reset</span></a></p>
+</dd>
+</dl>
+<p>After power-on reset, LED1 shall be in the <strong>OFF</strong> state.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id1">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Software Requirements</a><a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<section id="req-sw-001-port-initialisation">
+<span id="req-sw-001"></span><h3><strong>REQ-SW-001</strong> – Port Initialisation<a class="headerlink" href="#req-sw-001-port-initialisation" title="Link to this heading"></a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">ID<span class="colon">:</span></dt>
+<dd class="field-odd"><p>REQ-SW-001</p>
+</dd>
+<dt class="field-even">Type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Software</p>
+</dd>
+<dt class="field-odd">Priority<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Mandatory</p>
+</dd>
+<dt class="field-even">Status<span class="colon">:</span></dt>
+<dd class="field-even"><p>Approved</p>
+</dd>
+<dt class="field-odd">Allocated To<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">Port_Init()</span></code> in <code class="docutils literal notranslate"><span class="pre">src/Mcal/Port/Port.c</span></code></p>
+</dd>
+<dt class="field-even">Test Cases<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="test_spec.html#tc-001"><span class="std std-ref">TC-001 – SW1 Pin Drive Mode After Port_Init</span></a>, <a class="reference internal" href="test_spec.html#tc-002"><span class="std std-ref">TC-002 – LED1 Pin Drive Mode After Port_Init</span></a></p>
+</dd>
+</dl>
+<p>The Port Driver shall initialise all configured pins before any application
+runnable is called. The initialisation order shall be:</p>
+<ol class="arabic simple">
+<li><p>Set HSIOM to GPIO mode for each pin.</p></li>
+<li><p>Write the initial output value.</p></li>
+<li><p>Set the drive mode.</p></li>
+</ol>
+<hr class="docutils" />
+</section>
+<section id="req-sw-002-dio-read-channel">
+<span id="req-sw-002"></span><h3><strong>REQ-SW-002</strong> – DIO Read Channel<a class="headerlink" href="#req-sw-002-dio-read-channel" title="Link to this heading"></a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">ID<span class="colon">:</span></dt>
+<dd class="field-odd"><p>REQ-SW-002</p>
+</dd>
+<dt class="field-even">Type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Software</p>
+</dd>
+<dt class="field-odd">Priority<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Mandatory</p>
+</dd>
+<dt class="field-even">Status<span class="colon">:</span></dt>
+<dd class="field-even"><p>Approved</p>
+</dd>
+<dt class="field-odd">Allocated To<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">Dio_ReadChannel()</span></code> in <code class="docutils literal notranslate"><span class="pre">src/Mcal/Dio/Dio.c</span></code></p>
+</dd>
+<dt class="field-even">Test Cases<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="test_spec.html#tc-007"><span class="std std-ref">TC-007 – Dio_ReadChannel Returns STD_LOW When SW1 Pressed</span></a></p>
+</dd>
+</dl>
+<p>The DIO Driver shall read the current logical level of a channel from the
+hardware <strong>PRT_PS</strong> (Pin State) register and return <code class="docutils literal notranslate"><span class="pre">STD_HIGH</span></code> or <code class="docutils literal notranslate"><span class="pre">STD_LOW</span></code>.</p>
+<hr class="docutils" />
+</section>
+<section id="req-sw-003-dio-write-channel">
+<span id="req-sw-003"></span><h3><strong>REQ-SW-003</strong> – DIO Write Channel<a class="headerlink" href="#req-sw-003-dio-write-channel" title="Link to this heading"></a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">ID<span class="colon">:</span></dt>
+<dd class="field-odd"><p>REQ-SW-003</p>
+</dd>
+<dt class="field-even">Type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Software</p>
+</dd>
+<dt class="field-odd">Priority<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Mandatory</p>
+</dd>
+<dt class="field-even">Status<span class="colon">:</span></dt>
+<dd class="field-even"><p>Approved</p>
+</dd>
+<dt class="field-odd">Allocated To<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">Dio_WriteChannel()</span></code> in <code class="docutils literal notranslate"><span class="pre">src/Mcal/Dio/Dio.c</span></code></p>
+</dd>
+<dt class="field-even">Test Cases<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="test_spec.html#tc-008"><span class="std std-ref">TC-008 – Dio_WriteChannel Drives LED1 Active-LOW</span></a></p>
+</dd>
+</dl>
+<p>The DIO Driver shall write the requested logical level to the hardware
+<strong>PRT_DR</strong> (Data Register) of the specified channel.</p>
+<hr class="docutils" />
+</section>
+<section id="req-sw-004-iohwab-polarity-abstraction">
+<span id="req-sw-004"></span><h3><strong>REQ-SW-004</strong> – IoHwAb Polarity Abstraction<a class="headerlink" href="#req-sw-004-iohwab-polarity-abstraction" title="Link to this heading"></a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">ID<span class="colon">:</span></dt>
+<dd class="field-odd"><p>REQ-SW-004</p>
+</dd>
+<dt class="field-even">Type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Software</p>
+</dd>
+<dt class="field-odd">Priority<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Mandatory</p>
+</dd>
+<dt class="field-even">Status<span class="colon">:</span></dt>
+<dd class="field-even"><p>Approved</p>
+</dd>
+<dt class="field-odd">Allocated To<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">IoHwAb.c</span></code> in <code class="docutils literal notranslate"><span class="pre">src/EcuAb/IoHwAb/</span></code></p>
+</dd>
+<dt class="field-even">Test Cases<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="test_spec.html#tc-009"><span class="std std-ref">TC-009 – IoHwAb Polarity Inversion for SW1</span></a>, <a class="reference internal" href="test_spec.html#tc-010"><span class="std std-ref">TC-010 – IoHwAb Polarity Inversion for LED1</span></a></p>
+</dd>
+</dl>
+<p>The IoHwAb layer shall abstract the active-LOW hardware polarity of SW1 and
+LED1. The application shall use only logical values
+<code class="docutils literal notranslate"><span class="pre">IOHWAB_SIG_ACTIVE</span></code> / <code class="docutils literal notranslate"><span class="pre">IOHWAB_SIG_INACTIVE</span></code> without knowledge of
+physical pin polarity.</p>
+<hr class="docutils" />
+</section>
+<section id="req-sw-005-swc-runnable-period">
+<span id="req-sw-005"></span><h3><strong>REQ-SW-005</strong> – SWC Runnable Period<a class="headerlink" href="#req-sw-005-swc-runnable-period" title="Link to this heading"></a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">ID<span class="colon">:</span></dt>
+<dd class="field-odd"><p>REQ-SW-005</p>
+</dd>
+<dt class="field-even">Type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Software</p>
+</dd>
+<dt class="field-odd">Priority<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Mandatory</p>
+</dd>
+<dt class="field-even">Status<span class="colon">:</span></dt>
+<dd class="field-even"><p>Approved</p>
+</dd>
+<dt class="field-odd">Allocated To<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">SwcLedToggle_Run10ms()</span></code> in <code class="docutils literal notranslate"><span class="pre">src/App/SwcLedToggle/SwcLedToggle.c</span></code></p>
+</dd>
+<dt class="field-even">Test Cases<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="test_spec.html#tc-011"><span class="std std-ref">TC-011 – SWC Runnable Called at 10 ms Period</span></a></p>
+</dd>
+</dl>
+<p>The <code class="docutils literal notranslate"><span class="pre">SwcLedToggle_Run10ms</span></code> runnable shall be called with a period of
+<strong>10 ms</strong> by the scheduler. This period provides implicit software debounce
+for the mechanical switch.</p>
+<hr class="docutils" />
+</section>
+<section id="req-sw-006-no-direct-register-access-in-application-layer">
+<span id="req-sw-006"></span><h3><strong>REQ-SW-006</strong> – No Direct Register Access in Application Layer<a class="headerlink" href="#req-sw-006-no-direct-register-access-in-application-layer" title="Link to this heading"></a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">ID<span class="colon">:</span></dt>
+<dd class="field-odd"><p>REQ-SW-006</p>
+</dd>
+<dt class="field-even">Type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Software / Architecture</p>
+</dd>
+<dt class="field-odd">Priority<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Mandatory</p>
+</dd>
+<dt class="field-even">Status<span class="colon">:</span></dt>
+<dd class="field-even"><p>Approved</p>
+</dd>
+<dt class="field-odd">Test Cases<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="test_spec.html#tc-012"><span class="std std-ref">TC-012 – No Direct Register Access in SwcLedToggle</span></a></p>
+</dd>
+</dl>
+<p>Application-layer code (SWC) shall <strong>not</strong> access hardware registers directly.
+All hardware interaction shall be routed through IoHwAb and MCAL.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="requirements-traceability-matrix">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">Requirements Traceability Matrix</a><a class="headerlink" href="#requirements-traceability-matrix" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 15.0%" />
+<col style="width: 28.0%" />
+<col style="width: 25.0%" />
+<col style="width: 20.0%" />
+<col style="width: 12.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Req ID</p></th>
+<th class="head"><p>Summary</p></th>
+<th class="head"><p>Implementation</p></th>
+<th class="head"><p>Test Cases</p></th>
+<th class="head"><p>Status</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>REQ-SYS-001</p></td>
+<td><p>Target: CYT2B75XX on CYTVII-B-E-1M-SK</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">Port_Cfg.h</span></code></p></td>
+<td><p><a class="reference internal" href="test_spec.html#tc-001"><span class="std std-ref">TC-001 – SW1 Pin Drive Mode After Port_Init</span></a>, <a class="reference internal" href="test_spec.html#tc-002"><span class="std std-ref">TC-002 – LED1 Pin Drive Mode After Port_Init</span></a></p></td>
+<td><p>Approved</p></td>
+</tr>
+<tr class="row-odd"><td><p>REQ-SYS-002</p></td>
+<td><p>AUTOSAR layered architecture</p></td>
+<td><p>All layers in <code class="docutils literal notranslate"><span class="pre">src/</span></code></p></td>
+<td><p><a class="reference internal" href="test_spec.html#tc-012"><span class="std std-ref">TC-012 – No Direct Register Access in SwcLedToggle</span></a></p></td>
+<td><p>Approved</p></td>
+</tr>
+<tr class="row-even"><td><p>REQ-HW-001</p></td>
+<td><p>SW1 = P7.0, pull-up, active-LOW</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Port_Cfg.h</span></code>, <code class="docutils literal notranslate"><span class="pre">Dio_Cfg.h</span></code></p></td>
+<td><p><a class="reference internal" href="test_spec.html#tc-001"><span class="std std-ref">TC-001 – SW1 Pin Drive Mode After Port_Init</span></a>, <a class="reference internal" href="test_spec.html#tc-007"><span class="std std-ref">TC-007 – Dio_ReadChannel Returns STD_LOW When SW1 Pressed</span></a>, <a class="reference internal" href="test_spec.html#tc-009"><span class="std std-ref">TC-009 – IoHwAb Polarity Inversion for SW1</span></a></p></td>
+<td><p>Approved</p></td>
+</tr>
+<tr class="row-odd"><td><p>REQ-HW-002</p></td>
+<td><p>LED1 = P19.0, strong output, active-LOW</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Port_Cfg.h</span></code>, <code class="docutils literal notranslate"><span class="pre">Dio_Cfg.h</span></code></p></td>
+<td><p><a class="reference internal" href="test_spec.html#tc-002"><span class="std std-ref">TC-002 – LED1 Pin Drive Mode After Port_Init</span></a>, <a class="reference internal" href="test_spec.html#tc-008"><span class="std std-ref">TC-008 – Dio_WriteChannel Drives LED1 Active-LOW</span></a>, <a class="reference internal" href="test_spec.html#tc-010"><span class="std std-ref">TC-010 – IoHwAb Polarity Inversion for LED1</span></a></p></td>
+<td><p>Approved</p></td>
+</tr>
+<tr class="row-even"><td><p>REQ-FUNC-001</p></td>
+<td><p>SW1 press toggles LED1</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SwcLedToggle.c</span></code></p></td>
+<td><p><a class="reference internal" href="test_spec.html#tc-004"><span class="std std-ref">TC-004 – LED1 ON After First SW1 Press</span></a>, <a class="reference internal" href="test_spec.html#tc-005"><span class="std std-ref">TC-005 – LED1 OFF After Second SW1 Press</span></a></p></td>
+<td><p>Approved</p></td>
+</tr>
+<tr class="row-odd"><td><p>REQ-FUNC-002</p></td>
+<td><p>Single rising-edge detection</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SwcLedToggle.c</span></code> (<code class="docutils literal notranslate"><span class="pre">prevSwState</span></code>)</p></td>
+<td><p><a class="reference internal" href="test_spec.html#tc-004"><span class="std std-ref">TC-004 – LED1 ON After First SW1 Press</span></a>, <a class="reference internal" href="test_spec.html#tc-005"><span class="std std-ref">TC-005 – LED1 OFF After Second SW1 Press</span></a>, <a class="reference internal" href="test_spec.html#tc-006"><span class="std std-ref">TC-006 – No Repeated Toggle While Holding SW1</span></a></p></td>
+<td><p>Approved</p></td>
+</tr>
+<tr class="row-even"><td><p>REQ-FUNC-003</p></td>
+<td><p>LED1 OFF at power-on</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Port.c</span></code> (<code class="docutils literal notranslate"><span class="pre">initValue</span> <span class="pre">=</span> <span class="pre">STD_HIGH</span></code>)</p></td>
+<td><p><a class="reference internal" href="test_spec.html#tc-003"><span class="std std-ref">TC-003 – LED1 OFF at Power-On Reset</span></a></p></td>
+<td><p>Approved</p></td>
+</tr>
+<tr class="row-odd"><td><p>REQ-SW-001</p></td>
+<td><p>Port_Init() before runnables</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Port.c</span></code>, <code class="docutils literal notranslate"><span class="pre">main.c</span></code></p></td>
+<td><p><a class="reference internal" href="test_spec.html#tc-001"><span class="std std-ref">TC-001 – SW1 Pin Drive Mode After Port_Init</span></a>, <a class="reference internal" href="test_spec.html#tc-002"><span class="std std-ref">TC-002 – LED1 Pin Drive Mode After Port_Init</span></a></p></td>
+<td><p>Approved</p></td>
+</tr>
+<tr class="row-even"><td><p>REQ-SW-002</p></td>
+<td><p>Dio_ReadChannel via PRT_PS</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Dio.c</span></code></p></td>
+<td><p><a class="reference internal" href="test_spec.html#tc-007"><span class="std std-ref">TC-007 – Dio_ReadChannel Returns STD_LOW When SW1 Pressed</span></a></p></td>
+<td><p>Approved</p></td>
+</tr>
+<tr class="row-odd"><td><p>REQ-SW-003</p></td>
+<td><p>Dio_WriteChannel via PRT_DR</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Dio.c</span></code></p></td>
+<td><p><a class="reference internal" href="test_spec.html#tc-008"><span class="std std-ref">TC-008 – Dio_WriteChannel Drives LED1 Active-LOW</span></a></p></td>
+<td><p>Approved</p></td>
+</tr>
+<tr class="row-even"><td><p>REQ-SW-004</p></td>
+<td><p>IoHwAb polarity abstraction</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">IoHwAb.c</span></code></p></td>
+<td><p><a class="reference internal" href="test_spec.html#tc-009"><span class="std std-ref">TC-009 – IoHwAb Polarity Inversion for SW1</span></a>, <a class="reference internal" href="test_spec.html#tc-010"><span class="std std-ref">TC-010 – IoHwAb Polarity Inversion for LED1</span></a></p></td>
+<td><p>Approved</p></td>
+</tr>
+<tr class="row-odd"><td><p>REQ-SW-005</p></td>
+<td><p>SWC runnable period 10 ms</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SwcLedToggle.c</span></code>, <code class="docutils literal notranslate"><span class="pre">main.c</span></code></p></td>
+<td><p><a class="reference internal" href="test_spec.html#tc-011"><span class="std std-ref">TC-011 – SWC Runnable Called at 10 ms Period</span></a></p></td>
+<td><p>Approved</p></td>
+</tr>
+<tr class="row-even"><td><p>REQ-SW-006</p></td>
+<td><p>No HW register access in App layer</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SwcLedToggle.c</span></code> (IoHwAb only)</p></td>
+<td><p><a class="reference internal" href="test_spec.html#tc-012"><span class="std std-ref">TC-012 – No Direct Register Access in SwcLedToggle</span></a></p></td>
+<td><p>Approved</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="TRAVEO II Entry Family Starter Kit" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="test_spec.html" class="btn btn-neutral float-right" title="Test Specification" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
