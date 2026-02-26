@@ -160,12 +160,33 @@ jobs:
         shell: powershell
         run: |
           $env:Path = [System.Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [System.Environment]::GetEnvironmentVariable('Path','User')
-          $logFile = "$PWD\openocd.log"
-          $proc = Start-Process -FilePath "openocd" `
-            -ArgumentList @("-f", "${{ env.INTERFACE_CFG }}", "-f", "${{ env.TARGET_CFG }}") `
+
+          # Resolve openocd executable
+          $openocdExe = (Get-Command openocd -ErrorAction Stop).Source
+          if (-not $openocdExe) { throw "openocd not found on PATH" }
+
+          # Resolve scripts directory (same logic as flash_traveo2.ps1)
+          $openocdBinDir = Split-Path -Parent $openocdExe
+          $candidateScriptDirs = @(
+            (Join-Path $openocdBinDir "..\scripts"),
+            "C:\Infineon\Tools\ModusToolboxProgtools-1.7\openocd\scripts"
+          )
+          $openocdScripts = $null
+          foreach ($candidate in $candidateScriptDirs) {
+            if (Test-Path $candidate) { $openocdScripts = $candidate; break }
+          }
+          if (-not $openocdScripts) { throw "OpenOCD scripts directory not found. Checked: $($candidateScriptDirs -join '; ')" }
+
+          Write-Host "Using OpenOCD : $openocdExe"
+          Write-Host "Using scripts : $openocdScripts"
+
+          $logFile    = "$PWD\openocd.log"
+          $logErrFile = "$PWD\openocd_err.log"
+          $proc = Start-Process -FilePath $openocdExe `
+            -ArgumentList @("-s", $openocdScripts, "-f", "${{ env.INTERFACE_CFG }}", "-f", "${{ env.TARGET_CFG }}") `
             -NoNewWindow -PassThru `
             -RedirectStandardOutput $logFile `
-            -RedirectStandardError  "$PWD\openocd_err.log"
+            -RedirectStandardError  $logErrFile
           $proc.Id | Out-File openocd.pid
 
           # Poll until port 4444 accepts connections (max 30 s)
@@ -174,8 +195,8 @@ jobs:
           Write-Host "Waiting for OpenOCD to bind port 4444..."
           while ($elapsed -lt $timeout) {
             if ($proc.HasExited) {
-              Write-Host "=== OpenOCD stdout ===" ; Get-Content $logFile -ErrorAction SilentlyContinue
-              Write-Host "=== OpenOCD stderr ===" ; Get-Content "$PWD\openocd_err.log" -ErrorAction SilentlyContinue
+              Write-Host "=== OpenOCD stdout ===" ; Get-Content $logFile    -ErrorAction SilentlyContinue
+              Write-Host "=== OpenOCD stderr ===" ; Get-Content $logErrFile -ErrorAction SilentlyContinue
               throw "OpenOCD process exited prematurely (exit code $($proc.ExitCode))."
             }
             try {
@@ -189,8 +210,8 @@ jobs:
             }
           }
           if ($elapsed -ge $timeout) {
-            Write-Host "=== OpenOCD stdout ===" ; Get-Content $logFile -ErrorAction SilentlyContinue
-            Write-Host "=== OpenOCD stderr ===" ; Get-Content "$PWD\openocd_err.log" -ErrorAction SilentlyContinue
+            Write-Host "=== OpenOCD stdout ===" ; Get-Content $logFile    -ErrorAction SilentlyContinue
+            Write-Host "=== OpenOCD stderr ===" ; Get-Content $logErrFile -ErrorAction SilentlyContinue
             throw "Timed out waiting for OpenOCD to open port 4444 after ${timeout}s."
           }
 
