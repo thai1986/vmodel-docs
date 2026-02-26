@@ -46,9 +46,9 @@ TC-001 - SW1 Pin P7.0 Drive Mode Is Pull-Up After Port Init
 
     # Verify the drive-mode is pull-up (0x2 = PORT_DM_PULLUP)
     Should Be Equal As Integers    ${drive_mode}    ${PORT_DM_PULLUP}
-    ...    msg=TC-001 FAIL: P7.0 (SW1) PRT_PC drive-mode expected 0x${PORT_DM_PULLUP:X} (pull-up) but got 0x${drive_mode:X}
+    ...    msg=TC-001 FAIL: P7.0 (SW1) PRT_PC drive-mode expected ${PORT_DM_PULLUP} (pull-up) but got ${drive_mode}
 
-    Log    TC-001 PASS: P7.0 drive-mode = 0x${drive_mode:X} (PORT_DM_PULLUP)
+    Log    TC-001 PASS: P7.0 drive-mode = ${drive_mode} (PORT_DM_PULLUP)
 
 
 # ── TC-002 ──────────────────────────────────────────────────────────────────
@@ -70,9 +70,9 @@ TC-002 - LED1 Pin P19.0 Drive Mode Is Strong After Port Init
 
     # Verify the drive-mode is strong (0x6 = PORT_DM_STRONG)
     Should Be Equal As Integers    ${drive_mode}    ${PORT_DM_STRONG}
-    ...    msg=TC-002 FAIL: P19.0 (LED1) PRT_PC drive-mode expected 0x${PORT_DM_STRONG:X} (strong) but got 0x${drive_mode:X}
+    ...    msg=TC-002 FAIL: P19.0 (LED1) PRT_PC drive-mode expected ${PORT_DM_STRONG} (strong) but got ${drive_mode}
 
-    Log    TC-002 PASS: P19.0 drive-mode = 0x${drive_mode:X} (PORT_DM_STRONG)
+    Log    TC-002 PASS: P19.0 drive-mode = ${drive_mode} (PORT_DM_STRONG)
 
 
 *** Keywords ***

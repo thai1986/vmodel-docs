@@ -62,7 +62,7 @@ PRT_PC Drive Mode Should Be
     [Arguments]    ${port_number}    ${expected_dm}
     ${actual}=    Read PRT_PC Bits For Port    ${port_number}
     Should Be Equal As Integers    ${actual}    ${expected_dm}
-    ...    msg=PRT_PC drive-mode for port ${port_number}: expected 0x${expected_dm:X}, got 0x${actual:X}
+    ...    msg=PRT_PC drive-mode for port ${port_number}: expected ${expected_dm}, got ${actual}
 
 PRT_DR Bit Should Be
     [Documentation]    Assert that bit *pin* of PRT_DR for *port* equals *expected*.
