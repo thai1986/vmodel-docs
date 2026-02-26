@@ -160,12 +160,46 @@ jobs:
         shell: powershell
         run: |
           $env:Path = [System.Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [System.Environment]::GetEnvironmentVariable('Path','User')
+          $logFile = "$PWD\openocd.log"
           $proc = Start-Process -FilePath "openocd" `
             -ArgumentList @("-f", "${{ env.INTERFACE_CFG }}", "-f", "${{ env.TARGET_CFG }}") `
-            -NoNewWindow -PassThru
+            -NoNewWindow -PassThru `
+            -RedirectStandardOutput $logFile `
+            -RedirectStandardError  "$PWD\openocd_err.log"
           $proc.Id | Out-File openocd.pid
-          # Give OpenOCD time to enumerate the probe
-          Start-Sleep -Seconds 3
+
+          # Poll until port 4444 accepts connections (max 30 s)
+          $timeout = 30
+          $elapsed = 0
+          Write-Host "Waiting for OpenOCD to bind port 4444..."
+          while ($elapsed -lt $timeout) {
+            if ($proc.HasExited) {
+              Write-Host "=== OpenOCD stdout ===" ; Get-Content $logFile -ErrorAction SilentlyContinue
+              Write-Host "=== OpenOCD stderr ===" ; Get-Content "$PWD\openocd_err.log" -ErrorAction SilentlyContinue
+              throw "OpenOCD process exited prematurely (exit code $($proc.ExitCode))."
+            }
+            try {
+              $tcp = [System.Net.Sockets.TcpClient]::new("localhost", 4444)
+              $tcp.Close()
+              Write-Host "OpenOCD is ready after ${elapsed}s."
+              break
+            } catch {
+              Start-Sleep -Seconds 1
+              $elapsed++
+            }
+          }
+          if ($elapsed -ge $timeout) {
+            Write-Host "=== OpenOCD stdout ===" ; Get-Content $logFile -ErrorAction SilentlyContinue
+            Write-Host "=== OpenOCD stderr ===" ; Get-Content "$PWD\openocd_err.log" -ErrorAction SilentlyContinue
+            throw "Timed out waiting for OpenOCD to open port 4444 after ${timeout}s."
+          }
+
+      - name: Dump OpenOCD log on failure
+        if: failure()
+        shell: powershell
+        run: |
+          Write-Host "=== OpenOCD stdout ===" ; Get-Content openocd.log     -ErrorAction SilentlyContinue
+          Write-Host "=== OpenOCD stderr ===" ; Get-Content openocd_err.log -ErrorAction SilentlyContinue
 
       - name: Run Robot Framework test suites
         shell: powershell
