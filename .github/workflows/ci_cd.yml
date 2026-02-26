@@ -32,8 +32,9 @@ env:
   TARGET_CFG: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.target_cfg || 'target/traveo2_1m_a0.cfg' }}
 
 jobs:
+  # ── Stage 1: Compile ────────────────────────────────────────────────────────
   ci_build:
-    name: CI Build
+    name: "1 · Compile"
     runs-on: self-hosted
 
     steps:
@@ -60,10 +61,10 @@ jobs:
             }
           }
 
-          Ensure-Tool -CommandName "cmake" -WingetId "Kitware.CMake"
-          Ensure-Tool -CommandName "ninja" -WingetId "Ninja-build.Ninja"
+          Ensure-Tool -CommandName "cmake"            -WingetId "Kitware.CMake"
+          Ensure-Tool -CommandName "ninja"            -WingetId "Ninja-build.Ninja"
           Ensure-Tool -CommandName "arm-none-eabi-gcc" -WingetId "Arm.GnuArmEmbeddedToolchain"
-          Ensure-Tool -CommandName "openocd" -WingetId "xpack-dev-tools.openocd-xpack"
+          Ensure-Tool -CommandName "openocd"          -WingetId "xpack-dev-tools.openocd-xpack"
 
           Add-Content -Path $env:GITHUB_PATH -Value "$env:LOCALAPPDATA\Microsoft\WinGet\Links"
 
@@ -79,13 +80,14 @@ jobs:
           name: traveo2-starter-elf
           path: build/traveo2_starter.elf
 
+  # ── Stage 2: Flash ──────────────────────────────────────────────────────────
   cd_flash:
-    name: CD Flash To Hardware
+    name: "2 · Flash"
     needs: ci_build
     if: (github.event_name == 'push' && github.ref == 'refs/heads/main') || github.event_name == 'workflow_dispatch'
     runs-on: self-hosted
     concurrency:
-      group: traveo2-board-flash
+      group: traveo2-board
       cancel-in-progress: false
 
     steps:
@@ -134,3 +136,149 @@ jobs:
           Set-ExecutionPolicy -Scope Process Bypass
           $env:Path = [System.Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [System.Environment]::GetEnvironmentVariable('Path','User')
           ./scripts/flash_traveo2.ps1 -ElfPath "build/traveo2_starter.elf" -InterfaceCfg "${{ env.INTERFACE_CFG }}" -TargetCfg "${{ env.TARGET_CFG }}"
+
+  # ── Stage 3: Test ───────────────────────────────────────────────────────────
+  cd_test:
+    name: "3 · Test"
+    needs: cd_flash
+    runs-on: self-hosted
+    concurrency:
+      group: traveo2-board
+      cancel-in-progress: false
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Robot Framework dependencies
+        shell: powershell
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r tests/requirements.txt
+
+      - name: Start OpenOCD server
+        shell: powershell
+        run: |
+          $env:Path = [System.Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [System.Environment]::GetEnvironmentVariable('Path','User')
+          $script = @"
+          Start-Process -FilePath "openocd" `
+            -ArgumentList "-f ${{ env.INTERFACE_CFG }}", "-f ${{ env.TARGET_CFG }}" `
+            -NoNewWindow -PassThru | Select-Object -ExpandProperty Id | Out-File openocd.pid
+          "@
+          Invoke-Expression $script
+          # Give OpenOCD time to enumerate the probe
+          Start-Sleep -Seconds 3
+
+      - name: Run Robot Framework test suites
+        shell: powershell
+        run: |
+          python -m robot `
+            --outputdir tests/results `
+            --log     log.html `
+            --report  report.html `
+            --output  output.xml `
+            tests/suites/
+
+      - name: Stop OpenOCD server
+        if: always()
+        shell: powershell
+        run: |
+          if (Test-Path openocd.pid) {
+            $pid = Get-Content openocd.pid
+            Stop-Process -Id $pid -Force -ErrorAction SilentlyContinue
+            Remove-Item openocd.pid -Force
+          }
+
+      - name: Upload test results artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: robot-test-results
+          path: |
+            tests/results/output.xml
+            tests/results/log.html
+            tests/results/report.html
+
+  # ── Stage 4: Build docs & deploy to GitHub Pages ────────────────────────────
+  cd_docs:
+    name: "4 · Docs"
+    needs: cd_test
+    if: always() && ((github.event_name == 'push' && github.ref == 'refs/heads/main') || github.event_name == 'workflow_dispatch')
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download test results artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: robot-test-results
+          path: tests/results
+
+      - name: Copy test reports into docs static folder
+        shell: powershell
+        run: |
+          $dest = "docs/_static/test_results"
+          New-Item -ItemType Directory -Force -Path $dest | Out-Null
+          Copy-Item tests/results/report.html "$dest/report.html" -Force
+          Copy-Item tests/results/log.html    "$dest/log.html"    -Force
+
+      - name: Install Sphinx dependencies
+        shell: powershell
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r docs/requirements.txt
+
+      - name: Build Sphinx HTML docs
+        shell: powershell
+        run: |
+          python -m sphinx -b html docs docs/_build/html
+
+      - name: Upload Sphinx HTML artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sphinx-html
+          path: docs/_build/html
+
+  deploy_pages:
+    name: "5 · Deploy Pages"
+    needs: cd_docs
+    if: (github.event_name == 'push' && github.ref == 'refs/heads/main') || github.event_name == 'workflow_dispatch'
+    runs-on: self-hosted
+    permissions:
+      contents: write
+
+    steps:
+      - name: Download Sphinx HTML artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: sphinx-html
+          path: sphinx-html
+
+      - name: Push to gh-pages branch
+        shell: powershell
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          $ErrorActionPreference = "Stop"
+
+          git config --global user.name  "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Build the authenticated remote URL
+          $remote = "https://x-access-token:$env:GITHUB_TOKEN@github.com/${{ github.repository }}.git"
+
+          # Create a fresh deploy directory and init an orphan gh-pages commit
+          $deploy = "$env:RUNNER_TEMP\gh-pages-deploy"
+          Remove-Item -Recurse -Force $deploy -ErrorAction SilentlyContinue
+          New-Item -ItemType Directory -Force $deploy | Out-Null
+          Copy-Item -Recurse -Force "sphinx-html\*" $deploy
+
+          Set-Location $deploy
+          git init -b gh-pages
+          git remote add origin $remote
+          git add -A
+          git commit -m "docs: update GitHub Pages from ${{ github.sha }} [skip ci]"
+          git push -f origin gh-pages
+          Write-Host "Deployed to gh-pages branch."

@@ -1,0 +1,15 @@
+# Robot Framework test dependencies for TRAVEO II LED-toggle test suite
+#
+# Install with:
+#   pip install -r tests/requirements.txt
+
+# Core test framework
+robotframework>=7.0
+
+# No additional pip packages are needed:
+# - OpenOcdLibrary.py uses only stdlib (subprocess, telnetlib, re, time)
+# - SourceInspectionLibrary.py uses only stdlib (re, os, pathlib)
+#
+# External tool required (NOT a pip package):
+#   OpenOCD  – https://openocd.org/
+#   Bundled with Infineon ModusToolbox: C:\Infineon\Tools\ModusToolboxProgtools-x.y\openocd\
