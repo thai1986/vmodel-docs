@@ -260,6 +260,7 @@ jobs:
           Remove-Item -Recurse -Force $deploy -ErrorAction SilentlyContinue
           New-Item -ItemType Directory -Force $deploy | Out-Null
           Copy-Item -Recurse -Force "sphinx-html\*" $deploy
+          New-Item -ItemType File -Force "$deploy\.nojekyll" | Out-Null
 
           Set-Location $deploy
           git init -b gh-pages
