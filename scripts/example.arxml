@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0">
+    <AR-PACKAGES>
+        <AR-PACKAGE>
+            <SHORT-NAME>MyComponents</SHORT-NAME>
+
+            <ELEMENTS>
+
+                <!-- ========================= -->
+                <!--  SWC 1: SpeedController   -->
+                <!-- ========================= -->
+                <APPLICATION-SOFTWARE-COMPONENT-TYPE>
+                    <SHORT-NAME>SpeedController</SHORT-NAME>
+
+                    <PORTS>
+                        <P-PORT-PROTOTYPE>
+                            <SHORT-NAME>SpeedOut</SHORT-NAME>
+                            <PROVIDED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">SpeedInterface</PROVIDED-INTERFACE-TREF>
+                        </P-PORT-PROTOTYPE>
+
+                        <R-PORT-PROTOTYPE>
+                            <SHORT-NAME>SpeedIn</SHORT-NAME>
+                            <REQUIRED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">SpeedInterface</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+                    </PORTS>
+                </APPLICATION-SOFTWARE-COMPONENT-TYPE>
+
+                <!-- ========================= -->
+                <!--  SWC 2: BrakeSystem       -->
+                <!-- ========================= -->
+                <APPLICATION-SOFTWARE-COMPONENT-TYPE>
+                    <SHORT-NAME>BrakeSystem</SHORT-NAME>
+
+                    <PORTS>
+                        <R-PORT-PROTOTYPE>
+                            <SHORT-NAME>BrakeIn</SHORT-NAME>
+                            <REQUIRED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">BrakeInterface</REQUIRED-INTERFACE-TREF>
+                        </R-PORT-PROTOTYPE>
+                    </PORTS>
+                </APPLICATION-SOFTWARE-COMPONENT-TYPE>
+
+                <!-- ========================= -->
+                <!--  INTERFACE DEFINITIONS    -->
+                <!-- ========================= -->
+                <SENDER-RECEIVER-INTERFACE>
+                    <SHORT-NAME>SpeedInterface</SHORT-NAME>
+                    <DATA-ELEMENTS>
+                        <VARIABLE-DATA-PROTOTYPE>
+                            <SHORT-NAME>VehicleSpeed</SHORT-NAME>
+                            <TYPE-TREF DEST="APPLICATION-PRIMITIVE-DATA-TYPE">uint16</TYPE-TREF>
+                        </VARIABLE-DATA-PROTOTYPE>
+                    </DATA-ELEMENTS>
+                </SENDER-RECEIVER-INTERFACE>
+
+                <SENDER-RECEIVER-INTERFACE>
+                    <SHORT-NAME>BrakeInterface</SHORT-NAME>
+                    <DATA-ELEMENTS>
+                        <VARIABLE-DATA-PROTOTYPE>
+                            <SHORT-NAME>BrakePressure</SHORT-NAME>
+                            <TYPE-TREF DEST="APPLICATION-PRIMITIVE-DATA-TYPE">uint16</TYPE-TREF>
+                        </VARIABLE-DATA-PROTOTYPE>
+                    </DATA-ELEMENTS>
+                </SENDER-RECEIVER-INTERFACE>
+
+                <!-- ========================= -->
+                <!--  DATATYPES                -->
+                <!-- ========================= -->
+                <APPLICATION-PRIMITIVE-DATA-TYPE>
+                    <SHORT-NAME>uint16</SHORT-NAME>
+                </APPLICATION-PRIMITIVE-DATA-TYPE>
+
+            </ELEMENTS>
+        </AR-PACKAGE>
+    </AR-PACKAGES>
+</AUTOSAR>

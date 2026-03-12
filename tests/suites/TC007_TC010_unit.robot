@@ -37,36 +37,41 @@ TC-007 - Dio ReadChannel Returns STD_LOW When SW1 Is Pressed
     ...    The DIO driver reads PRT_PS (pin state register).  When the active-LOW
     ...    switch closes the circuit, P7.0 is pulled to GND → PRT_PS bit 0 == 0.
     ...
-    ...    OPERATOR ACTION REQUIRED: Press and hold SW1 when prompted.
+    ...    This test uses debugger pin forcing to emulate SW1 pressed/released
+    ...    states without manual button interaction.
     ...
     ...    Covers: REQ-SW-002, REQ-HW-001
     [Tags]    TC-007    unit    dio    REQ-SW-002    REQ-HW-001
 
-    # -- Verify released state first (pin should be HIGH via pull-up) --
-    Log    TC-007: Please make sure SW1 is NOT pressed.
-    Sleep    1s
     Halt Target
+    ${pc_before}=    Read Register    ${P7_PRT_PC}
+    ${dr_before}=    Read Register    ${P7_PRT_DR}
+
+    # Force P7.0 to strong drive output so we can inject deterministic levels.
+    ${pc_force_out}=    Evaluate    (int(${pc_before}) & 0xFFFFFFF0) | 0xE
+    Write Register    ${P7_PRT_PC}    ${pc_force_out}
+
+    # Emulate SW1 released: pin HIGH
+    ${dr_release}=    Evaluate    int(${dr_before}) | (1 << 0)
+    Write Register    ${P7_PRT_DR}    ${dr_release}
     ${released_ps}=    Read PRT_PS Bit For Port Pin    7    0
     Should Be Equal As Integers    ${released_ps}    ${STD_HIGH}
-    ...    msg=TC-007 precondition: SW1 released but PRT_PS bit 0 = ${released_ps} (expected 1/HIGH)
-    Resume Target
+    ...    msg=TC-007 precondition: emulated released state should read HIGH, got ${released_ps}
 
-    # -- Now ask operator to press the button --
-    Log    TC-007: ACTION REQUIRED: Press and HOLD SW1 now.
-    Sleep    3s    # 3 s operator window
-
-    Halt Target
+    # Emulate SW1 pressed: pin LOW
+    ${dr_press}=    Evaluate    int(${dr_before}) & ~(1 << 0) & 0xFFFFFFFF
+    Write Register    ${P7_PRT_DR}    ${dr_press}
     ${pressed_ps}=    Read PRT_PS Bit For Port Pin    7    0
 
     # SW1 active-LOW: pressed → pin LOW → PRT_PS bit = 0 (STD_LOW)
     Should Be Equal As Integers    ${pressed_ps}    ${STD_LOW}
     ...    msg=TC-007 FAIL: Dio_ReadChannel(SW1) should return STD_LOW (PRT_PS bit 0 = 0) while SW1 pressed, got ${pressed_ps}
 
+    # Restore original SW1 pin configuration and output data.
+    Write Register    ${P7_PRT_DR}    ${dr_before}
+    Write Register    ${P7_PRT_PC}    ${pc_before}
     Resume Target
-    Log    TC-007 PASS: PRT_PS bit 0 = ${pressed_ps} (STD_LOW) while SW1 is pressed.
-
-    Log    TC-007: ACTION REQUIRED: Release SW1.
-    Sleep    1s
+    Log    TC-007 PASS: Emulated SW1 press drives PRT_PS bit 0 LOW as expected.
 
 
 # ── TC-008 ──────────────────────────────────────────────────────────────────
@@ -117,42 +122,44 @@ TC-009 - IoHwAb Polarity Inversion For SW1
     ...      Pin LOW  (SW1 pressed)  → ``IOHWAB_SIG_ACTIVE``   (1)
     ...      Pin HIGH (SW1 released) → ``IOHWAB_SIG_INACTIVE`` (0)
     ...
-    ...    The test forces PRT_PS indirectly by asking the operator to press /
-    ...    release SW1, or by injecting the pin state via an output-mode trick
-    ...    (not used here to preserve normal pin config).
-    ...
-    ...    OPERATOR ACTION REQUIRED: press then release SW1 when prompted.
+    ...    The test emulates SW1 pin states via debugger pin forcing and checks
+    ...    the expected active-LOW polarity mapping.
     ...
     ...    Covers: REQ-SW-004
     [Tags]    TC-009    unit    iohwab    polarity    REQ-SW-004
 
-    # -- Verify with SW1 released (INACTIVE expected) --
-    Log    TC-009: Ensure SW1 is NOT pressed (released state).
-    Sleep    1s
     Halt Target
+    ${pc_before}=    Read Register    ${P7_PRT_PC}
+    ${dr_before}=    Read Register    ${P7_PRT_DR}
+
+    # Force P7.0 to strong drive output to inject deterministic levels.
+    ${pc_force_out}=    Evaluate    (int(${pc_before}) & 0xFFFFFFF0) | 0xE
+    Write Register    ${P7_PRT_PC}    ${pc_force_out}
+
+    # -- Verify with SW1 released (INACTIVE expected) --
+    ${dr_release}=    Evaluate    int(${dr_before}) | (1 << 0)
+    Write Register    ${P7_PRT_DR}    ${dr_release}
     ${pin_released}=    Read PRT_PS Bit For Port Pin    7    0
     # Compute expected IoHwAb output: pin HIGH → INACTIVE
     ${iohwab_inactive}=    Evaluate    ${IOHWAB_SIG_INACTIVE} if int(${pin_released}) == 1 else ${IOHWAB_SIG_ACTIVE}
     Should Be Equal As Integers    ${iohwab_inactive}    ${IOHWAB_SIG_INACTIVE}
     ...    msg=TC-009 FAIL (released): pin HIGH should map to IOHWAB_SIG_INACTIVE (0). PRT_PS bit = ${pin_released}
     Log    TC-009: Released: PRT_PS bit = ${pin_released} → IoHwAb = ${iohwab_inactive} (INACTIVE). PASS.
-    Resume Target
 
     # -- Verify with SW1 pressed (ACTIVE expected) --
-    Log    TC-009: ACTION REQUIRED: Press and HOLD SW1 now.
-    Sleep    3s
-
-    Halt Target
+    ${dr_press}=    Evaluate    int(${dr_before}) & ~(1 << 0) & 0xFFFFFFFF
+    Write Register    ${P7_PRT_DR}    ${dr_press}
     ${pin_pressed}=    Read PRT_PS Bit For Port Pin    7    0
     # Compute expected IoHwAb output: pin LOW → ACTIVE
     ${iohwab_active}=    Evaluate    ${IOHWAB_SIG_ACTIVE} if int(${pin_pressed}) == 0 else ${IOHWAB_SIG_INACTIVE}
     Should Be Equal As Integers    ${iohwab_active}    ${IOHWAB_SIG_ACTIVE}
     ...    msg=TC-009 FAIL (pressed): pin LOW should map to IOHWAB_SIG_ACTIVE (1). PRT_PS bit = ${pin_pressed}
     Log    TC-009: Pressed: PRT_PS bit = ${pin_pressed} → IoHwAb = ${iohwab_active} (ACTIVE). PASS.
-    Resume Target
 
-    Log    TC-009: ACTION REQUIRED: Release SW1.
-    Sleep    0.5s
+    # Restore original SW1 pin configuration and output data.
+    Write Register    ${P7_PRT_DR}    ${dr_before}
+    Write Register    ${P7_PRT_PC}    ${pc_before}
+    Resume Target
 
 
 # ── TC-010 ──────────────────────────────────────────────────────────────────

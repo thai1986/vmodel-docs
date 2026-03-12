@@ -15,7 +15,7 @@
 #define HSIOM_PORT_STRIDE     (0x100UL)
 
 #define PRT_DR                (0x00UL)   /* Output data register          */
-#define PRT_PC                (0x08UL)   /* Drive mode  (3 bits per pin)  */
+#define PRT_PC                (0x44UL)   /* CFG register: drive mode + input enable */
 
 #define HSIOM_PORT_SEL0       (0x00UL)   /* HSIOM select  pins 0-3        */
 #define HSIOM_PORT_SEL1       (0x04UL)   /* HSIOM select  pins 4-7        */
@@ -41,7 +41,7 @@ const Port_PinConfigType Port_PinConfig[PORT_NUM_PINS] =
         PORT_PIN_LED1_PIN,
         PORT_DM_STRONG,
         STD_HIGH
-    }
+    },
 };
 
 /* --------------------------------------------------------------------------
@@ -61,10 +61,10 @@ static void Port_Hw_SetHsiomGpio(uint8 port, uint8 pin)
 static void Port_Hw_SetDriveMode(uint8 port, uint8 pin, uint8 driveMode)
 {
     uint32 gpio_prt  = GPIO_BASE + ((uint32)port * GPIO_PORT_STRIDE);
-    uint32 pc_shift  = (uint32)pin * 3u;
+    uint32 pc_shift  = (uint32)pin * 4u;
 
-    REG32(gpio_prt + PRT_PC) &= ~(0x7UL  << pc_shift);
-    REG32(gpio_prt + PRT_PC) |=  ((uint32)driveMode << pc_shift);
+    REG32(gpio_prt + PRT_PC) &= ~(0xFUL  << pc_shift);
+    REG32(gpio_prt + PRT_PC) |=  (((uint32)driveMode & 0xFUL) << pc_shift);
 }
 
 static void Port_Hw_WritePin(uint8 port, uint8 pin, uint8 value)

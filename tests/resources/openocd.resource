@@ -34,7 +34,7 @@ Read PRT_PC Bits For Port
     ...        ${dm}=    Read PRT_PC Bits For Port    7
     [Arguments]    ${port_number}
     ${port_base}=    Evaluate    0x40310000 + int(${port_number}) * 0x80
-    ${prt_pc_addr}=    Evaluate    ${port_base} + 0x08
+    ${prt_pc_addr}=    Evaluate    ${port_base} + 0x44
     ${bits}=    Read Register Bits    ${prt_pc_addr}    lsb=0    width=3
     RETURN    ${bits}
 
@@ -43,7 +43,7 @@ Read PRT_PS Bit For Port Pin
     ...    the live digital input state of pin *pin* on *port*.
     [Arguments]    ${port_number}    ${pin_number}
     ${port_base}=    Evaluate    0x40310000 + int(${port_number}) * 0x80
-    ${prt_ps_addr}=    Evaluate    ${port_base} + 0x04
+    ${prt_ps_addr}=    Evaluate    ${port_base} + 0x10
     ${bit}=    Read Register Bits    ${prt_ps_addr}    lsb=${pin_number}    width=1
     RETURN    ${bit}
 

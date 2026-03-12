@@ -5,11 +5,14 @@
 
 MEMORY
 {
-  FLASH (rx)  : ORIGIN = 0x10000000, LENGTH = 1024K
-  RAM   (rwx) : ORIGIN = 0x08000000, LENGTH = 256K
+  /* Match CYT2B75 1M partition used by the working BSP build.
+   * CM0+ occupies the beginning of flash/RAM, CM4 app starts after that.
+   */
+  FLASH (rx)  : ORIGIN = 0x10020000, LENGTH = 960K
+  RAM   (rwx) : ORIGIN = 0x08008000, LENGTH = 96K
 }
 
-ENTRY(main)
+ENTRY(Reset_Handler)
 
 SECTIONS
 {
@@ -20,14 +23,22 @@ SECTIONS
     *(.rodata*)
   } > FLASH
 
+  _sidata = LOADADDR(.data);
+
   .data :
   {
+    _sdata = .;
     *(.data*)
+    _edata = .;
   } > RAM AT > FLASH
 
   .bss :
   {
+    _sbss = .;
     *(.bss*)
     *(COMMON)
+    _ebss = .;
   } > RAM
+
+  _estack = ORIGIN(RAM) + LENGTH(RAM);
 }

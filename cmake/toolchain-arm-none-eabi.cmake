@@ -7,7 +7,7 @@ set(CMAKE_ASM_COMPILER arm-none-eabi-gcc)
 
 set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 
-set(COMMON_FLAGS "-mcpu=cortex-m7 -mthumb -ffunction-sections -fdata-sections")
+set(COMMON_FLAGS "-mcpu=cortex-m4 -mthumb -ffunction-sections -fdata-sections")
 set(CMAKE_C_FLAGS_INIT "${COMMON_FLAGS} -std=c11")
 set(CMAKE_CXX_FLAGS_INIT "${COMMON_FLAGS}")
 set(CMAKE_ASM_FLAGS_INIT "${COMMON_FLAGS}")

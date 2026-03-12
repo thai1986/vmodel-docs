@@ -25,8 +25,8 @@
 /* --------------------------------------------------------------------------
  * Drive modes (maps to CYT2B75XX PRT_PC 3-bit field)
  * -------------------------------------------------------------------------- */
-#define PORT_DM_PULLUP       ((uint8)0x2u)   /* Resistive pull-up (input)  */
-#define PORT_DM_STRONG       ((uint8)0x6u)   /* Strong drive      (output) */
+#define PORT_DM_PULLUP       ((uint8)0xAu)   /* Pull-up + input buffer on  */
+#define PORT_DM_STRONG       ((uint8)0x6u)   /* Strong drive, input off    */
 
 /* --------------------------------------------------------------------------
  * Number of pins configured at startup

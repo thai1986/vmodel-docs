@@ -67,7 +67,7 @@ TC-004 - LED1 Turns ON After First SW1 Press
     ...
     ...    Active-LOW LED:  PRT_DR bit 0 == 0 ( STD_LOW ) → LED on.
     ...
-    ...    OPERATOR ACTION REQUIRED: Press and release SW1 when prompted.
+    ...    SW1 press/release is emulated via debugger pin forcing.
     ...
     ...    Covers: REQ-FUNC-001, REQ-FUNC-002
     [Tags]    TC-004    functional    button    REQ-FUNC-001    REQ-FUNC-002
@@ -75,12 +75,7 @@ TC-004 - LED1 Turns ON After First SW1 Press
     # Precondition: TC-003 passed – LED must be OFF
     Verify LED1 Is Off    precondition=TC-003
 
-    # Let firmware run so it can detect the button event
-    Resume Target
-
-    # Pause to allow the operator to press and release the button
-    Log    ACTION REQUIRED: Press and release SW1 (USER button) on the board now.
-    Sleep    5s    # Operator window: 5 seconds to press the button
+    Emulate SW1 Press And Release
 
     # Halt to read the stable post-press register state
     Halt Target
@@ -101,7 +96,7 @@ TC-005 - LED1 Turns OFF After Second SW1 Press
     ...    Starting state: LED1 ON (PRT_DR bit 0 == 0, from TC-004).
     ...    After one press + release: LED1 OFF (PRT_DR bit 0 == 1).
     ...
-    ...    OPERATOR ACTION REQUIRED: Press and release SW1 when prompted.
+    ...    SW1 press/release is emulated via debugger pin forcing.
     ...
     ...    Covers: REQ-FUNC-001, REQ-FUNC-002
     [Tags]    TC-005    functional    button    REQ-FUNC-001    REQ-FUNC-002
@@ -109,11 +104,7 @@ TC-005 - LED1 Turns OFF After Second SW1 Press
     # Precondition: TC-004 passed – LED must be ON
     Verify LED1 Is On    precondition=TC-004
 
-    # Resume so the firmware can catch the button event
-    Resume Target
-
-    Log    ACTION REQUIRED: Press and release SW1 (USER button) on the board now.
-    Sleep    5s
+    Emulate SW1 Press And Release
 
     Halt Target
 
@@ -134,7 +125,7 @@ TC-006 - No Repeated Toggle While SW1 Is Held For 3 Seconds
     ...    Method: Record LED state before press, record again at 1 s intervals
     ...    while the button is held, verify LED state is stable throughout.
     ...
-    ...    OPERATOR ACTION REQUIRED: Hold SW1 pressed when prompted.
+    ...    SW1 hold is emulated via debugger pin forcing.
     ...
     ...    Covers: REQ-FUNC-002
     [Tags]    TC-006    functional    button    debounce    REQ-FUNC-002
@@ -144,10 +135,9 @@ TC-006 - No Repeated Toggle While SW1 Is Held For 3 Seconds
     # ------------------------------------------------------------------
     Halt Target
     ${initial_led}=    Read PRT_DR Bit For Port Pin    19    0
+    Start SW1 Hold Emulation
     Resume Target
-
-    Log    TC-006: LED1 initial state = ${initial_led}. ACTION REQUIRED: Press and HOLD SW1 now.
-    Sleep    1s    # Short pause before hold starts
+    Sleep    0.3s
 
     # ------------------------------------------------------------------
     # 2. Sample LED at 1 s intervals while button is held
@@ -163,8 +153,10 @@ TC-006 - No Repeated Toggle While SW1 Is Held For 3 Seconds
         Log    TC-006: sample ${i+1}/${BUTTON_HOLD_SECONDS}: LED PRT_DR bit = ${sample}
     END
 
-    Log    ACTION REQUIRED: Release SW1 now.
-    Sleep    0.5s
+    Halt Target
+    Stop SW1 Hold Emulation
+    Resume Target
+    Sleep    0.2s
 
     # ------------------------------------------------------------------
     # 3. The expected final state is the toggle of the initial state
@@ -212,3 +204,31 @@ Verify LED1 Is On
     Should Be Equal As Integers    ${bit}    ${STD_LOW}
     ...    msg=Precondition (${precondition}) not met: LED1 must be ON before this test (PRT_DR bit = ${bit})
     Resume Target
+
+Start SW1 Hold Emulation
+    [Documentation]    Force P7.0 as output LOW with input buffer enabled.
+    ${pc_before}=    Read Register    ${P7_PRT_PC}
+    ${dr_before}=    Read Register    ${P7_PRT_DR}
+    Set Suite Variable    ${SW1_PC_BEFORE}    ${pc_before}
+    Set Suite Variable    ${SW1_DR_BEFORE}    ${dr_before}
+    ${pc_force_out}=    Evaluate    (int(${pc_before}) & 0xFFFFFFF0) | 0xE
+    ${dr_press}=    Evaluate    int(${dr_before}) & ~(1 << 0) & 0xFFFFFFFF
+    Write Register    ${P7_PRT_PC}    ${pc_force_out}
+    Write Register    ${P7_PRT_DR}    ${dr_press}
+
+Stop SW1 Hold Emulation
+    [Documentation]    Release P7.0 and restore original pin configuration.
+    ${dr_release}=    Evaluate    int(${SW1_DR_BEFORE}) | (1 << 0)
+    Write Register    ${P7_PRT_DR}    ${dr_release}
+    Write Register    ${P7_PRT_PC}    ${SW1_PC_BEFORE}
+
+Emulate SW1 Press And Release
+    [Documentation]    Inject one deterministic SW1 press and release pulse.
+    Halt Target
+    Start SW1 Hold Emulation
+    Resume Target
+    Sleep    0.3s
+    Halt Target
+    Stop SW1 Hold Emulation
+    Resume Target
+    Sleep    0.3s

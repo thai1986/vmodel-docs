@@ -7,8 +7,8 @@ Documentation    Shared variables for TRAVEO II LED-toggle test suite.
 ...              GPIO_BASE          = 0x40310000
 ...              GPIO_PORT_STRIDE   = 0x80 (128 bytes per port)
 ...              PRT_DR  offset     = 0x00  (output data register)
-...              PRT_PS  offset     = 0x04  (pin state – input read)
-...              PRT_PC  offset     = 0x08  (drive mode configuration)
+...              PRT_PS  offset     = 0x10  (IN register – pin state input)
+...              PRT_PC  offset     = 0x44  (CFG register – drive mode bits)
 
 
 *** Variables ***
@@ -31,14 +31,14 @@ ${GPIO_PORT_STRIDE}     ${0x80}
 # Port 7  – SW1 on P7.0
 ${PORT7_BASE}           ${0x40310380}    # 0x40310000 + 7*0x80
 ${P7_PRT_DR}            ${0x40310380}
-${P7_PRT_PS}            ${0x40310384}
-${P7_PRT_PC}            ${0x40310388}
+${P7_PRT_PS}            ${0x40310390}
+${P7_PRT_PC}            ${0x403103C4}
 
 # Port 19 – LED1 on P19.0
 ${PORT19_BASE}          ${0x40310980}    # 0x40310000 + 19*0x80
 ${P19_PRT_DR}           ${0x40310980}
-${P19_PRT_PS}           ${0x40310984}
-${P19_PRT_PC}           ${0x40310988}
+${P19_PRT_PS}           ${0x40310990}
+${P19_PRT_PC}           ${0x403109C4}
 
 # ── Drive-mode constants (PRT_PC bits[2:0]) ─────────────────────────────────
 ${PORT_DM_PULLUP}       ${0x2}    # Pull-up  – expected for SW1  (P7.0)

@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.20)
 project(traveo2_starter C ASM)
 
+option(ENABLE_SW1_SIMULATION "Enable software simulation for SW1 input in Dio_ReadChannel" OFF)
+
 # ---------------------------------------------------------------------------
 # Source files  (AUTOSAR layered architecture)
 #   Base     : Std_Types, Platform_Types, Compiler (header-only)
@@ -9,6 +11,7 @@ project(traveo2_starter C ASM)
 #   App      : SwcLedToggle
 # ---------------------------------------------------------------------------
 add_executable(${PROJECT_NAME}.elf
+    src/startup.c
     src/main.c
     src/Mcal/Port/Port.c
     src/Mcal/Dio/Dio.c
@@ -30,6 +33,10 @@ target_include_directories(${PROJECT_NAME}.elf PRIVATE
 target_compile_definitions(${PROJECT_NAME}.elf PRIVATE
     CYTVII_B_E_1M_SK=1
 )
+
+if(ENABLE_SW1_SIMULATION)
+    target_compile_definitions(${PROJECT_NAME}.elf PRIVATE ENABLE_SW1_SIMULATION=1)
+endif()
 
 target_compile_options(${PROJECT_NAME}.elf PRIVATE
     -Wall

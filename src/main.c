@@ -15,6 +15,7 @@
 
 #include "Std_Types.h"
 #include "Port.h"
+#include "Dio.h"
 #include "SwcLedToggle.h"
 
 /* --------------------------------------------------------------------------
