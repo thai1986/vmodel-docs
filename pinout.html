@@ -1,0 +1,543 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pinout – Board Headers &mdash; TRAVEO II Entry Family Starter Kit 002-25314 Rev. *B documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=133f8659"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Board Overview" href="board_overview.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            TRAVEO II Entry Family Starter Kit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="requirements.html">Software Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test_spec.html">Test Specification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test_results.html">Test Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="board_overview.html">Board Overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Pinout – Board Headers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#j1-arduino-pin-header-1-81">J1 – Arduino Pin Header 1 (8×1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#j2-arduino-pin-header-2-81-analog-inputs">J2 – Arduino Pin Header 2 (8×1) – Analog Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#j7-arduino-pin-header-3-81-extended-analog">J7 – Arduino Pin Header 3 (8×1) – Extended Analog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#j9-arduino-pin-header-4-81-digital-1421">J9 – Arduino Pin Header 4 (8×1) – Digital 14–21</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#j10-arduino-pin-header-5-81-digital-07">J10 – Arduino Pin Header 5 (8×1) – Digital 0–7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#j11-arduino-pin-header-6-101-i2c-digital-813">J11 – Arduino Pin Header 6 (10×1) – I2C + Digital 8–13</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#j13-arduino-pin-header-7-182-extended-digital-2253">J13 – Arduino Pin Header 7 (18×2) – Extended Digital 22–53</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#key-port-summary">Key Port Summary</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">TRAVEO II Entry Family Starter Kit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Pinout – Board Headers</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/pinout.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pinout-board-headers">
+<h1>Pinout – Board Headers<a class="headerlink" href="#pinout-board-headers" title="Link to this heading"></a></h1>
+<p>The <strong>CYTVII-B-E-1M-SK</strong> board (MCU: <strong>CYT2B75XX</strong>) provides <strong>7 Arduino-compatible pin headers</strong> (2.54 mm pitch)
+for accessing MCU signals.</p>
+<nav class="contents local" id="header-list">
+<p class="topic-title">Header List</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#j1-arduino-pin-header-1-81" id="id1">J1 – Arduino Pin Header 1 (8×1)</a></p></li>
+<li><p><a class="reference internal" href="#j2-arduino-pin-header-2-81-analog-inputs" id="id2">J2 – Arduino Pin Header 2 (8×1) – Analog Inputs</a></p></li>
+<li><p><a class="reference internal" href="#j7-arduino-pin-header-3-81-extended-analog" id="id3">J7 – Arduino Pin Header 3 (8×1) – Extended Analog</a></p></li>
+<li><p><a class="reference internal" href="#j9-arduino-pin-header-4-81-digital-1421" id="id4">J9 – Arduino Pin Header 4 (8×1) – Digital 14–21</a></p></li>
+<li><p><a class="reference internal" href="#j10-arduino-pin-header-5-81-digital-07" id="id5">J10 – Arduino Pin Header 5 (8×1) – Digital 0–7</a></p></li>
+<li><p><a class="reference internal" href="#j11-arduino-pin-header-6-101-i2c-digital-813" id="id6">J11 – Arduino Pin Header 6 (10×1) – I2C + Digital 8–13</a></p></li>
+<li><p><a class="reference internal" href="#j13-arduino-pin-header-7-182-extended-digital-2253" id="id7">J13 – Arduino Pin Header 7 (18×2) – Extended Digital 22–53</a></p></li>
+<li><p><a class="reference internal" href="#key-port-summary" id="id8">Key Port Summary</a></p></li>
+</ul>
+</nav>
+<hr class="docutils" />
+<section id="j1-arduino-pin-header-1-81">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">J1 – Arduino Pin Header 1 (8×1)</a><a class="headerlink" href="#j1-arduino-pin-header-1-81" title="Link to this heading"></a></h2>
+<p>Power and GND pins.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 15.0%" />
+<col style="width: 85.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Pin</p></th>
+<th class="head"><p>Tín hiệu</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>NC</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>5 V</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>NC</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>NC</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>5 V</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>GND</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>GND</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>5 V</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<hr class="docutils" />
+<section id="j2-arduino-pin-header-2-81-analog-inputs">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">J2 – Arduino Pin Header 2 (8×1) – Analog Inputs</a><a class="headerlink" href="#j2-arduino-pin-header-2-81-analog-inputs" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 15.0%" />
+<col style="width: 85.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Pin</p></th>
+<th class="head"><p>Tín hiệu (MCU port)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>A0 (P7_5)</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>A1 (P7_4)</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>A2 (P7_3)</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>A3 (P6_5)</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>A4 (P6_4)</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>A5 (P13_2)</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>A6 (P12_1)</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>A7</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<hr class="docutils" />
+<section id="j7-arduino-pin-header-3-81-extended-analog">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">J7 – Arduino Pin Header 3 (8×1) – Extended Analog</a><a class="headerlink" href="#j7-arduino-pin-header-3-81-extended-analog" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 15.0%" />
+<col style="width: 85.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Pin</p></th>
+<th class="head"><p>Tín hiệu (MCU port)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>A8 (P7_0)</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>A9 (P18_6)</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>A10 (P18_7)</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>NC</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>NC</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>NC</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>NC</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>NC</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<hr class="docutils" />
+<section id="j9-arduino-pin-header-4-81-digital-1421">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">J9 – Arduino Pin Header 4 (8×1) – Digital 14–21</a><a class="headerlink" href="#j9-arduino-pin-header-4-81-digital-1421" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 15.0%" />
+<col style="width: 85.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Pin</p></th>
+<th class="head"><p>Tín hiệu (MCU port)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>14 (P18_1)</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>15 (P18_0)</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>16 (P17_2)</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>17 (P17_1)</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>18 (P14_1)</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>19 (P14_0)</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>20 (P0_3) – CAN RX</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>21 (P0_2) – CAN TX</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<hr class="docutils" />
+<section id="j10-arduino-pin-header-5-81-digital-07">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">J10 – Arduino Pin Header 5 (8×1) – Digital 0–7</a><a class="headerlink" href="#j10-arduino-pin-header-5-81-digital-07" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 15.0%" />
+<col style="width: 85.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Pin</p></th>
+<th class="head"><p>Tín hiệu (MCU port)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>2 (P19_1)</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>3 (P19_2)</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>4 (P21_0)</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>5 (P21_1)</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>6 (P13_3)</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>7 (P13_5)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<hr class="docutils" />
+<section id="j11-arduino-pin-header-6-101-i2c-digital-813">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">J11 – Arduino Pin Header 6 (10×1) – I2C + Digital 8–13</a><a class="headerlink" href="#j11-arduino-pin-header-6-101-i2c-digital-813" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 15.0%" />
+<col style="width: 85.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Pin</p></th>
+<th class="head"><p>Tín hiệu (MCU port)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>SCL</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>SDA</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>5 V</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>GND</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>13 (P22_2)</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>12 (P22_0)</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>11 (P22_1)</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>10 (P22_3)</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>9 (P23_3)</p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>8 (P21_5)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<hr class="docutils" />
+<section id="j13-arduino-pin-header-7-182-extended-digital-2253">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">J13 – Arduino Pin Header 7 (18×2) – Extended Digital 22–53</a><a class="headerlink" href="#j13-arduino-pin-header-7-182-extended-digital-2253" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 9.1%" />
+<col style="width: 40.9%" />
+<col style="width: 9.1%" />
+<col style="width: 40.9%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Pin</p></th>
+<th class="head"><p>Tín hiệu (MCU port)</p></th>
+<th class="head"><p>Pin</p></th>
+<th class="head"><p>Tín hiệu (MCU port)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>5 V</p></td>
+<td><p>2</p></td>
+<td><p>5 V</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>22 (P11_2)</p></td>
+<td><p>4</p></td>
+<td><p>23 (P11_1)</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>24 (P11_0)</p></td>
+<td><p>6</p></td>
+<td><p>25 (P8_2)</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>26 (P8_1)</p></td>
+<td><p>8</p></td>
+<td><p>27 (P18_2)</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>28 (P17_0)</p></td>
+<td><p>10</p></td>
+<td><p>29 (P14_3)</p></td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>30 (P14_2)</p></td>
+<td><p>12</p></td>
+<td><p>31 (P13_7)</p></td>
+</tr>
+<tr class="row-even"><td><p>13</p></td>
+<td><p>32 (P13_6)</p></td>
+<td><p>14</p></td>
+<td><p>33 (P13_4)</p></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>34 (P8_0)</p></td>
+<td><p>16</p></td>
+<td><p>35 (P3_0)</p></td>
+</tr>
+<tr class="row-even"><td><p>17</p></td>
+<td><p>36 (P2_3)</p></td>
+<td><p>18</p></td>
+<td><p>37 (P12_4)</p></td>
+</tr>
+<tr class="row-odd"><td><p>19</p></td>
+<td><p>38 (P12_3)</p></td>
+<td><p>20</p></td>
+<td><p>39 (P12_2)</p></td>
+</tr>
+<tr class="row-even"><td><p>21</p></td>
+<td><p>40 (P19_0) – USER LED</p></td>
+<td><p>22</p></td>
+<td><p>41 (P3_1)</p></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>42 (P5_3)</p></td>
+<td><p>24</p></td>
+<td><p>43 (P2_0)</p></td>
+</tr>
+<tr class="row-even"><td><p>25</p></td>
+<td><p>44 (P5_0)</p></td>
+<td><p>26</p></td>
+<td><p>45 (P5_1)</p></td>
+</tr>
+<tr class="row-odd"><td><p>27</p></td>
+<td><p>46 (P5_2)</p></td>
+<td><p>28</p></td>
+<td><p>47 (P18_3)</p></td>
+</tr>
+<tr class="row-even"><td><p>29</p></td>
+<td><p>48 (P18_4)</p></td>
+<td><p>30</p></td>
+<td><p>49 (P18_5)</p></td>
+</tr>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>50 (P6_0) – ADC[0]_0</p></td>
+<td><p>32</p></td>
+<td><p>51 (P6_1)</p></td>
+</tr>
+<tr class="row-even"><td><p>33</p></td>
+<td><p>52 (P6_2)</p></td>
+<td><p>34</p></td>
+<td><p>53 (P6_3)</p></td>
+</tr>
+<tr class="row-odd"><td><p>35</p></td>
+<td><p>GND</p></td>
+<td><p>36</p></td>
+<td><p>GND</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<hr class="docutils" />
+<section id="key-port-summary">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">Key Port Summary</a><a class="headerlink" href="#key-port-summary" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>MCU Port</p></th>
+<th class="head"><p>Board Location</p></th>
+<th class="head"><p>Function</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>P0.2</p></td>
+<td><p>J9 pin 8</p></td>
+<td><p>CAN0_1 TX</p></td>
+</tr>
+<tr class="row-odd"><td><p>P0.3</p></td>
+<td><p>J9 pin 7</p></td>
+<td><p>CAN0_1 RX</p></td>
+</tr>
+<tr class="row-even"><td><p>P6.0</p></td>
+<td><p>J13 pin 31</p></td>
+<td><p>ADC[0]_0 (potentiometer VR1)</p></td>
+</tr>
+<tr class="row-odd"><td><p>P7.0</p></td>
+<td><p>J7 pin 1 / SW1</p></td>
+<td><p>A8 / User Switch</p></td>
+</tr>
+<tr class="row-even"><td><p>P12.2</p></td>
+<td><p>J13 pin 20</p></td>
+<td><p>USER LED4 (Blue), QFP pin 47</p></td>
+</tr>
+<tr class="row-odd"><td><p>P19.0</p></td>
+<td><p>J13 pin 21</p></td>
+<td><p>USER LED1 (Blue), QFP pin 77</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="board_overview.html" class="btn btn-neutral float-left" title="Board Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
