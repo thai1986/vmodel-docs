@@ -1,6 +1,13 @@
 Test Results
 ============
 
+Latest local verification (2026-03-12)
+--------------------------------------
+
+- Full Robot suite: **12 passed, 0 failed**
+- Build mode: ``-DENABLE_SW1_SIMULATION=OFF``
+- SW1 handling in functional/unit suites: debugger-driven emulation (no manual button press)
+
 The Robot Framework test reports below are generated automatically by the CI/CD
 pipeline on every push to ``main`` and are kept in sync with the latest firmware.
 

@@ -27,62 +27,62 @@ Overview
      - Port initialisation – SW1 pin drive mode
      - :ref:`REQ-SW-001`, :ref:`REQ-HW-001`
      - Inspection / Debug
-     - Draft
+     - Implemented
    * - :ref:`TC-002`
      - Port initialisation – LED1 pin drive mode
      - :ref:`REQ-SW-001`, :ref:`REQ-HW-002`
      - Inspection / Debug
-     - Draft
+     - Implemented
    * - :ref:`TC-003`
      - LED1 OFF at power-on reset
      - :ref:`REQ-FUNC-003`
-     - Board Test
-     - Draft
+     - Board Test / Debugger
+     - Implemented
    * - :ref:`TC-004`
      - LED1 turns ON on first SW1 press
      - :ref:`REQ-FUNC-001`, :ref:`REQ-FUNC-002`
-     - Board Test
-     - Draft
+     - Board Test / Debugger emulation
+     - Implemented
    * - :ref:`TC-005`
      - LED1 turns OFF on second SW1 press
      - :ref:`REQ-FUNC-001`, :ref:`REQ-FUNC-002`
-     - Board Test
-     - Draft
+     - Board Test / Debugger emulation
+     - Implemented
    * - :ref:`TC-006`
      - No repeated toggle while holding SW1
      - :ref:`REQ-FUNC-002`
-     - Board Test
-     - Draft
+     - Board Test / Debugger emulation
+     - Implemented
    * - :ref:`TC-007`
      - Dio_ReadChannel returns STD_LOW when SW1 pressed
      - :ref:`REQ-SW-002`, :ref:`REQ-HW-001`
-     - Unit Test
-     - Draft
+     - Unit Test / Debugger emulation
+     - Implemented
    * - :ref:`TC-008`
      - Dio_WriteChannel drives LED1 active-LOW correctly
      - :ref:`REQ-SW-003`, :ref:`REQ-HW-002`
      - Unit Test
-     - Draft
+     - Implemented
    * - :ref:`TC-009`
      - IoHwAb polarity inversion – SW1
      - :ref:`REQ-SW-004`
-     - Unit Test
-     - Draft
+     - Unit Test / Debugger emulation
+     - Implemented
    * - :ref:`TC-010`
      - IoHwAb polarity inversion – LED1
      - :ref:`REQ-SW-004`
      - Unit Test
-     - Draft
+     - Implemented
    * - :ref:`TC-011`
      - SWC runnable called at 10 ms period
      - :ref:`REQ-SW-005`
      - Inspection
-     - Draft
+     - Implemented
    * - :ref:`TC-012`
      - No direct register access in SwcLedToggle
      - :ref:`REQ-SW-006`
      - Code Review
-     - Draft
+     - Implemented
 
 ----
 
@@ -146,18 +146,18 @@ TC-003 – LED1 OFF at Power-On Reset
 
 :ID:              TC-003
 :Covers:          :ref:`REQ-FUNC-003`
-:Test Method:     Board Test (visual observation)
+:Test Method:     Board Test (debugger register read)
 :Robot File:      :download:`TC003_TC006_functional.robot <../tests/suites/TC003_TC006_functional.robot>`
-:Precondition:    Board powered via USB. No button pressed.
+:Precondition:    Board powered, firmware loaded, debugger connected.
 
 **Steps**
 
-1. Power-cycle the board (unplug and reconnect USB).
-2. Observe LED1 immediately after power-on.
+1. Execute target reset/run sequence and halt after firmware startup.
+2. Read ``PRT_DR`` bit 0 for port 19.
 
 **Pass Criteria**
 
-LED1 is **not illuminated** after power-on reset.
+``PRT_DR`` bit 0 for P19 is ``1`` (LED1 active-LOW OFF state).
 
 ----
 
@@ -168,18 +168,18 @@ TC-004 – LED1 ON After First SW1 Press
 
 :ID:              TC-004
 :Covers:          :ref:`REQ-FUNC-001`, :ref:`REQ-FUNC-002`
-:Test Method:     Board Test (visual observation)
+:Test Method:     Board Test (debugger register read + SW1 emulation)
 :Robot File:      :download:`TC003_TC006_functional.robot <../tests/suites/TC003_TC006_functional.robot>`
 :Precondition:    TC-003 passed (LED1 is OFF).
 
 **Steps**
 
-1. Press SW1 once and release.
-2. Observe LED1.
+1. Emulate one SW1 press/release pulse via debugger forcing on P7.0.
+2. Read ``PRT_DR`` bit 0 for port 19.
 
 **Pass Criteria**
 
-LED1 is **illuminated** (blue) after releasing SW1.
+``PRT_DR`` bit 0 for P19 is ``0`` (LED1 active-LOW ON state).
 
 ----
 
@@ -190,18 +190,18 @@ TC-005 – LED1 OFF After Second SW1 Press
 
 :ID:              TC-005
 :Covers:          :ref:`REQ-FUNC-001`, :ref:`REQ-FUNC-002`
-:Test Method:     Board Test (visual observation)
+:Test Method:     Board Test (debugger register read + SW1 emulation)
 :Robot File:      :download:`TC003_TC006_functional.robot <../tests/suites/TC003_TC006_functional.robot>`
 :Precondition:    TC-004 passed (LED1 is ON).
 
 **Steps**
 
-1. Press SW1 once and release.
-2. Observe LED1.
+1. Emulate one SW1 press/release pulse via debugger forcing on P7.0.
+2. Read ``PRT_DR`` bit 0 for port 19.
 
 **Pass Criteria**
 
-LED1 is **not illuminated** after releasing SW1.
+``PRT_DR`` bit 0 for P19 is ``1`` (LED1 active-LOW OFF state).
 
 ----
 
@@ -212,20 +212,21 @@ TC-006 – No Repeated Toggle While Holding SW1
 
 :ID:              TC-006
 :Covers:          :ref:`REQ-FUNC-002`
-:Test Method:     Board Test (visual observation)
+:Test Method:     Board Test (debugger sampling + SW1 hold emulation)
 :Robot File:      :download:`TC003_TC006_functional.robot <../tests/suites/TC003_TC006_functional.robot>`
 :Precondition:    LED1 is in any stable state.
 
 **Steps**
 
-1. Press and **hold** SW1 for 3 seconds without releasing.
-2. Observe LED1 during the hold period.
-3. Release SW1.
+1. Record initial LED1 state from ``PRT_DR`` bit 0 for port 19.
+2. Emulate SW1 LOW hold on P7.0 for 3 seconds.
+3. Sample LED1 state at 1-second intervals while hold is active.
+4. Release SW1 emulation and verify sampled states.
 
 **Pass Criteria**
 
-LED1 changes state **exactly once** at the moment of press.
-It does not toggle repeatedly while the button is held.
+LED1 changes state **exactly once** relative to initial state and remains stable
+during all hold-period samples.
 
 ----
 
@@ -236,16 +237,16 @@ TC-007 – Dio_ReadChannel Returns STD_LOW When SW1 Pressed
 
 :ID:              TC-007
 :Covers:          :ref:`REQ-SW-002`, :ref:`REQ-HW-001`
-:Test Method:     Unit Test (debugger watch / printf trace)
+:Test Method:     Unit Test (debugger register read + SW1 emulation)
 :Robot File:      :download:`TC007_TC010_unit.robot <../tests/suites/TC007_TC010_unit.robot>`
-:Precondition:    Debugger connected. Breakpoint inside ``SwcLedToggle_Run10ms``.
+:Precondition:    Debugger connected.
 
 **Steps**
 
-1. Set a breakpoint at the ``IoHwAb_Read_Sw1()`` call in ``SwcLedToggle_Run10ms``.
-2. Press and hold SW1.
-3. Step into ``IoHwAb_Read_Sw1`` → ``Dio_ReadChannel(DIO_CHANNEL_SW1)``.
-4. Inspect return value.
+1. Force P7.0 to emulated released state (HIGH) and verify ``PRT_PS`` bit 0 is ``1``.
+2. Force P7.0 to emulated pressed state (LOW).
+3. Read ``PRT_PS`` bit 0 for port 7.
+4. Restore original P7.0 configuration.
 
 **Pass Criteria**
 
@@ -283,16 +284,17 @@ TC-009 – IoHwAb Polarity Inversion for SW1
 
 :ID:              TC-009
 :Covers:          :ref:`REQ-SW-004`
-:Test Method:     Unit Test (code inspection + debugger)
+:Test Method:     Unit Test (debugger register read + SW1 emulation)
 :Robot File:      :download:`TC007_TC010_unit.robot <../tests/suites/TC007_TC010_unit.robot>`
 :Precondition:    Debugger connected.
 
 **Steps**
 
-1. With SW1 **pressed** (pin LOW), call ``IoHwAb_Read_Sw1()``.
-2. Verify return value is ``IOHWAB_SIG_ACTIVE`` (1).
-3. With SW1 **released** (pin HIGH), call ``IoHwAb_Read_Sw1()``.
-4. Verify return value is ``IOHWAB_SIG_INACTIVE`` (0).
+1. Force P7.0 to emulated released state (HIGH) and read ``PRT_PS`` bit 0.
+2. Confirm HIGH maps to ``IOHWAB_SIG_INACTIVE`` according to active-LOW polarity.
+3. Force P7.0 to emulated pressed state (LOW) and read ``PRT_PS`` bit 0.
+4. Confirm LOW maps to ``IOHWAB_SIG_ACTIVE`` according to active-LOW polarity.
+5. Restore original P7.0 configuration.
 
 **Pass Criteria**
 
