@@ -8,3 +8,4 @@ build/
 actions-runner/
 .venv/
 docs/_build/
+mtb_shared/
